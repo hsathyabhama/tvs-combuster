@@ -697,10 +697,16 @@ class TestPageContainer extends Component {
                               className="test-radio"
                             >
                               <Radio value={1} className="radio-btn">
-                                Burner 1
+                                <span style={{ color: "white" }}>
+                                  {" "}
+                                  Burner 1
+                                </span>
                               </Radio>
                               <Radio value={2} className="radio-btn">
-                                Burner 2
+                                <span style={{ color: "white" }}>
+                                  {" "}
+                                  Burner 2
+                                </span>
                               </Radio>
                             </Radio.Group>
                           )}
