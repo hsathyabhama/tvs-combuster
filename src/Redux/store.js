@@ -8,7 +8,8 @@ const InitialState = {
   leftBarView: false,
   collapsed: true,
   titleElements: titleElements,
-  turboMode: '1',
+  turboChargerType: 0,
+  plcControlType : 0,
   IsLogin: false,
   IsUserName: [],
 
@@ -42,12 +43,9 @@ const InitialState = {
   targetTemp: '',
   resetTemp: '',
   resetRPM: '',
-  
-  /*ADD bugid-(GTRE_7012) */
   startDisable: false,
-
-  /* ADD bugid-(GTRE_7018)   */
   testIdData: 0,
+  
   //grapgView
   delayValue: 1000,
 }

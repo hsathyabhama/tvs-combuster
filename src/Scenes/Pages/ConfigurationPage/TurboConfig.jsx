@@ -34,9 +34,6 @@ const {
   nozzleArea_max,
   nozzleArea_step,
   nozzleArea_defalutValue,
-  blade_defalutValue,
-  blade_min,
-  blade_max,
   error_turbo_msg,
   added_turbo_msg,
   message_title,
@@ -52,10 +49,8 @@ class TurboConfig extends Component {
       dateVal: "",
       nozzleArea: nozzleArea_defalutValue,
       discriptionVal: null,
-      bladeVal: blade_defalutValue,
     };
     this.updateDate = this.updateDate.bind(this);
-    this.updateBlades = this.updateBlades.bind(this);
   }
 
   //notification for more than 1 turbine active
@@ -93,7 +88,6 @@ class TurboConfig extends Component {
       date: this.state.dateVal,
       nozzle_area: this.state.nozzleArea,
       descriptions: this.state.discriptionVal,
-      noofblades: this.state.bladeVal,
     };
 
     message.success(added_turbo_msg);
@@ -136,18 +130,6 @@ class TurboConfig extends Component {
     this.setState({
       discriptionVal: e.target.value,
     });
-  };
-
-  updateBlades = (value) => {
-    if (value === null) {
-      this.setState({
-        bladeVal: blade_defalutValue,
-      });
-    } else {
-      this.setState({
-        bladeVal: value,
-      });
-    }
   };
 
   render() {
@@ -256,27 +238,6 @@ class TurboConfig extends Component {
                     onChange={this.updateDiscription}
                   />
                 </Tooltip>
-              </Col>
-
-              <Col sm={2}>
-                <label className="label">
-                  No of Blades
-                  <i style={{ color: "red", fontSize: "15px" }}> *</i>
-                </label>
-              </Col>
-              <Col sm={3}>
-                <Form.Item name="No of Blades ">
-                  <InputNumber
-                    min={blade_min}
-                    max={blade_max}
-                    defaultValue={blade_defalutValue}
-                    step={1}
-                    precision={0}
-                    required
-                    style={{ width: "320px" }}
-                    onChange={this.updateBlades}
-                  />
-                </Form.Item>
               </Col>
             </Row>
 

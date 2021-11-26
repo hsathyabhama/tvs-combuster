@@ -104,11 +104,17 @@ export const updateTestIdCount = data => ({
   payload: data
 })
 
-// turboMode
+// turboChargerType
 export const updateTurboMode = data => ({
   type: 'UPDATE_TURBO_MODE',
   payload: data
 })
+//plcControlType
+export const updatePlcControlType = data => ({
+  type: 'UPDATE_PLC_CONTROLTYPE',
+  payload: data
+})
+
 export const updateDropDown = data => ({
   type: 'UPDATE_DROPDOWN',
   payload: data
@@ -184,14 +190,12 @@ export const stopDbInsert = bool => ({
   payload: bool
 })         
 
- /*ADD bugid-(GTRE_7012) */
 //startDisable
 export const startDisableEvent = data => ({
   type: 'SHUTDOWN_ENABLE_EVENT',
   payload: data
 })
 
- /* ADD bugid-(GTRE_7018)   */
 // testIdData
 export const gettingTestIdData = data => ({
   type: 'GETTING_TEST_ID_DATA',

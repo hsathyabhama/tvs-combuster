@@ -45,7 +45,6 @@ import {
 const { Content, Header, Footer } = Layout;
 
 export class MainComponent extends Component {
-  /*ADD bugid-(GTRE_7010) */
   constructor(props) {
     super(props);
     this.state = {
@@ -84,10 +83,6 @@ export class MainComponent extends Component {
       this.props.updateTestIdCount(data);
     });
 
-    // // fetch DelayValue on application load
-    // gettingDelayValue((data) => {
-    //   this.props.fetchingDelayValue(data);
-    // });
     // fetch graphvalue on application load
     getTableView((data) => {
       //getting this function(data) from request page
@@ -99,10 +94,8 @@ export class MainComponent extends Component {
       this.props.updateTableViewData(filteredTableData);
     });
 
-    /*ADD bugid-(GTRE_7010) */
     // fetch TestDatainsert on application load
     if (this.state.testDataInsert === false) {
-      // let status = "Statusblock loading";
       axios
         .post("http://localhost:7000/testdatainsert.php", {
           status: "Statusblock loading",
@@ -117,15 +110,14 @@ export class MainComponent extends Component {
         });
     }
 
-    // {/*ADD bugid-(GTRE_7002) */}
     // fetch livedata from DB application load
     setInterval(() => {
       gettingChartData((data) => {
+        console.log(data);
         this.props.updateChartData(data);
       });
     }, this.props.app.delayValue);
 
-    // {/*ADD bugid-(GTRE_7019) */}
     setInterval(() => {
       getSensorData((data) => {
         let val = data;

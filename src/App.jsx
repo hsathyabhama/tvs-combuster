@@ -7,7 +7,7 @@ import ForgotPassword from "./Scenes/Components/Forms/ForgotPassword";
 import "antd/dist/antd.css";
 import "../src/Styles/style.css";
 import Cookies from "universal-cookie";
-//{/*ADD - GTRE_7020*/}
+
 import { gettingDelayValue } from "./Services/requests";
 import { fetchingDelayValue } from "./Redux/action";
 
@@ -17,7 +17,6 @@ class App extends Component {
     this.stste = {};
   }
 
-  //{/*ADD - GTRE_7020*/}
   componentDidMount() {
     gettingDelayValue((data) => {
       this.props.fetchingDelayValue(data);

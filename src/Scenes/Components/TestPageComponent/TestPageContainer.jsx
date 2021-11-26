@@ -6,6 +6,7 @@ import {
   Layout,
   Divider,
   Input,
+  Radio,
   Select,
   Alert,
   Button,
@@ -43,11 +44,11 @@ import {
   gettingTestIdData,
 } from "../../../Redux/action";
 import {
-  updateChartData,
   navigateMainPage,
   updateTestIdValue,
   updateTestIdCount,
   updateTurboMode,
+  updatePlcControlType,
   updateDropDown,
   startDisableEvent,
 } from "../../../Redux/action";
@@ -56,7 +57,6 @@ import {
   shutdownClickEvent,
   getHandleChangetestID,
   requestStatusData,
-  logoutEvent,
 } from "../../../Services/requests";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -73,10 +73,10 @@ let count = 1;
 const {
   duplicate_msg,
   warning_Id,
-  warning_mode,
+  warning_burnermode,
+  warning_controlunit,
   warning_name,
   alert_targetval,
-  /*MOD bugid-(GTRE_7007) */
   Initializedata,
   Startdata,
   nShutdowndata,
@@ -98,7 +98,6 @@ const {
   IgnitorSwitch,
   KerosenePump,
   LubeOilPump,
-  //  {/* ADD -  GTRE_7006 */}
   ErrorCode,
 } = helpPopup;
 
@@ -109,7 +108,6 @@ class TestPageContainer extends Component {
       turboIdDefaultValue: "Select Turbo ID",
       // turboIdValue: "Select Turbo ID",
       truboIDnum: true,
-      turboMode: "",
       testingData: null,
       value: null,
       testerItems: [],
@@ -133,7 +131,6 @@ class TestPageContainer extends Component {
       IgnitorSwitch: "OFF",
       KerosenePump: "OFF",
       LubeOilPump: "OFF",
-      // ADD - BUG-ID(GTRE_7006)
       ErrorCode: 0,
       currentDateTime: "",
       turbostartname: [],
@@ -146,9 +143,7 @@ class TestPageContainer extends Component {
     this.interval = null;
     this.startClick = this.startClick.bind(this);
     this.addTesterItem = this.addTesterItem.bind(this);
-    this.addWitnessItem = this.addWitnessItem.bind(this);
     this.handleTesterInput = this.handleTesterInput.bind(this);
-    this.handleWitnessInput = this.handleWitnessInput.bind(this);
     this.deleteTesterItem = this.deleteTesterItem.bind(this);
     this.deleteWitnessItem = this.deleteWitnessItem.bind(this);
   }
@@ -192,37 +187,10 @@ class TestPageContainer extends Component {
     }
   }
 
-  //add Witness details
-  addWitnessItem(e) {
-    e.preventDefault();
-    const { currentWitnessItem, witnessItems } = this.state;
-    const newItem = currentWitnessItem;
-    const isDuplicateWitness = witnessItems.includes(newItem);
-    if (isDuplicateWitness) {
-      this.setState({
-        isDuplicateWitness: isDuplicateWitness,
-      });
-      message.warning(duplicate_msg);
-    }
-    if (newItem !== null && !isDuplicateWitness) {
-      this.setState({
-        witnessItems: [...witnessItems, newItem],
-        currentWitnessItem: null,
-      });
-    }
-  }
-
   //Tester onchange
   handleTesterInput(e) {
     this.setState({
       currentTesterItem: e.target.value,
-    });
-  }
-
-  //witness onchange
-  handleWitnessInput(e) {
-    this.setState({
-      currentWitnessItem: e.target.value,
     });
   }
 
@@ -246,13 +214,15 @@ class TestPageContainer extends Component {
     });
   }
 
-  //onchange for radio
-  onChangeRadio = (e) => {
-    this.setState({
-      turboMode: e.target.value,
-    });
+  //onchange for turbo charger
+  onChangeTurboCharger = (e) => {
     let data = e.target.value;
     this.props.updateTurboMode(data);
+  };
+  //onchange for control type
+  onChangeControlType = (e) => {
+    let data = e.target.value;
+    this.props.updatePlcControlType(data);
   };
 
   //select the TestId
@@ -290,38 +260,13 @@ class TestPageContainer extends Component {
     });
   };
 
-  //  {/*DEL bugid-(GTRE_7002) */}
-  // //graph data
-  // requestChartData() {
-  //   gettingChartData((data) => {
-  //     //this function from request page
-  //     let chartData = data;
-  //     //updating to the store called chartdata
-  //     this.props.updateChartData(chartData);
-  //   });
-  // }
-
-  // {/*DEL bugid-(GTRE_7019) */}
-  // //this event trigger while clicking the initialize
-  // sensorData() {
-  //   //fetching sensor data from DB
-  //   getSensorData((data) => {
-  //     let val = data;
-  //     if (this.props.app.communication === true && val.length >= 1) {
-  //       this.props.initiateTurboStart(val);
-  //     }
-  //     // else {
-  //     //   this.props.initiateTurboStart([]);
-  //     // }
-  //   });
-  // }
-
   //getting communication value in request page
   communicationstatus() {
-    /* ADD bugid-(GTRE_7018)   */
     axios
       .post("http://localhost:5000/initialize.php", {
         testId: this.props.app.testIdData,
+        chargerType: this.props.app.turboChargerType,
+        controlType: this.props.app.plcControlType,
       })
       .then((res) => {
         let CommunicationData = res.data;
@@ -342,11 +287,20 @@ class TestPageContainer extends Component {
   initializeClick = () => {
     this.props.updateDropDown(null);
     if (
-      this.props.app.turboMode === "" ||
-      this.props.app.turboMode === undefined
+      this.props.app.turboChargerType === 0 ||
+      this.props.app.turboChargerType === undefined
     ) {
       this.setState({
-        errormsg: warning_mode,
+        errormsg: warning_burnermode,
+      });
+      return;
+    }
+    if (
+      this.props.app.plcControlType === 0 ||
+      this.props.app.plcControlType === undefined
+    ) {
+      this.setState({
+        errormsg: warning_controlunit,
       });
       return;
     }
@@ -370,7 +324,8 @@ class TestPageContainer extends Component {
     if (
       this.props.app.testIdValue !== undefined &&
       this.props.app.testIdValue !== "" &&
-      this.props.app.turboMode !== "" &&
+      this.props.app.turboChargerType !== 0 &&
+      this.props.app.plcControlType !== 0 &&
       this.state.testerItems.length !== 0 &&
       this.props.app.communication === false &&
       this.props.app.testIdValue.length !== 0
@@ -379,11 +334,10 @@ class TestPageContainer extends Component {
         .post("http://localhost:5000/gettestid.php", {
           turboIdVal: this.props.app.testIdValue,
           testerItems: this.state.testerItems,
-          witnessItems: this.state.witnessItems,
-          turboMode: this.props.app.turboMode,
+          turboMode: this.props.app.turboChargerType,
+          controlUnit: this.props.app.plcControlType,
         })
         .then((res) => {
-          /* ADD bugid-(GTRE_7018)   */
           let data = res.data;
           this.props.gettingTestIdData(data);
           this.communicationstatus();
@@ -424,10 +378,6 @@ class TestPageContainer extends Component {
         self.setState({
           valvestatus: response.data.valvestatus,
         });
-        // {/* DEL -  GTRE_7006 */}
-        // self.setState({
-        //   ErrorCode: valveData[10],
-        // });
         if (valveData[0] === "1") {
           self.setState({
             PilotFlameAir: "ON",
@@ -542,40 +492,37 @@ class TestPageContainer extends Component {
   //start event onClick
   startClick = () => {
     if (this.props.app.communication === true) {
-      if (
-        parseInt(this.props.app.targetTemp) >
-          parseInt(this.props.app.paramConfig[12].upperlimit) ||
-        parseInt(this.props.app.targetRPM) >
-          parseInt(this.props.app.paramConfig[10].upperlimit)
-      ) {
-        message.error("Temprature or RPM exceeded the limit");
+      // if (
+      //   parseInt(this.props.app.targetTemp) >
+      //     parseInt(this.props.app.paramConfig[12].upperlimit) ||
+      //   parseInt(this.props.app.targetRPM) >
+      //     parseInt(this.props.app.paramConfig[10].upperlimit)
+      // ) {
+      //   message.error("Temprature or RPM exceeded the limit");
+      // } else {
+      if (this.props.app.targetRPM !== "" && this.props.app.targetTemp !== "") {
+        this.props.initiateShowTarget();
+        this.props.startDisableEvent(true);
+
+        //delay for receiving sensor data from plc
+        axios
+          .post("http://localhost:5000/start.php", {
+            //set target rpm & temp value to sent plc
+            testId: this.props.app.testIdData,
+            targetRPM: this.props.app.targetRPM,
+            targetTemp: this.props.app.targetTemp,
+          })
+          .then((res) => {
+            //read the response from plc for trget temp & rpm
+            let startData = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
-        if (
-          this.props.app.targetRPM !== "" &&
-          this.props.app.targetTemp !== ""
-        ) {
-          this.props.initiateShowTarget();
-          /*ADD bugid-(GTRE_7012) */
-          this.props.startDisableEvent(true);
-          //delay for receiving sensor data from plc
-          axios
-            .post("http://localhost:5000/start.php", {
-              //set target rpm & temp value to sent plc
-              testId: this.props.app.testIdData,
-              targetRPM: this.props.app.targetRPM,
-              targetTemp: this.props.app.targetTemp,
-            })
-            .then((res) => {
-              //read the response from plc for trget temp & rpm
-              let startData = res.data;
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        } else {
-          this.props.initiateTargetState();
-        }
+        this.props.initiateTargetState();
       }
+      // }
     }
   };
 
@@ -588,20 +535,15 @@ class TestPageContainer extends Component {
 
   //reSet action
   reloadAllEvents = () => {
-    /*ADD bugid-(GTRE_7003) */
-    logoutEvent((data) => {});
-
-    /*ADD bugid-(GTRE_7018) */
     this.props.gettingTestIdData(0);
     this.props.stopDbInsert();
     this.props.updateTestIdCount("");
     this.props.updateTestIdValue("");
-    this.props.updateTurboMode("");
+    this.props.updateTurboMode(0);
+    this.props.updatePlcControlType(0);
     this.props.initiateTurboStart([]);
     this.props.initiateCommunicationFailed(false);
     this.props.getResetTemp("");
-
-    /*ADD bugid-(GTRE_7012) */
     this.props.startDisableEvent(false);
 
     this.setState({
@@ -656,16 +598,7 @@ class TestPageContainer extends Component {
     }
     console.log(this.props.app.targetTemp, this.props.app.targetRPM);
     console.log(this.props.app);
-    console.log(this.props.app.paramConfig);
-
-    /*DEL bugid-(GTRE_7007) */
-    // const {
-    //   Initializedata,
-    //   Startdata,
-    //   nShutdowndata,
-    //   eShutdowndata,
-    //   Resetdata,
-    // } = testParamHash;
+    console.log(this.props.app.chartData);
 
     const InitializedataArray = turboStart.filter((it) =>
       Initializedata.find((val) => val === it.name)
@@ -678,7 +611,6 @@ class TestPageContainer extends Component {
       nShutdowndata.find((val) => val === it.name)
     );
 
-    /*ADD bugid-(GTRE_7007) */
     const eShutdowndataArray = turboStart.filter((it) =>
       eShutdowndata.find((val) => val === it.name)
     );
@@ -735,6 +667,94 @@ class TestPageContainer extends Component {
                     paddingLeft: "20px",
                   }}
                 >
+                  <Row style={{ paddingLeft: "20px" }}>
+                    <Col xs={8}>
+                      <form>
+                        <Row>
+                          <Col xs={5} style={{ marginTop: "20px" }}>
+                            <label htmlFor="text" className="label">
+                              Mode
+                            </label>
+                          </Col>
+                          {communication ? (
+                            <Radio.Group
+                              name="radiogroup"
+                              disabled
+                              className="test-radio"
+                            >
+                              <Radio value={1} className="radio-btn">
+                                Burner 1
+                              </Radio>
+                              <Radio value={2} className="radio-btn">
+                                Burner 2
+                              </Radio>
+                            </Radio.Group>
+                          ) : (
+                            <Radio.Group
+                              name="radiogroup"
+                              defaultValue={this.props.app.turboChargerType}
+                              onChange={this.onChangeTurboCharger}
+                              className="test-radio"
+                            >
+                              <Radio value={1} className="radio-btn">
+                                <span style={{ color: "white" }}>
+                                  {" "}
+                                  Burner 1
+                                </span>
+                              </Radio>
+                              <Radio value={2} className="radio-btn">
+                                <span style={{ color: "white" }}>
+                                  {" "}
+                                  Burner 2
+                                </span>
+                              </Radio>
+                            </Radio.Group>
+                          )}
+                        </Row>
+                      </form>
+                    </Col>
+
+                    <Col xs={8}>
+                      <form>
+                        <Row>
+                          <Col xs={6} style={{ marginTop: "20px" }}>
+                            <label htmlFor="text" className="label">
+                              Controll Unit
+                            </label>
+                          </Col>
+                          {communication ? (
+                            <Radio.Group
+                              name="radiogroup"
+                              disabled
+                              className="test-radio"
+                            >
+                              <Radio value={1} className="radio-btn">
+                                RPM
+                              </Radio>
+                              <Radio value={2} className="radio-btn">
+                                Mass Flow
+                              </Radio>
+                            </Radio.Group>
+                          ) : (
+                            <Radio.Group
+                              name="radiogroup"
+                              defaultValue={this.props.app.plcControlType}
+                              onChange={this.onChangeControlType}
+                              className="test-radio"
+                            >
+                              <Radio value={1} className="radio-btn">
+                                RPM
+                              </Radio>
+                              <Radio value={2} className="radio-btn">
+                                Mass Flow
+                              </Radio>
+                            </Radio.Group>
+                          )}
+                        </Row>
+                      </form>
+                    </Col>
+                  </Row>
+
                   <Row style={{ paddingTop: "2%", paddingLeft: "20px" }}>
                     <Col span={8}>
                       <form>
@@ -815,7 +835,7 @@ class TestPageContainer extends Component {
                     <Col span={8}>
                       <form onSubmit={(e) => this.addTesterItem(e, "tester")}>
                         <Row>
-                          <Col span={5} style={{ marginTop: "20px" }}>
+                          <Col span={6} style={{ marginTop: "20px" }}>
                             <label htmlFor="text" className="label">
                               Test Engg
                             </label>
@@ -824,13 +844,13 @@ class TestPageContainer extends Component {
                             {communication ? (
                               <Input
                                 disabled
-                                placeholder="Test Engineers"
+                                placeholder="Tester"
                                 name="Tester"
                                 style={{ width: "300px" }}
                               />
                             ) : (
                               <Input
-                                placeholder="Test Engineers"
+                                placeholder="Tester"
                                 name="Tester"
                                 style={{ width: "300px" }}
                                 value={this.state.currentTesterItem}
@@ -849,47 +869,6 @@ class TestPageContainer extends Component {
                         <ListItems
                           items={this.state.testerItems}
                           deleteItem={this.deleteTesterItem}
-                        />
-                      </Row>
-                    </Col>
-
-                    <Col span={8}>
-                      <form onSubmit={(e) => this.addWitnessItem(e, "witness")}>
-                        <Row>
-                          <Col span={4} style={{ marginTop: "20px" }}>
-                            <label htmlFor="text" className="label">
-                              Witness
-                            </label>
-                          </Col>
-                          <Col span={15}>
-                            {communication ? (
-                              <Input
-                                disabled
-                                placeholder="Witness"
-                                name="Witness"
-                                style={{ width: "300px" }}
-                              />
-                            ) : (
-                              <Input
-                                placeholder="Witness"
-                                name="Witness"
-                                style={{ width: "300px" }}
-                                value={this.state.currentWitnessItem}
-                                onChange={this.handleWitnessInput}
-                              />
-                            )}
-                          </Col>
-                          <Col>
-                            <button className="add-btn" type="submit">
-                              +
-                            </button>
-                          </Col>
-                        </Row>
-                      </form>
-                      <Row style={{ paddingLeft: "5rem" }}>
-                        <ListItems
-                          items={this.state.witnessItems}
-                          deleteItem={this.deleteWitnessItem}
                         />
                       </Row>
                     </Col>
@@ -930,7 +909,6 @@ class TestPageContainer extends Component {
                 style={{ width: 185, cursor: "pointer", borderColor: "green" }}
               >
                 <div style={{ width: "300px" }}>
-                  {/* MOD bugid-(GTRE_7009)  */}
                   {communication === true || communicationFailed === true ? (
                     <DownloadOutlined
                       className="iconbutton1-basic"
@@ -1249,7 +1227,6 @@ class TestPageContainer extends Component {
             <Col span={4}>
               <Card
                 style={
-                  /*ADD bugid-(GTRE_7013) */
                   showTarget || communication
                     ? { width: 185, borderColor: "red", cursor: "pointer" }
                     : { width: 185, borderColor: "gray" }
@@ -1257,7 +1234,6 @@ class TestPageContainer extends Component {
               >
                 <div style={{ width: "300px" }}>
                   <div>
-                    {/*ADD bugid-(GTRE_7013) */}
                     {showTarget || communication ? (
                       <PoweroffOutlined
                         className="icon-button3"
@@ -1271,7 +1247,6 @@ class TestPageContainer extends Component {
                       />
                     )}
                   </div>
-                  {/*ADD bugid-(GTRE_7013) */}
                   {showTarget || communication ? (
                     <p
                       style={{
@@ -1312,7 +1287,7 @@ class TestPageContainer extends Component {
               ) : (
                 []
               )}
-              {/* ADD bugid-(GTRE_7007)  */}
+
               {/* E-shutdown */}
               {showTarget ? (
                 <p style={{ height: "15px", color: "white", marginTop: "7px" }}>
@@ -1335,11 +1310,9 @@ class TestPageContainer extends Component {
             <Col span={3}>
               <Card
                 style={
-                  //  ADD bugid-(GTRE_7011)
                   (nShutdowndataArray.length >= 1 &&
                     eShutdowndataArray.length >= 1) ||
                   nShutdowndataArray.length >= 2 ||
-                  /*ADD bugid-(GTRE_7007) */
                   eShutdowndataArray.length >= 2 ||
                   (showTarget === false && communication === false)
                     ? { width: 100, cursor: "pointer", borderColor: "green" }
@@ -1347,11 +1320,9 @@ class TestPageContainer extends Component {
                 }
               >
                 <div>
-                  {/* ADD bugid-(GTRE_7011) */}
                   {(nShutdowndataArray.length >= 1 &&
                     eShutdowndataArray.length >= 1) ||
                   nShutdowndataArray.length >= 2 ||
-                  /*DEL bugid-(GTRE_7007) */
                   eShutdowndataArray.length >= 2 ||
                   (showTarget === false && communication === false) ? (
                     <RedoOutlined
@@ -1367,11 +1338,9 @@ class TestPageContainer extends Component {
                   )}
                 </div>
 
-                {/* ADD bugid-(GTRE_7011) */}
                 {(nShutdowndataArray.length >= 1 &&
                   eShutdowndataArray.length >= 1) ||
                 nShutdowndataArray.length >= 2 ||
-                //  {/* ADD bugid-(GTRE_7007) */}
                 eShutdowndataArray.length >= 2 ||
                 (showTarget === false && communication === false) ||
                 communicationFailed === true ? (
@@ -1424,7 +1393,6 @@ class TestPageContainer extends Component {
                       {LubeOilPump} {this.state.LubeOilPump}
                     </p>
 
-                    {/* ADD -  GTRE_7006 */}
                     <p>
                       {ErrorCode} {this.state.ErrorCode}
                     </p>
@@ -1488,11 +1456,11 @@ const mapDispatchToProps = {
   getTargetTemp,
   getResetTemp,
   getResetRPM,
-  updateChartData,
   stopDbInsert,
   updateTestIdValue,
   updateTestIdCount,
   updateTurboMode,
+  updatePlcControlType,
   updateDropDown,
   updateNotifyAction,
   startDisableEvent,

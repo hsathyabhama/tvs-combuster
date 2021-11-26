@@ -11,11 +11,8 @@ const url = {
   TABLE_VIEW: 'tableview.php',
   SHUTDOWN_CLICK: 'shutdown.php',
   TURBOID_VALUE: 'turboIdValue.php',
-  TABLE_STATUSDATA: 'statusValue.php',
-  GRAPH_DATA: 'graph.php',
+  TABLE_STATUSDATA: 'statusValue.php',  
   DELAY_DATA: 'delay.php',     
-
-     /* ADD bugid-(GTRE_7003)*/
   LOGOUT_EVENT: 'logout.php',     
 }
 
@@ -44,31 +41,18 @@ const CompanyDetails = {
 
 const dashboardDataVal = [
   { "key": "0", "Name": "Combustor Outlet Temperature", "chosen": true },
-  { "key": "1", "Name": " Turbine Inlet Temperature", "chosen": true },
-  { "key": "2", "Name": "Turbine Outlet Temperature", "chosen": true },
-  { "key": "3", "Name": "Compressor Inlet Temperature", "chosen": false },
-  { "key": "4", "Name": "Compressor Outlet Temperature", "chosen": false },
-  { "key": "5", "Name": "Ambient Temperature", "chosen": false },
-  { "key": "6", "Name": "Combustor Inlet Pressure", "chosen": false },
-  { "key": "7", "Name": "Fuel Line Pressure", "chosen": false },
-  { "key": "8", "Name": "Turbine Inlet Pressure", "chosen": true },
-  { "key": "9", "Name": "Ambient Pressure", "chosen": false },
-  { "key": "10", "Name": " Compressor Inlet Pressure", "chosen": false },
-  { "key": "11", "Name": "Compressor Outlet Pressure", "chosen": false },
-  { "key": "12", "Name": "Ventury meter differential pressure", "chosen": false },
-  { "key": "13", "Name": "Fuel Flow Rate", "chosen": true },
-  { "key": "14", "Name": "Rpm sensor", "chosen": true },
+  { "key": "1", "Name": "TurboCharger Outlet Temperature", "chosen": true },
+  { "key": "2", "Name": "RPM sensor", "chosen": true },
+  { "key": "3", "Name": "Pressure Sensor", "chosen": true },
+  { "key": "4", "Name": "Combuster Inlet Pressure", "chosen": true },
+  { "key": "5", "Name": "Gas Inlet Pressure", "chosen": true },
+
 ]
 const dashboardSensor = {
   sensorLabel: [
-    "Combustor Outlet Temperature", "Turbine Inlet Temperature",
-    "Turbine Outlet Temperature", "Compressor Inlet Temperature",
-    "Compressor Outlet Temperature", "Ambient Temperature",
-    "Combustor Inlet Pressure", "Fuel Line Pressure",
-    "Turbine Inlet Pressure", "Ambient Pressure ",
-    "Compressor Inlet Pressure", "Compressor Outlet Pressure",
-    "Ventury meter differential pressure",
-    "Fuel Flow Rate", "Rpm sensor",],
+    "Combustor Outlet Temperature", "TurboCharger Outlet Temperature", "Rpm sensor",
+    "Pressure Sensor", "Combuster Inlet Pressure","Gas Inlet Pressure",
+   ],
   dummyData: 0,
   chartMax: 5,
   n_shutdown: 'N-Shutdown',
@@ -77,7 +61,7 @@ const dashboardSensor = {
   offline: 'OFFLINE'
 
 }
-const targetKeysVal = ["0","1", "2", "8", "13", "14"]
+const targetKeysVal = ["0","1", "2", "3", "4", "5"]
 
 const titleElements = [
   {
@@ -90,15 +74,14 @@ const testParamHash = {
   Initializedata: ['Communication', 'Initialize Started', 'Initialize Completed'],
   Startdata: ['Start Completed', 'Ignite', 'Gas Opened', 'Stage1', 'Ruel Opened', 'Stage2', 'Fuel Opened', 'Stage2', 'Gas Closed', 'Stage3'],
   nShutdowndata: ['N.Shutdown Initiated', 'N.Shutdown Completed'],
-
-   // {/*ADD bugid-(GTRE_7007) */}
   eShutdowndata: ['E.Shutdown Initiated', 'E.Shutdown Completed'],
   Resetdata: ['Reset Values'],
   Tester_warning: 'Already exists',
   Witness_warning: 'Already exists',
   duplicate_msg: 'Duplicate value',
   warning_Id: "Please select the turbo ID",
-  warning_mode: "Please select turbo mode",
+  warning_burnermode: "Please select turbo mode",
+  warning_controlunit: "Please select control unit",
   warning_name: "Please enter tester name",
   alert_targetval: "Please enter target values",
 }
@@ -115,9 +98,7 @@ const helpPopup = {
   IgnitorSwitch: 'IgnitorSwitch : ',
   KerosenePump: 'KerosenePump : ',
   LubeOilPump: 'LubeOilPump : ',
-
-   // {/*ADD bugid-(GTRE_7006) */}
-   ErrorCode: 'ERROR CODE : ',
+  ErrorCode: 'ERROR CODE : ',
 }
 
 const turboConfigValue = {
@@ -125,10 +106,7 @@ const turboConfigValue = {
   nozzleArea_min: 0.0002,
   nozzleArea_max: 0.0005,
   nozzleArea_step: 0.0001,
-  nozzleArea_defalutValue: 0.00023,
-  blade_defalutValue: 6,
-  blade_min: 1,
-  blade_max: 10,
+  nozzleArea_defalutValue: 0.00023,  
   error_turbo_msg: 'Turbo ID alreadt exists',
   error_blade_msg: 'Please enter number of blades',
   added_turbo_msg: 'TurboID added successfully',

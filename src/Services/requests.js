@@ -18,8 +18,6 @@ const turboIdValueUrl = `${BASE_URL}${URL.TURBOID_VALUE}`
 const tableStatusDataUrl = `${BASE_URL}${URL.TABLE_STATUSDATA}`
 const graphDataUrl = `http://localhost:8001/graph.php`   
 const delayDataUrl = `${BASE_URL}${URL.DELAY_DATA}`
-
-// {/*ADD bugid-(GTRE_7003) */}
 const logoutEventUrl = `${BASE_URL}${URL.LOGOUT_EVENT}`
 
 // Form requests
@@ -98,6 +96,7 @@ const getParamConfigData = (callBack) => {
       console.log(err);
     })
 }
+
 // TurboConfig page request
 const turbineConfigSubmit = (body, callBack) => {
   axios.post(turboConfigSubmitUrl, body)
@@ -171,7 +170,6 @@ const gettingDelayValue = (callBack) => {
     })
 };
 
-/* ADD bugid-(GTRE_7003)*/
 const logoutEvent = (callBack) => {
   axios.post(logoutEventUrl)
     .then(res => {
@@ -181,7 +179,6 @@ const logoutEvent = (callBack) => {
       console.log(err.res)
     })
 };
-
 
 export {
   getTurboConfigData, turbineConfigSubmit,

@@ -140,7 +140,6 @@ class StatusBlock extends Component {
     return (
       <div>
         <div>
-          {/* ADD -  GTRE_7005  */}
           <Row>
             {eShutdown ? (
               <p style={styles.offline}>{e_shutdown}</p>

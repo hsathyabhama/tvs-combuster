@@ -94,10 +94,16 @@ const appReducer = (state = InitialState, action) => {
       newState.turboIdTestCount = action.payload ? action.payload : []
       return newState
 
-    //turboMode
+    //turboChargerType
     case 'UPDATE_TURBO_MODE':
-      newState.turboMode = action.payload ? action.payload : []
+      newState.turboChargerType = action.payload ? action.payload : []
       return newState
+     
+    //plcControlType
+    case 'UPDATE_PLC_CONTROLTYPE':
+      newState.plcControlType = action.payload ? action.payload : []
+      return newState
+
     //testDropdown
     case 'UPDATE_DROPDOWN':
       newState.testDropdown = action.payload
@@ -166,13 +172,11 @@ const appReducer = (state = InitialState, action) => {
       newState.shutdownInitiated = false
       return newState  
 
-  /*ADD bugid-(GTRE_7012) */
     //startDisable
     case 'SHUTDOWN_ENABLE_EVENT':
      newState.startDisable = action.payload
     return newState
-    
-  /* ADD bugid-(GTRE_7018)   */
+
     //testIdData
     case 'GETTING_TEST_ID_DATA':
       newState.testIdData = action.payload

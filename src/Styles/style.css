@@ -381,7 +381,6 @@ div#allreport h1 {
   padding: 8px 8px 0 8px;
   background-color: #42dbdc;
 }
-
 /* icon-btn */
 .icon-button1 {
   margin-left: 40px;
@@ -476,6 +475,22 @@ div#allreport h1 {
   border: 1px;
   border-radius: 5px;
   box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc;
+}
+
+/* ===================================
+          radio + btn
+=================================== */
+.test-radio {
+  border: 1px solid gray;
+  width: 300px;
+  height: 40px;
+  padding-top: 4px;
+  padding-left: 25px;
+}
+
+.radio-btn {
+  color: rgb(216, 213, 216);
+  font-size: 18px;
 }
 
 /*
@@ -769,7 +784,6 @@ div#allreport h1 {
   padding-left: 10px;
   padding-right: 10px;
   background: #131633;
-  /* ADD bugid-(GTRE_7007)   */
   color: #fff;
 }
 .statistic-block .title {
@@ -783,7 +797,6 @@ div#allreport h1 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 13px !important;
-  /* ADD bugid-(GTRE_7007)   */
   color: #fff;
   margin-bottom: -5px !important;
 }

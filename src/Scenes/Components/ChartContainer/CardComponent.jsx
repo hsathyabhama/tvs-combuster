@@ -17,111 +17,57 @@ class CardComponent extends Component {
       cardList: [],
       dummygraphData: [
         {
-          FFR: dummyData, //dummyData = 0 in constant page
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData, //dummyData = 0 in constant page
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
         {
-          FFR: dummyData,
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData,
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
         {
-          FFR: dummyData,
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData,
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
         {
-          FFR: dummyData,
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData,
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
         {
-          FFR: dummyData,
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData,
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
         {
-          FFR: dummyData,
-          P1: dummyData,
-          P2: dummyData,
+          T1T2: dummyData,
+          T3T4: dummyData,
+          rpm1rpm2: dummyData,
+          P1P2: dummyData,
           P3: dummyData,
-          P4: dummyData,
-          P5: dummyData,
-          P6: dummyData,
-          P7: dummyData,
-          T1: dummyData,
-          T2: dummyData,
-          T3: dummyData,
-          T4: dummyData,
-          T5: dummyData,
-          T11: dummyData,
-          rpm: dummyData,
+          G1G2: dummyData,
           testdatadate: dummyData,
         },
       ],
@@ -152,38 +98,21 @@ class CardComponent extends Component {
   }, 1000);
 
   prepareChartParams = (chartdata) => {
-    let t1 = [];
-    let t2 = [];
-    let t3 = [];
-    let t4 = [];
-    let t5 = [];
-    let t11 = [];
-    let rpm = [];
-    let p1 = [];
-    let p2 = [];
+    let t1t2 = [];
+    let t3t4 = [];
+    let rpm1rpm2 = [];
+    let p1p2 = [];
     let p3 = [];
-    let p4 = [];
-    let p5 = [];
-    let p6 = [];
-    let p7 = [];
-    let ffr = [];
+    let g1g2 = [];
     let date_Time = [];
     for (let i = 0; i < 6; i++) {
-      t1.push(chartdata[i].T1);
-      t2.push(chartdata[i].T2);
-      t3.push(chartdata[i].T3);
-      t4.push(chartdata[i].T4);
-      t5.push(chartdata[i].T5);
-      t11.push(chartdata[i].T11);
-      rpm.push(chartdata[i].rpm);
-      p1.push(chartdata[i].P1);
-      p2.push(chartdata[i].P2);
+      t1t2.push(chartdata[i].T1T2);
+      t3t4.push(chartdata[i].T3T4);
+      rpm1rpm2.push(chartdata[i].rpm1rpm2);
+      p1p2.push(chartdata[i].P1P2);
       p3.push(chartdata[i].P3);
-      p4.push(chartdata[i].P4);
-      p5.push(chartdata[i].P5);
-      p6.push(chartdata[i].P6);
-      p7.push(chartdata[i].P7);
-      ffr.push(chartdata[i].FFR);
+      g1g2.push(chartdata[i].G1G2);
+
       date_Time.push(
         new Date(chartdata[i].date_Time).toLocaleTimeString([], {
           hour12: false,
@@ -199,21 +128,12 @@ class CardComponent extends Component {
     ); //chartlabel
 
     let chartArray = [];
-    chartArray.push(t1);
-    chartArray.push(t2);
-    chartArray.push(t3);
-    chartArray.push(t4);
-    chartArray.push(t5);
-    chartArray.push(t11);
-    chartArray.push(p1);
-    chartArray.push(p2);
+    chartArray.push(t1t2);
+    chartArray.push(t3t4);
+    chartArray.push(rpm1rpm2);
+    chartArray.push(p1p2);
     chartArray.push(p3);
-    chartArray.push(p4);
-    chartArray.push(p5);
-    chartArray.push(p6);
-    chartArray.push(p7);
-    chartArray.push(ffr);
-    chartArray.push(rpm);
+    chartArray.push(g1g2);
 
     let filteredData = chartArray.filter((_, index) =>
       dashboardDataNumArr.includes(index)
@@ -249,12 +169,6 @@ class CardComponent extends Component {
             ],
             chartTextColor: textColor,
 
-            // /*DEL bugid-(GTRE_7001)*/
-            // upperLimitVal: this.props.app.tableViewData[i].upperlimit,
-            // normalLimitVal: this.props.app.tableViewData[i].normallimit,
-            // lowerLimitVal: this.props.app.tableViewData[i].lowerlimit,
-
-            ///*ADD bugid-(GTRE_7001)*/
             upperLimitVal: this.props.app.tableViewData[i].graph_upper,
             normalLimitVal: this.props.app.tableViewData[i].normallimit,
             lowerLimitVal: this.props.app.tableViewData[i].graph_lower,

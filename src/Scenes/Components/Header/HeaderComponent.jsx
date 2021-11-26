@@ -22,7 +22,6 @@ class HeaderComponent extends Component {
   //function for logout
   backToLoginEvent = () => {
     window.location.reload(false);
-    /* ADD bugid-(GTRE_7003)*/
     logoutEvent((data) => {});
   };
 

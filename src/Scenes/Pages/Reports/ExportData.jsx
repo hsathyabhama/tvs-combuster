@@ -116,7 +116,6 @@ class ExportData extends Component {
         .then((res) => {
           var data = res.data;
 
-          /*ADD bugid-(GOARIG_7024) */
           if (data.length > 5 && typeof data !== "string") {
             //updated the export data title
             this.setState({
