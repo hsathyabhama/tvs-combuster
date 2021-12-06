@@ -115,6 +115,7 @@ export const updatePlcControlType = data => ({
   payload: data
 })
 
+//testDropdown
 export const updateDropDown = data => ({
   type: 'UPDATE_DROPDOWN',
   payload: data
@@ -205,5 +206,10 @@ export const gettingTestIdData = data => ({
 //delayValue
 export const fetchingDelayValue = data => ({
   type: 'FETCHING_DELAY_VALUE',
+  payload: data
+})
+//cvStageValue
+export const fetchingCvstageValue = data => ({
+  type: 'FETCHING_CVSTAGE_VALUE',
   payload: data
 })

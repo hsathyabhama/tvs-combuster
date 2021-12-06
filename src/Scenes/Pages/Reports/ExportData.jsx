@@ -33,32 +33,13 @@ class ExportData extends Component {
       loading: false,
       title: [],
       formulaUnit: {
-        "Turbine Nozzle Area": "m2",
-        "Total Mass Flow Rate": "kg/sec",
-        "Combustor Inlet Air Flow": "kg/sec",
-        "Combustor Input Energy": "KJ",
-        "Specific Heat Capacity": "KJ/Kg-K",
-        "Combustor Output Energy": "KJ",
-        "Combustor Input Fuel Energy": "KJ",
-        "Combustor Ideal Efficiency": "η",
-        "Turbine Expansion Ratio": "",
-        "Turbine Differential Temperature": "Deg C",
-        "Turbine Power": "KW",
-        "Turbine Isentropic Efficiency": "ηT",
-        "Compressor Pressure Ratio": "",
-        "Compressor Differential Temperature": "Degree C",
-        "Ventury meter differential Pressure": "mm water",
-        "Actual Differential Pressure": "pascal",
-        "Ventury Volume Flow Rate": "m3",
-        "Compressor Mass Flow Rate": "kg/sec",
-        "Compressor Power": "KW",
-        "Compressor Efficiency": "ηc",
-        "Compressor Air Flow": "kg/sec",
-        "Combustor Flue Gas flow rate": "kg/sec",
-        "Corrected Compressor rpm": "rpm",
-        "Surge Margin": "%",
-        "Corrected mass flow of compressor": "kg/sec",
-        "Air Fuel ratio": "",
+        "Combustor Outlet Temperature": "Deg C",
+        "TurboCharger Outlet Temperature": "Deg C",
+        "RPM Sensor": "rpm",
+        "Combuster Inlet Pressure": "Bar",
+        "Gas Inlet Pressure": "Bar",
+        "Gas Flow": "kg/min",
+        "Ventury Meter": "mm",
       },
       timeUnit: {
         testdataDate: "Time",
@@ -79,7 +60,7 @@ class ExportData extends Component {
     //while adding the unit row in the table,exported excel sheet not in the correct order,
     //so here changed the order of the array index value
 
-    const index = [10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14];
+    const index = [4, 0, 1, 2, 3, 5, 6];
 
     const createdData = index.map((i) => paramValue[i]);
 
@@ -114,6 +95,7 @@ class ExportData extends Component {
           testno: this.state.testno1,
         })
         .then((res) => {
+          console.log(res.data);
           var data = res.data;
 
           if (data.length > 5 && typeof data !== "string") {
@@ -150,6 +132,7 @@ class ExportData extends Component {
           testno: this.state.testno1,
         })
         .then((res) => {
+          console.log(res.data);
           this.setState({
             tester: res.data[0].tester,
             witness: res.data[0].witness,
@@ -229,7 +212,7 @@ class ExportData extends Component {
         dataIndex: this.state.title[0],
         key: this.state.title[0],
         fixed: "left",
-        width: 105,
+        width: 25,
       },
       {
         title: this.state.title[1],
@@ -237,243 +220,38 @@ class ExportData extends Component {
         key: this.state.title[1],
         fixed: this.state.title[1],
         fixed: "left",
-        width: 100,
+        width: 20,
       },
       {
         title: this.state.title[2],
         dataIndex: this.state.title[2],
         key: this.state.title[2],
-        width: 100,
+        width: 20,
       },
       {
         title: this.state.title[3],
         dataIndex: this.state.title[3],
         key: this.state.title[3],
-        width: 100,
+        width: 20,
       },
       {
         title: this.state.title[4],
         dataIndex: this.state.title[4],
         key: this.state.title[4],
-        width: 100,
+        width: 20,
       },
       {
         title: this.state.title[5],
         dataIndex: this.state.title[5],
         key: this.state.title[5],
-        width: 100,
+        width: 20,
       },
       {
         title: this.state.title[6],
         dataIndex: this.state.title[6],
         key: this.state.title[6],
-        width: 100,
+        width: 20,
       },
-      {
-        title: this.state.title[7],
-        dataIndex: this.state.title[7],
-        key: this.state.title[7],
-        width: 100,
-      },
-      {
-        title: this.state.title[8],
-        dataIndex: this.state.title[8],
-        key: this.state.title[8],
-        width: 100,
-      },
-      {
-        title: this.state.title[9],
-        dataIndex: this.state.title[9],
-        key: this.state.title[9],
-        width: 100,
-      },
-      {
-        title: this.state.title[10],
-        dataIndex: this.state.title[10],
-        key: this.state.title[10],
-        width: 100,
-      },
-      {
-        title: this.state.title[11],
-        dataIndex: this.state.title[11],
-        key: this.state.title[11],
-        width: 100,
-      },
-      {
-        title: this.state.title[12],
-        dataIndex: this.state.title[12],
-        key: this.state.title[12],
-        width: 100,
-      },
-      {
-        title: this.state.title[13],
-        dataIndex: this.state.title[13],
-        key: this.state.title[13],
-        width: 100,
-      },
-      {
-        title: this.state.title[14],
-        dataIndex: this.state.title[14],
-        key: this.state.title[14],
-        width: 100,
-      },
-
-      // {
-      //   title: "Turbine Nozzle Area",
-      //   dataIndex: "Turbine Nozzle Area",
-      //   key: "Turbine Nozzle Area",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Total Mass Flow Rate",
-      //   dataIndex: "Total Mass Flow Rate",
-      //   key: "Total Mass Flow Rate",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Inlet Air Flow",
-      //   dataIndex: "Combustor Inlet Air Flow",
-      //   key: "Combustor Inlet Air Flow",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Input Energy",
-      //   dataIndex: "Combustor Input Energy",
-      //   key: "Combustor Input Energy",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Specific Heat Capacity",
-      //   dataIndex: "Specific Heat Capacity",
-      //   key: "Specific Heat Capacity",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Output Energy",
-      //   dataIndex: "Combustor Output Energy",
-      //   key: "Combustor Output Energy",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Input Fuel Energy",
-      //   dataIndex: "Combustor Input Fuel Energy",
-      //   key: "Combustor Input Fuel Energy",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Ideal Efficiency",
-      //   dataIndex: "Combustor Ideal Efficiency",
-      //   key: "Combustor Ideal Efficiency",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Turbine Expansion Ratio",
-      //   dataIndex: "Turbine Expansion Ratio",
-      //   key: "Turbine Expansion Ratio",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Turbine Differential Temperature",
-      //   dataIndex: "Turbine Differential Temperature",
-      //   key: "Turbine Differential Temperature",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Turbine Power",
-      //   dataIndex: "Turbine Power",
-      //   key: "Turbine Power",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Turbine Isentropic Efficiency",
-      //   dataIndex: "Turbine Isentropic Efficiency",
-      //   key: "Turbine Isentropic Efficiency",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Pressure Ratio",
-      //   dataIndex: "Compressor Pressure Ratio",
-      //   key: "Compressor Pressure Ratio",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Differential Temperature",
-      //   dataIndex: "Compressor Differential Temperature",
-      //   key: "Compressor Differential Temperature",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Ventury meter differential Pressure",
-      //   dataIndex: "Ventury meter differential Pressure",
-      //   key: "Ventury meter differential Pressure",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Actual Differential Pressure",
-      //   dataIndex: "Actual Differential Pressure",
-      //   key: "Actual Differential Pressure",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Ventury Volume Flow Rate",
-      //   dataIndex: "Ventury Volume Flow Rate",
-      //   key: "Ventury Volume Flow Rate",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Mass Flow Rate",
-      //   dataIndex: "Compressor Mass Flow Rate",
-      //   key: "Compressor Mass Flow Rate",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Power",
-      //   dataIndex: "Compressor Power",
-      //   key: "Compressor Power",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Efficiency",
-      //   dataIndex: "Compressor Efficiency",
-      //   key: "Compressor Efficiency",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Compressor Air Flow",
-      //   dataIndex: "Compressor Air Flow",
-      //   key: "Compressor Air Flow",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Combustor Flue Gas flow rate",
-      //   dataIndex: "Combustor Flue Gas flow rate",
-      //   key: "Combustor Flue Gas flow rate",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Corrected Compressor rpm",
-      //   dataIndex: "Corrected Compressor rpm",
-      //   key: "Corrected Compressor rpm",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Surge Margin",
-      //   dataIndex: "Surge Margin",
-      //   key: "Surge Margin",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Corrected mass flow of compressor",
-      //   dataIndex: "Corrected mass flow of compressor",
-      //   key: "Corrected mass flow of compressor",
-      //   width: 100,
-      // },
-      // {
-      //   title: "Air Fuel ratio",
-      //   dataIndex: "Air Fuel ratio",
-      //   key: "Air Fuel ratio",
-      //   width: 100,
-      // },
     ];
     return (
       <div style={{ paddingTop: "1px" }}>

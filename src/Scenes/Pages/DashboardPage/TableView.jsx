@@ -20,11 +20,6 @@ const columns = [
     key: "lowerlimit",
   },
   {
-    title: "normallimit",
-    dataIndex: "normallimit",
-    key: "normallimit",
-  },
-  {
     title: "unitName",
     dataIndex: "unitname",
     key: "unitname",
@@ -109,7 +104,7 @@ class TableView extends Component {
       this.setState({
         filteredTableData: filteredTableData,
       });
-      // this.props.updateTableViewData(filteredTableData);
+      //this.props.updateTableViewData(this.state.filteredTableData);
     });
   }
 
@@ -132,6 +127,7 @@ class TableView extends Component {
   });
 
   render() {
+    console.log(this.state.filteredTableData);
     return (
       <div>
         <StatusBlock />

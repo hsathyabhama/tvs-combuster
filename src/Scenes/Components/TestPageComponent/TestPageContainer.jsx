@@ -65,7 +65,7 @@ import {
   turboConfigValue,
   helpPopup,
 } from "../../../Services/constants";
-
+import CVStageComponent from "./CVStageComponent";
 var { Option } = Select;
 const { SubMenu } = Menu;
 let count = 1;
@@ -146,6 +146,7 @@ class TestPageContainer extends Component {
     this.handleTesterInput = this.handleTesterInput.bind(this);
     this.deleteTesterItem = this.deleteTesterItem.bind(this);
     this.deleteWitnessItem = this.deleteWitnessItem.bind(this);
+    this.resetOnClick = this.resetOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -468,25 +469,25 @@ class TestPageContainer extends Component {
 
   //reset event onClick
   resetOnClick = () => {
-    if (
-      parseInt(this.props.app.resetTemp) >
-        parseInt(this.props.app.paramConfig[12].upperlimit) ||
-      parseInt(this.props.app.resetRPM) >
-        parseInt(this.props.app.paramConfig[10].upperlimit)
-    ) {
-      message.error("Temprature or RPM exceeded the limit");
-    } else {
-      axios
-        .post("http://localhost:5000/reset_targetVal.php", {
-          ResetRPM: this.props.app.resetRPM,
-          ResetTemp: this.props.app.resetTemp,
-          testId: this.props.app.testIdData,
-        })
-        .then((res) => {})
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    // if (
+    //   parseInt(this.props.app.resetTemp) >
+    //     parseInt(this.props.app.paramConfig[1].upperlimit) ||
+    //   parseInt(this.props.app.resetRPM) >
+    //     parseInt(this.props.app.paramConfig[4].upperlimit)
+    // ) {
+    //   message.error("Temprature or RPM exceeded the limit");
+    // } else {
+    axios
+      .post("http://localhost:5000/reset_targetVal.php", {
+        ResetRPM: this.props.app.resetRPM,
+        ResetTemp: this.props.app.resetTemp,
+        testId: this.props.app.testIdData,
+      })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+    // }
   };
 
   //start event onClick
@@ -539,12 +540,12 @@ class TestPageContainer extends Component {
     this.props.stopDbInsert();
     this.props.updateTestIdCount("");
     this.props.updateTestIdValue("");
-    this.props.updateTurboMode(0);
-    this.props.updatePlcControlType(0);
     this.props.initiateTurboStart([]);
     this.props.initiateCommunicationFailed(false);
     this.props.getResetTemp("");
     this.props.startDisableEvent(false);
+    this.props.updateTurboMode(0);
+    this.props.updatePlcControlType(0);
 
     this.setState({
       turboIdDefaultValue: "Select Turbo ID",
@@ -596,9 +597,7 @@ class TestPageContainer extends Component {
     if (this.props.app.turboStart) {
       turboStart = this.props.app.turboStart;
     }
-    console.log(this.props.app.targetTemp, this.props.app.targetRPM);
     console.log(this.props.app);
-    console.log(this.props.app.chartData);
 
     const InitializedataArray = turboStart.filter((it) =>
       Initializedata.find((val) => val === it.name)
@@ -606,7 +605,7 @@ class TestPageContainer extends Component {
     const StartdataArray = turboStart.filter((it) =>
       Startdata.find((val) => val === it.name)
     );
-
+    console.log(StartdataArray);
     const nShutdowndataArray = turboStart.filter((it) =>
       nShutdowndata.find((val) => val === it.name)
     );
@@ -683,10 +682,10 @@ class TestPageContainer extends Component {
                               className="test-radio"
                             >
                               <Radio value={1} className="radio-btn">
-                                Burner 1
+                                <span className="disable-btn"> Burner 1</span>
                               </Radio>
                               <Radio value={2} className="radio-btn">
-                                Burner 2
+                                <span className="disable-btn"> Burner 2</span>
                               </Radio>
                             </Radio.Group>
                           ) : (
@@ -697,16 +696,10 @@ class TestPageContainer extends Component {
                               className="test-radio"
                             >
                               <Radio value={1} className="radio-btn">
-                                <span style={{ color: "white" }}>
-                                  {" "}
-                                  Burner 1
-                                </span>
+                                <span className="disable-btn">Burner 1</span>
                               </Radio>
                               <Radio value={2} className="radio-btn">
-                                <span style={{ color: "white" }}>
-                                  {" "}
-                                  Burner 2
-                                </span>
+                                <span className="disable-btn">Burner 2</span>
                               </Radio>
                             </Radio.Group>
                           )}
@@ -729,10 +722,10 @@ class TestPageContainer extends Component {
                               className="test-radio"
                             >
                               <Radio value={1} className="radio-btn">
-                                RPM
+                                <span className="disable-btn"> RPM</span>
                               </Radio>
                               <Radio value={2} className="radio-btn">
-                                Mass Flow
+                                <span className="disable-btn"> Mass Flow</span>
                               </Radio>
                             </Radio.Group>
                           ) : (
@@ -837,7 +830,7 @@ class TestPageContainer extends Component {
                         <Row>
                           <Col span={6} style={{ marginTop: "20px" }}>
                             <label htmlFor="text" className="label">
-                              Test Engg
+                              Tester
                             </label>
                           </Col>
                           <Col span={15}>
@@ -865,7 +858,7 @@ class TestPageContainer extends Component {
                           </Col>
                         </Row>
                       </form>
-                      <Row style={{ paddingLeft: "6rem" }}>
+                      <Row style={{ paddingLeft: "7rem" }}>
                         <ListItems
                           items={this.state.testerItems}
                           deleteItem={this.deleteTesterItem}
@@ -1078,7 +1071,7 @@ class TestPageContainer extends Component {
                   )}
 
                   {showTarget ? (
-                    <p style={{ height: "15px", width: "180px" }}>
+                    <p style={{ height: "15px", width: "190px" }}>
                       <Row>
                         {StartdataArray.map((item) => {
                           return (
@@ -1108,17 +1101,18 @@ class TestPageContainer extends Component {
               <hr></hr>
             </Col>
 
+            {/* Reset Values part */}
             <Col span={3}>
               <Card
                 style={
-                  StartdataArray.find((it) => it.name === "Stage3") &&
+                  StartdataArray.find((it) => it.name === "Stage 3") &&
                   communication
                     ? { width: 185, cursor: "pointer", borderColor: "green" }
                     : { width: 185, borderColor: "gray" }
                 }
               >
                 <div style={{ width: "300px" }}>
-                  {StartdataArray.find((it) => it.name === "Stage3") &&
+                  {StartdataArray.find((it) => it.name === "Stage 3") &&
                   communication ? (
                     <SyncOutlined
                       style={{ color: "green" }}
@@ -1132,7 +1126,7 @@ class TestPageContainer extends Component {
                     />
                   )}
 
-                  {StartdataArray.find((it) => it.name === "Stage3") &&
+                  {StartdataArray.find((it) => it.name === "Stage 3") &&
                   communication ? (
                     <p
                       style={{
@@ -1157,7 +1151,7 @@ class TestPageContainer extends Component {
 
                   {communication ? (
                     <p>
-                      {StartdataArray.find((it) => it.name === "Stage3") ? (
+                      {StartdataArray.find((it) => it.name === "Stage 3") ? (
                         <p>
                           <Row>
                             <p>Reset Temp,</p>
@@ -1176,12 +1170,9 @@ class TestPageContainer extends Component {
                               name="ResetRPM"
                               style={{ width: "75px" }}
                             />
-                            <button
-                              className="add-btn"
-                              onClick={() => this.resetOnClick()}
-                            >
+                            <Button onClick={() => this.resetOnClick()}>
                               +
-                            </button>
+                            </Button>
                           </Row>
                         </p>
                       ) : (
@@ -1196,7 +1187,7 @@ class TestPageContainer extends Component {
                               {item.testcommandsTime} - {item.name} -{" "}
                               {item.value}
                               {(() => {
-                                if (item.name === "stage3" && count === 1) {
+                                if (item.name === "Stage 3" && count === 1) {
                                   this.props.initiateStageThree();
                                   count++;
                                 }
@@ -1349,66 +1340,73 @@ class TestPageContainer extends Component {
                   <p style={{ color: "gray", fontSize: "20px" }}>Reset</p>
                 )}
               </Card>
+              <Row style={{ paddingTop: "40%" }}>
+                <CVStageComponent />
+              </Row>
             </Col>
 
             <Col span={2}>
-              <Popover
-                title={
-                  <div>
-                    <p style={{ fontWeight: "bold" }}>
-                      {value} {this.state.valvestatustime}
-                    </p>
-                  </div>
+              <Card
+                style={
+                  showTarget
+                    ? {
+                        width: 100,
+                        cursor: "pointer",
+                        borderColor: "green",
+                      }
+                    : { width: 100, borderColor: "gray" }
                 }
-                content={
-                  <div>
-                    <p>
-                      {PilotFlameAir} {this.state.PilotFlameAir}{" "}
-                    </p>
-                    <p>
-                      {FuelInjectorAir} {this.state.FuelInjectorAir}
-                    </p>
-                    <p>
-                      {PilotFlameGas} {this.state.PilotFlameGas}
-                    </p>
-                    <p>
-                      {FCVAir} {this.state.FCVAir}
-                    </p>
-                    <p>
-                      {FCVKeroseneFuel} {this.state.FCVKeroseneFuel}
-                    </p>
-                    <p>
-                      {ByPassValueI} {this.state.ByPassValueI}
-                    </p>
-                    <p>
-                      {ByPassValueII} {this.state.ByPassValueII}
-                    </p>
-                    <p>
-                      {IgnitorSwitch} {this.state.IgnitorSwitch}
-                    </p>
-                    <p>
-                      {KerosenePump} {this.state.KerosenePump}
-                    </p>
-                    <p>
-                      {LubeOilPump} {this.state.LubeOilPump}
-                    </p>
-
-                    <p>
-                      {ErrorCode} {this.state.ErrorCode}
-                    </p>
-                  </div>
-                }
-                trigger="click"
-                placement="bottomRight"
-                visible={this.state.visible}
-                onVisibleChange={this.handleVisibleChange}
               >
-                <Card
-                  style={
-                    showTarget
-                      ? { width: 100, cursor: "pointer", borderColor: "green" }
-                      : { width: 100, borderColor: "gray" }
+                <Popover
+                  title={
+                    <div>
+                      <p style={{ fontWeight: "bold" }}>
+                        {value} {this.state.valvestatustime}
+                      </p>
+                    </div>
                   }
+                  content={
+                    <div>
+                      <p>
+                        {PilotFlameAir} {this.state.PilotFlameAir}{" "}
+                      </p>
+                      <p>
+                        {FuelInjectorAir} {this.state.FuelInjectorAir}
+                      </p>
+                      <p>
+                        {PilotFlameGas} {this.state.PilotFlameGas}
+                      </p>
+                      <p>
+                        {FCVAir} {this.state.FCVAir}
+                      </p>
+                      <p>
+                        {FCVKeroseneFuel} {this.state.FCVKeroseneFuel}
+                      </p>
+                      <p>
+                        {ByPassValueI} {this.state.ByPassValueI}
+                      </p>
+                      <p>
+                        {ByPassValueII} {this.state.ByPassValueII}
+                      </p>
+                      <p>
+                        {IgnitorSwitch} {this.state.IgnitorSwitch}
+                      </p>
+                      <p>
+                        {KerosenePump} {this.state.KerosenePump}
+                      </p>
+                      <p>
+                        {LubeOilPump} {this.state.LubeOilPump}
+                      </p>
+
+                      <p>
+                        {ErrorCode} {this.state.ErrorCode}
+                      </p>
+                    </div>
+                  }
+                  trigger="click"
+                  placement="bottomRight"
+                  visible={this.state.visible}
+                  onVisibleChange={this.handleVisibleChange}
                 >
                   <div>
                     {showTarget ? (
@@ -1429,8 +1427,8 @@ class TestPageContainer extends Component {
                   ) : (
                     <p style={{ color: "gray", fontSize: "20px" }}>Help</p>
                   )}
-                </Card>
-              </Popover>
+                </Popover>
+              </Card>
             </Col>
           </Row>
         </Layout>

@@ -19,6 +19,7 @@ const tableStatusDataUrl = `${BASE_URL}${URL.TABLE_STATUSDATA}`
 const graphDataUrl = `http://localhost:8001/graph.php`   
 const delayDataUrl = `${BASE_URL}${URL.DELAY_DATA}`
 const logoutEventUrl = `${BASE_URL}${URL.LOGOUT_EVENT}`
+const fcvStageUrl = `${BASE_URL}${URL.FCV_STAGE}`
 
 // Form requests
 const loginValidation = (values, callBack) => {
@@ -180,6 +181,16 @@ const logoutEvent = (callBack) => {
     })
 };
 
+const fcvTransferEvent = (body,callBack) => {
+  axios.post(fcvStageUrl, body)
+    .then(res => {
+      callBack(res.data)
+    })
+    .catch(err => {
+      console.log(err.res)
+    })
+};
+
 export {
   getTurboConfigData, turbineConfigSubmit,
   getTestConfigData, getParamConfigData,
@@ -188,5 +199,5 @@ export {
   registerPageValidation, getTableView,
   getSensorData, getHandleChangetestID,
   requestStatusData, gettingChartData, 
-  gettingDelayValue, logoutEvent
+  gettingDelayValue, logoutEvent,fcvTransferEvent
 }

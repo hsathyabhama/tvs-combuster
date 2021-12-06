@@ -23,6 +23,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
         {
@@ -32,6 +33,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
         {
@@ -41,6 +43,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
         {
@@ -50,6 +53,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
         {
@@ -59,6 +63,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
         {
@@ -68,6 +73,7 @@ class CardComponent extends Component {
           P1P2: dummyData,
           P3: dummyData,
           G1G2: dummyData,
+          VM1VM2: dummyData,
           testdatadate: dummyData,
         },
       ],
@@ -104,6 +110,8 @@ class CardComponent extends Component {
     let p1p2 = [];
     let p3 = [];
     let g1g2 = [];
+    let vm1vm2 = [];
+
     let date_Time = [];
     for (let i = 0; i < 6; i++) {
       t1t2.push(chartdata[i].T1T2);
@@ -112,6 +120,7 @@ class CardComponent extends Component {
       p1p2.push(chartdata[i].P1P2);
       p3.push(chartdata[i].P3);
       g1g2.push(chartdata[i].G1G2);
+      vm1vm2.push(chartdata[i].VM1VM2);
 
       date_Time.push(
         new Date(chartdata[i].date_Time).toLocaleTimeString([], {
@@ -134,6 +143,7 @@ class CardComponent extends Component {
     chartArray.push(p1p2);
     chartArray.push(p3);
     chartArray.push(g1g2);
+    chartArray.push(vm1vm2);
 
     let filteredData = chartArray.filter((_, index) =>
       dashboardDataNumArr.includes(index)
@@ -170,7 +180,6 @@ class CardComponent extends Component {
             chartTextColor: textColor,
 
             upperLimitVal: this.props.app.tableViewData[i].graph_upper,
-            normalLimitVal: this.props.app.tableViewData[i].normallimit,
             lowerLimitVal: this.props.app.tableViewData[i].graph_lower,
           },
         };
@@ -242,11 +251,6 @@ class CardComponent extends Component {
                             upperLimit={
                               it.dataSet.upperLimitVal
                                 ? it.dataSet.upperLimitVal
-                                : []
-                            }
-                            normalLimit={
-                              it.dataSet.normalLimitVal
-                                ? it.dataSet.normalLimitVal
                                 : []
                             }
                             lowerLimit={

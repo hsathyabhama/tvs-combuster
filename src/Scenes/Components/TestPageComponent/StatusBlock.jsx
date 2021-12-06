@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Progress } from "antd";
 import { connect } from "react-redux";
 import { dashboardSensor } from "../../../Services/constants";
 import { getTableView } from "../../../Services/requests";
@@ -162,7 +162,7 @@ class StatusBlock extends Component {
         </div>
         <Row>
           {persons.map((It, y) => (
-            <Col span={4} style={{ paddingRight: "10px" }}>
+            <Col style={{ paddingRight: "10px", width: "215px" }}>
               <div className="statistic-block block">
                 <Row className="progress-details d-flex align-items-end justify-content-between">
                   {/* up and down arrow column */}
@@ -194,7 +194,7 @@ class StatusBlock extends Component {
                   {/* value displaying column */}
                   <Col
                     className="number dashtext-1"
-                    style={{ paddingLeft: "20%", fontSize: "23px" }}
+                    style={{ paddingLeft: "20%", fontSize: "21px" }}
                   >
                     {/* getting the color from the color array */}
                     <span style={{ color: colors[y] }}>{It}</span>
@@ -222,6 +222,24 @@ class StatusBlock extends Component {
               </div>
             </Col>
           ))}
+
+          <Col>
+            <div className="statistic-block block">
+              <Progress
+                strokeWidth={10}
+                strokeColor="#03fc28"
+                type="circle"
+                width={60}
+                style={{ marginLeft: "10px", marginRight: "10px" }}
+                percent={this.props.app.chartData[0].AirFCV}
+              />
+              <div className="title">
+                <div style={{ fontSize: "10px" }}>
+                  <strong> FCV Air</strong>
+                </div>
+              </div>
+            </div>
+          </Col>
         </Row>
       </div>
     );

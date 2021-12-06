@@ -12,8 +12,9 @@ const url = {
   SHUTDOWN_CLICK: 'shutdown.php',
   TURBOID_VALUE: 'turboIdValue.php',
   TABLE_STATUSDATA: 'statusValue.php',  
-  DELAY_DATA: 'delay.php',     
+  DELAY_DATA: 'configuration.php',     
   LOGOUT_EVENT: 'logout.php',     
+  FCV_STAGE: 'fcvStage.php',
 }
 
 const FormDetails = {
@@ -43,15 +44,17 @@ const dashboardDataVal = [
   { "key": "0", "Name": "Combustor Outlet Temperature", "chosen": true },
   { "key": "1", "Name": "TurboCharger Outlet Temperature", "chosen": true },
   { "key": "2", "Name": "RPM sensor", "chosen": true },
-  { "key": "3", "Name": "Pressure Sensor", "chosen": true },
-  { "key": "4", "Name": "Combuster Inlet Pressure", "chosen": true },
-  { "key": "5", "Name": "Gas Inlet Pressure", "chosen": true },
+  { "key": "3", "Name": "Combuster Inlet Pressure", "chosen": true },
+  { "key": "4", "Name": "Gas Inlet Pressure", "chosen": true },
+  { "key": "5", "Name": "Gas Flow", "chosen": true },
+  { "key": "6", "Name": "Ventury Meter", "chosen": false },
 
 ]
+
 const dashboardSensor = {
   sensorLabel: [
     "Combustor Outlet Temperature", "TurboCharger Outlet Temperature", "Rpm sensor",
-    "Pressure Sensor", "Combuster Inlet Pressure","Gas Inlet Pressure",
+    "Combuster Inlet Pressure","Gas Inlet Pressure", "Gas Flow","Ventury Meter",
    ],
   dummyData: 0,
   chartMax: 5,
@@ -72,7 +75,7 @@ const titleElements = [
 
 const testParamHash = { 
   Initializedata: ['Communication', 'Initialize Started', 'Initialize Completed'],
-  Startdata: ['Start Completed', 'Ignite', 'Gas Opened', 'Stage1', 'Ruel Opened', 'Stage2', 'Fuel Opened', 'Stage2', 'Gas Closed', 'Stage3'],
+  Startdata: ['Start Completed', 'Ignite', 'Pilot Gas Opened', 'Stage 1', 'Main Gas Opened','Stage 2', 'Pilot Gas Closed','Stage 3'],
   nShutdowndata: ['N.Shutdown Initiated', 'N.Shutdown Completed'],
   eShutdowndata: ['E.Shutdown Initiated', 'E.Shutdown Completed'],
   Resetdata: ['Reset Values'],

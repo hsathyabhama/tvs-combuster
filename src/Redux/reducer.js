@@ -96,12 +96,12 @@ const appReducer = (state = InitialState, action) => {
 
     //turboChargerType
     case 'UPDATE_TURBO_MODE':
-      newState.turboChargerType = action.payload ? action.payload : []
+      newState.turboChargerType = action.payload
       return newState
      
     //plcControlType
     case 'UPDATE_PLC_CONTROLTYPE':
-      newState.plcControlType = action.payload ? action.payload : []
+      newState.plcControlType = action.payload
       return newState
 
     //testDropdown
@@ -186,6 +186,11 @@ const appReducer = (state = InitialState, action) => {
     case 'FETCHING_DELAY_VALUE':
       newState.delayValue = action.payload
       return newState
+    //cvStageValue
+    case 'FETCHING_CVSTAGE_VALUE':
+      newState.cvStageValue = action.payload
+      return newState
+      
 
     default:
       return newState

@@ -26,7 +26,6 @@ import {
   updateTableStatusData,
   updateTestIdCount,
   updateTableViewData,
-  fetchingDelayValue,
   updateChartData,
   initiateTurboStart,
 } from "../../Redux/action";
@@ -97,9 +96,7 @@ export class MainComponent extends Component {
     // fetch TestDatainsert on application load
     if (this.state.testDataInsert === false) {
       axios
-        .post("http://localhost:7000/testdatainsert.php", {
-          status: "Statusblock loading",
-        })
+        .post("http://localhost:7000/testdatainsert.php", {})
         .then(function (response) {
           this.setState({
             testDataInsert: true,
@@ -113,7 +110,6 @@ export class MainComponent extends Component {
     // fetch livedata from DB application load
     setInterval(() => {
       gettingChartData((data) => {
-        console.log(data);
         this.props.updateChartData(data);
       });
     }, this.props.app.delayValue);
@@ -131,7 +127,6 @@ export class MainComponent extends Component {
   render() {
     const appData = this.props.app;
     const { mainPage } = appData;
-
     return (
       <Layout>
         <Header style={{ paddingLeft: "10px", paddingRight: "0" }}>
@@ -178,7 +173,6 @@ const mapDispatchToProps = {
   updateUserParameter,
   updateTestIdCount,
   updateTableViewData,
-  fetchingDelayValue,
   updateChartData,
   initiateTurboStart,
 };

@@ -48,5 +48,6 @@ const InitialState = {
   
   //grapgView
   delayValue: 1000,
+  cvStageValue:[],
 }
 export default InitialState

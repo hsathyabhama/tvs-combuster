@@ -13,7 +13,6 @@ class ChartComponent extends Component {
       borderColor: this.props.borderColor,
       textColor: "blue",
       upperLimit: this.props.upperLimit,
-      normalLimit: this.props.lowerLimit,
       lowerLimit: this.props.lowerLimit,
     };
   }

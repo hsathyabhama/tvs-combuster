@@ -374,9 +374,18 @@ div#allreport h1 {
   border-radius: 5px;
   box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc;
 }
-.add-btn[disabled] {
-  cursor: not-allowed;
+.add-btn:active {
+  cursor: pointer;
+  color: #255784;
+  background: #087a38;
+  border: 2px solid #087a38;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #087a38, 0 0 10px #087a38, 0 0 0px #087a38;
 }
+
+/* .add-btn[disabled] {
+  cursor: not-allowed;
+} */
 .site-button-ghost-wrapper {
   padding: 8px 8px 0 8px;
   background-color: #42dbdc;
@@ -395,6 +404,11 @@ div#allreport h1 {
   border: 2px solid #42dbdc;
   border-radius: 5px;
   box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc;
+}
+.icon-button1:active {
+  background: #5ce088;
+  border: 2px solid #5ce088;
+  box-shadow: 0 0 10px #5ce088, 0 0 10px #5ce088, 0 0 0px #5ce088;
 }
 .iconbutton1-basic {
   margin-left: 40px;
@@ -417,6 +431,12 @@ div#allreport h1 {
   box-shadow: 0 0 10px rgb(56, 189, 56), 0 0 10px rgb(56, 189, 56),
     0 0 0px rgb(56, 189, 56);
 }
+.icon-button2:active {
+  background: rgb(160, 219, 160);
+  border: 2px solid rgb(160, 219, 160);
+  box-shadow: 0 0 10px rgb(160, 219, 160), 0 0 10px rgb(160, 219, 160),
+    0 0 0px rgb(160, 219, 160);
+}
 .iconbutton2-basic {
   margin-left: 3px;
   margin-top: 1px;
@@ -436,6 +456,12 @@ div#allreport h1 {
   border-radius: 5px;
   box-shadow: 0 0 10px rgb(185, 51, 17), 0 0 10px rgb(185, 51, 17),
     0 0 0px rgb(185, 51, 17);
+}
+.icon-button3 :active {
+  background: rgb(240, 143, 119);
+  border: 2px solid rgb(240, 143, 119);
+  box-shadow: 0 0 10px rgb(240, 143, 119), 0 0 10px rgb(240, 143, 119),
+    0 0 0px rgb(240, 143, 119);
 }
 .iconbutton3-basic {
   margin-left: 40px;
@@ -457,6 +483,13 @@ div#allreport h1 {
   box-shadow: 0 0 10px rgb(185, 51, 17), 0 0 10px rgb(185, 51, 17),
     0 0 0px rgb(185, 51, 17);
 }
+.icon-button4 :active {
+  background: rgb(240, 143, 119);
+  border: 2px solid rgb(240, 143, 119);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(240, 143, 119), 0 0 10px rgb(240, 143, 119),
+    0 0 0px rgb(240, 143, 119);
+}
 .iconbutton4-basic {
   margin-left: 3px;
   margin-top: 1px;
@@ -476,7 +509,29 @@ div#allreport h1 {
   border-radius: 5px;
   box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc;
 }
+.logout-btn:active {
+  background-color: #139b47;
+}
 
+/* progress bar */
+
+.arrow-btn {
+  color: white;
+}
+.arrow-btn:hover {
+  color: #42dbdc;
+  padding: 4%;
+  border: 1px;
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc; */
+}
+.arrow-btn:active {
+  color: green;
+}
+
+.ant-progress-text {
+  color: white !important;
+}
 /* ===================================
           radio + btn
 =================================== */
@@ -492,7 +547,9 @@ div#allreport h1 {
   color: rgb(216, 213, 216);
   font-size: 18px;
 }
-
+.disable-btn {
+  color: #fff2f0 !important;
+}
 /*
 * =============================
 *      Table
@@ -764,6 +821,7 @@ div#allreport h1 {
   min-width: 50%;
   max-width: 300%;
 }
+
 /* ===================================
            -- Footer--
  ===================================*/
