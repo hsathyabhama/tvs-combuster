@@ -24,7 +24,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
@@ -34,7 +34,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
@@ -44,7 +44,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
@@ -54,7 +54,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
@@ -64,7 +64,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
@@ -74,7 +74,7 @@ class CardComponent extends Component {
           P3: dummyData,
           G1G2: dummyData,
           VM1VM2: dummyData,
-          testdatadate: dummyData,
+          testdataTime: dummyData,
         },
       ],
     };

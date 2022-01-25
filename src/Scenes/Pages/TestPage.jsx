@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TestPageContainer from "../Components/TestPageComponent/TestPageContainer";
 import StatusBlock from "../Components/TestPageComponent/StatusBlock";
+import StatusBlockRow2 from "../Components/TestPageComponent/StatusBlockRow2";
 import { updateTitleElements } from "../../Redux/action";
 import { connect } from "react-redux";
 
@@ -16,6 +17,7 @@ class TestPage extends Component {
     return (
       <div>
         <StatusBlock />
+        <StatusBlockRow2 />
         <TestPageContainer />
       </div>
     );

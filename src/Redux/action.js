@@ -213,3 +213,33 @@ export const fetchingCvstageValue = data => ({
   type: 'FETCHING_CVSTAGE_VALUE',
   payload: data
 })
+
+// chartData2
+export const updateChartData2 = data => ({
+  type: 'UPDATE_CHART_DATA2',
+  payload: data
+})
+
+// Cdinfinite
+export const updateCoefficientofDischarge = data => ({
+  type: 'UPDATE_CDINFINITE',
+  payload: data
+})
+
+// correctionFactor_b
+export const updateCorrectionFactor = data => ({
+  type: 'UPDATE_CORRECTIONFACTOR',
+  payload: data
+})
+
+// orificeDiameter_d
+export const updateorificeDiameter = data => ({
+  type: 'UPDATE_ORIFICEDIMETER',
+  payload: data
+})
+
+// PipeDiameter_D
+export const updatePipeDiameter = data => ({
+  type: 'UPDATE_PIPEDIAMETER',
+  payload: data
+})

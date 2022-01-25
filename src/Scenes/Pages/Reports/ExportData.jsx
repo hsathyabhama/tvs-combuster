@@ -42,7 +42,7 @@ class ExportData extends Component {
         "Ventury Meter": "mm",
       },
       timeUnit: {
-        testdataDate: "Time",
+        testdataTime: "Time",
       },
     };
   }

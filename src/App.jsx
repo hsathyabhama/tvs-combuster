@@ -19,7 +19,7 @@ class App extends Component {
   componentDidMount() {
     gettingDelayValue((data) => {
       this.props.fetchingDelayValue(data[0].Delay * 1000);
-      this.props.fetchingCvstageValue(data);
+      this.props.fetchingCvstageValue(data[0]);
     });
   }
   render() {

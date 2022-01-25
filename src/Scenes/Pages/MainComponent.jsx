@@ -28,6 +28,7 @@ import {
   updateTableViewData,
   updateChartData,
   initiateTurboStart,
+  updateChartData2,
 } from "../../Redux/action";
 import {
   getTurboConfigData,
@@ -40,8 +41,10 @@ import {
   gettingChartData,
   getSensorData,
 } from "../../Services/requests";
+import { testParamHash } from "../../Services/constants";
 
 const { Content, Header, Footer } = Layout;
+const { nShutdowndata, eShutdowndata } = testParamHash;
 
 export class MainComponent extends Component {
   constructor(props) {
@@ -109,19 +112,40 @@ export class MainComponent extends Component {
 
     // fetch livedata from DB application load
     setInterval(() => {
-      gettingChartData((data) => {
-        this.props.updateChartData(data);
+      const body = {
+        testId: this.props.app.testIdData,
+      };
+      gettingChartData(body, (data) => {
+        let ChartValue = data.slice(0, 7);
+        this.props.updateChartData(ChartValue);
+
+        let CommandValue = data.slice(7);
+        this.props.initiateTurboStart(CommandValue[0]);
       });
     }, this.props.app.delayValue);
 
-    setInterval(() => {
-      getSensorData((data) => {
-        let val = data;
-        if (this.props.app.communication === true && val.length >= 1) {
-          this.props.initiateTurboStart(val);
-        }
-      });
-    }, 1000);
+    // setInterval(() => {
+    //   const nShutdowndataArray = this.props.app.turboStart.filter((it) =>
+    //     nShutdowndata.find((val) => val === it.name)
+    //   );
+
+    //   const eShutdowndataArray = this.props.app.turboStart.filter((it) =>
+    //     eShutdowndata.find((val) => val === it.name)
+    //   );
+
+    //   if (
+    //     this.props.app.testIdData !== 0 &&
+    //     nShutdowndataArray.length < 2 &&
+    //     eShutdowndataArray.length < 2
+    //   ) {
+    //     // getSensorData((data) => {
+    //     //   let val = data;
+    //     // });
+    //     if (this.props.app.communication === true) {
+    //       // this.props.initiateTurboStart(this.props.app.chartData[7]);
+    //     }
+    //   }
+    // });
   }
 
   render() {
@@ -175,6 +199,7 @@ const mapDispatchToProps = {
   updateTableViewData,
   updateChartData,
   initiateTurboStart,
+  updateChartData2,
 };
 
 const MainContainer = connect(

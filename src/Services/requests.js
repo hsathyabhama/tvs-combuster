@@ -13,13 +13,13 @@ const paramConfigUrl = `${BASE_URL}${URL.PARAM_CONFIG}`
 const shutdownClickEventUrl = `${BASE_URL}${URL.SHUTDOWN_CLICK}`
 const updateConfigDataUrl = `${BASE_URL}${URL.UPDATE_CONFIG_DATA}`
 const tableViewUrl = `${BASE_URL}${URL.TABLE_VIEW}`
-const sensorDataUrl = `http://localhost:8002/getdata.php`
 const turboIdValueUrl = `${BASE_URL}${URL.TURBOID_VALUE}`
-const tableStatusDataUrl = `${BASE_URL}${URL.TABLE_STATUSDATA}`
-const graphDataUrl = `http://localhost:8001/graph.php`   
+const tableStatusDataUrl = `${BASE_URL}${URL.TABLE_STATUSDATA}` 
 const delayDataUrl = `${BASE_URL}${URL.DELAY_DATA}`
 const logoutEventUrl = `${BASE_URL}${URL.LOGOUT_EVENT}`
-const fcvStageUrl = `${BASE_URL}${URL.FCV_STAGE}`
+const graphDataUrl = `http://localhost:8001/graph.php`  
+const sensorDataUrl = `http://localhost:8002/getdata.php`
+const fcvStageUrl = `http://localhost:8003/fcvStage.php`
 
 // Form requests
 const loginValidation = (values, callBack) => {
@@ -129,8 +129,8 @@ const requestStatusData = (callBack) => {
       console.log(err);
     })
 }
-const gettingChartData = (callBack) => {
-  axios.get(graphDataUrl)
+const gettingChartData = (body,callBack) => {
+  axios.post(graphDataUrl, body)
     .then(res => {
       let chartdata = res.data;
       callBack(chartdata)
@@ -200,4 +200,5 @@ export {
   getSensorData, getHandleChangetestID,
   requestStatusData, gettingChartData, 
   gettingDelayValue, logoutEvent,fcvTransferEvent
+  
 }

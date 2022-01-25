@@ -3,6 +3,7 @@ import { Col, Row, Progress } from "antd";
 import { connect } from "react-redux";
 import { dashboardSensor } from "../../../Services/constants";
 import { getTableView } from "../../../Services/requests";
+
 const { sensorLabel, n_shutdown, e_shutdown, live, offline } = dashboardSensor;
 
 const styles = {
@@ -67,8 +68,14 @@ class StatusBlock extends Component {
     const arrStr = this.props.app.targetKeys;
     const dashboardDataNumArr = arrStr.map((i) => Number(i));
 
-    if (this.props.app.turboStart.length >= 0) {
-      this.props.app.turboStart.map((they) => {
+    // let turboStart = [];
+    let turboStart = this.props.app.turboStart;
+    // if (this.props.app.turboStart) {
+    //   turboStart = this.props.app.turboStart;
+    // }
+
+    if (turboStart.length >= 0) {
+      turboStart.map((they) => {
         if (they.name === "N.Shutdown Completed") {
           nShutdown = true;
         } else if (they.name === "E.Shutdown Completed") {
@@ -111,7 +118,7 @@ class StatusBlock extends Component {
 
     {
       this.props.app.chartData[0]
-        ? (receivedDate = this.props.app.chartData[0].testdatadate)
+        ? (receivedDate = this.props.app.chartData[0].testdataTime)
         : (receivedDate = null);
     }
 
@@ -162,7 +169,7 @@ class StatusBlock extends Component {
         </div>
         <Row>
           {persons.map((It, y) => (
-            <Col style={{ paddingRight: "10px", width: "215px" }}>
+            <Col style={{ paddingRight: "10px", width: "230px" }}>
               <div className="statistic-block block">
                 <Row className="progress-details d-flex align-items-end justify-content-between">
                   {/* up and down arrow column */}
@@ -223,7 +230,7 @@ class StatusBlock extends Component {
             </Col>
           ))}
 
-          <Col>
+          {/* <Col>
             <div className="statistic-block block">
               <Progress
                 strokeWidth={10}
@@ -239,7 +246,7 @@ class StatusBlock extends Component {
                 </div>
               </div>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     );

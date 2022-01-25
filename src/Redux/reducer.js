@@ -191,6 +191,30 @@ const appReducer = (state = InitialState, action) => {
       newState.cvStageValue = action.payload
       return newState
       
+    //chartData2
+    case 'UPDATE_CHART_DATA2':
+      newState.chartData2 = action.payload ? action.payload : []
+      return newState
+
+    //Cdinfinite
+    case 'UPDATE_CDINFINITE':
+      newState.Cdinfinite = action.payload 
+      return newState
+
+    //correctionFactor_b
+    case 'UPDATE_CORRECTIONFACTOR':
+      newState.correctionFactor_b = action.payload 
+      return newState
+
+    //orificeDiameter_d
+    case 'UPDATE_ORIFICEDIMETER':
+      newState.orificeDiameter_d = action.payload 
+      return newState
+
+    //PipeDiameter_D
+    case 'UPDATE_PIPEDIAMETER':
+      newState.PipeDiameter_D = action.payload 
+      return newState
 
     default:
       return newState

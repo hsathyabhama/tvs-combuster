@@ -13,8 +13,7 @@ const url = {
   TURBOID_VALUE: 'turboIdValue.php',
   TABLE_STATUSDATA: 'statusValue.php',  
   DELAY_DATA: 'configuration.php',     
-  LOGOUT_EVENT: 'logout.php',     
-  FCV_STAGE: 'fcvStage.php',
+  LOGOUT_EVENT: 'logout.php',  
 }
 
 const FormDetails = {
@@ -61,8 +60,15 @@ const dashboardSensor = {
   n_shutdown: 'N-Shutdown',
   e_shutdown: 'E-Shutdown',
   live: 'LIVE',
-  offline: 'OFFLINE'
+  offline: 'OFFLINE',
 
+  sensorLabel_row2 : [
+    "Beta", "AirtoFuelRatio", "AirMassFlow",
+  ],
+
+  //filter for statusblockRow2 
+  //number should be 2 less than the actual index like c13 = 11  
+    targetKeysVal_row2 :  [10, 11, 12],
 }
 const targetKeysVal = ["0","1", "2", "3", "4", "5"]
 
@@ -91,16 +97,11 @@ const testParamHash = {
 
 const helpPopup = {
   value: 'VALVE STATUS AT :',
-  PilotFlameAir: 'PilotFlameAir :',
-  FuelInjectorAir: 'FuelInjectorAir :',
-  PilotFlameGas: 'PilotFlameGas : ',
-  FCVAir: 'FCVAir : ',
-  FCVKeroseneFuel: 'FCVKeroseneFuel : ',
-  ByPassValueI: 'ByPassValueI : ',
-  ByPassValueII: 'ByPassValueII : ',
-  IgnitorSwitch: 'IgnitorSwitch : ',
-  KerosenePump: 'KerosenePump : ',
-  LubeOilPump: 'LubeOilPump : ',
+  SV1_coolingAir: 'CoolingAir :',
+  SV2_pilot_flameAir: 'PilotFlameAir :',
+  SV3_naturalGas: 'NaturalGas : ',
+  SV4_gas_pilotFlame: 'GasPilotFlame : ',
+  SV5_diliute: 'Diliute : ',  
   ErrorCode: 'ERROR CODE : ',
 }
 

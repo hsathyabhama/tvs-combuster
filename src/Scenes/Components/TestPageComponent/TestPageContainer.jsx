@@ -51,6 +51,10 @@ import {
   updatePlcControlType,
   updateDropDown,
   startDisableEvent,
+  updateCoefficientofDischarge,
+  updateCorrectionFactor,
+  updateorificeDiameter,
+  updatePipeDiameter,
 } from "../../../Redux/action";
 import ListItems from "../subComponents/ListItems";
 import {
@@ -65,7 +69,6 @@ import {
   turboConfigValue,
   helpPopup,
 } from "../../../Services/constants";
-import CVStageComponent from "./CVStageComponent";
 var { Option } = Select;
 const { SubMenu } = Menu;
 let count = 1;
@@ -88,16 +91,11 @@ const { installed_turbine } = turboConfigValue;
 
 const {
   value,
-  PilotFlameAir,
-  FuelInjectorAir,
-  PilotFlameGas,
-  FCVAir,
-  FCVKeroseneFuel,
-  ByPassValueI,
-  ByPassValueII,
-  IgnitorSwitch,
-  KerosenePump,
-  LubeOilPump,
+  SV1_coolingAir,
+  SV2_pilot_flameAir,
+  SV3_naturalGas,
+  SV4_gas_pilotFlame,
+  SV5_diliute,
   ErrorCode,
 } = helpPopup;
 
@@ -121,16 +119,11 @@ class TestPageContainer extends Component {
       visible: false,
       valvestatustime: "",
       valvestatus: "",
-      PilotFlameAir: "OFF",
-      FuelInjectorAir: "OFF",
-      PilotFlameGas: "OFF",
-      FCVAir: "OFF",
-      FCVKeroseneFuel: "OFF",
-      ByPassValueI: "OFF",
-      ByPassValueII: "OFF",
-      IgnitorSwitch: "OFF",
-      KerosenePump: "OFF",
-      LubeOilPump: "OFF",
+      SV1_coolingAir: "OFF",
+      SV2_pilot_flameAir: "OFF",
+      SV3_naturalGas: "OFF",
+      SV4_gas_pilotFlame: "OFF",
+      SV5_diliute: "OFF",
       ErrorCode: 0,
       currentDateTime: "",
       turbostartname: [],
@@ -145,8 +138,6 @@ class TestPageContainer extends Component {
     this.addTesterItem = this.addTesterItem.bind(this);
     this.handleTesterInput = this.handleTesterInput.bind(this);
     this.deleteTesterItem = this.deleteTesterItem.bind(this);
-    this.deleteWitnessItem = this.deleteWitnessItem.bind(this);
-    this.resetOnClick = this.resetOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -202,16 +193,6 @@ class TestPageContainer extends Component {
     );
     this.setState({
       testerItems: filteredItems,
-    });
-  }
-
-  //deletion for witness
-  deleteWitnessItem(text) {
-    const filteredItems = this.state.witnessItems.filter(
-      (item) => item !== text
-    );
-    this.setState({
-      witnessItems: filteredItems,
     });
   }
 
@@ -296,15 +277,15 @@ class TestPageContainer extends Component {
       });
       return;
     }
-    if (
-      this.props.app.plcControlType === 0 ||
-      this.props.app.plcControlType === undefined
-    ) {
-      this.setState({
-        errormsg: warning_controlunit,
-      });
-      return;
-    }
+    // if (
+    //   this.props.app.plcControlType === 0 ||
+    //   this.props.app.plcControlType === undefined
+    // ) {
+    //   this.setState({
+    //     errormsg: warning_controlunit,
+    //   });
+    //   return;
+    // }
     if (
       this.props.app.testIdValue === "" ||
       this.props.app.testIdValue === undefined ||
@@ -326,7 +307,7 @@ class TestPageContainer extends Component {
       this.props.app.testIdValue !== undefined &&
       this.props.app.testIdValue !== "" &&
       this.props.app.turboChargerType !== 0 &&
-      this.props.app.plcControlType !== 0 &&
+      // this.props.app.plcControlType !== 0 &&
       this.state.testerItems.length !== 0 &&
       this.props.app.communication === false &&
       this.props.app.testIdValue.length !== 0
@@ -337,9 +318,14 @@ class TestPageContainer extends Component {
           testerItems: this.state.testerItems,
           turboMode: this.props.app.turboChargerType,
           controlUnit: this.props.app.plcControlType,
+          dischargeCoefficient: this.props.app.Cdinfinite,
+          corectionfactor: this.props.app.correctionFactor_b,
+          orificeDiameter: this.props.app.orificeDiameter_d,
+          pipeDiameter: this.props.app.PipeDiameter_D,
         })
         .then((res) => {
           let data = res.data;
+          console.log(res.data);
           this.props.gettingTestIdData(data);
           this.communicationstatus();
         })
@@ -358,12 +344,12 @@ class TestPageContainer extends Component {
       currentDateTime: time,
     });
 
-    axios
-      .get("http://localhost:8000/testdata.php")
-      .then(function (response) {})
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get("http://localhost:8000/testdata.php")
+    //   .then(function (response) {})
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   //help event onClick
@@ -381,52 +367,27 @@ class TestPageContainer extends Component {
         });
         if (valveData[0] === "1") {
           self.setState({
-            PilotFlameAir: "ON",
+            SV1_coolingAir: "ON",
           });
         }
         if (valveData[1] === "1") {
           self.setState({
-            FuelInjectorAir: "ON",
+            SV2_pilot_flameAir: "ON",
           });
         }
         if (valveData[2] === "1") {
           self.setState({
-            PilotFlameGas: "ON",
+            SV3_naturalGas: "ON",
           });
         }
         if (valveData[3] === "1") {
           self.setState({
-            FCVAir: "ON",
+            SV4_gas_pilotFlame: "ON",
           });
         }
         if (valveData[4] === "1") {
           self.setState({
-            FCVKeroseneFuel: "ON",
-          });
-        }
-        if (valveData[5] === "1") {
-          self.setState({
-            ByPassValueI: "ON",
-          });
-        }
-        if (valveData[6] === "1") {
-          self.setState({
-            ByPassValueII: "ON",
-          });
-        }
-        if (valveData[7] === "1") {
-          self.setState({
-            IgnitorSwitch: "ON",
-          });
-        }
-        if (valveData[8] === "1") {
-          self.setState({
-            KerosenePump: "ON",
-          });
-        }
-        if (valveData[9] === "1") {
-          self.setState({
-            LubeOilPump: "ON",
+            SV5_diliute: "ON",
           });
         }
       })
@@ -512,6 +473,9 @@ class TestPageContainer extends Component {
             testId: this.props.app.testIdData,
             targetRPM: this.props.app.targetRPM,
             targetTemp: this.props.app.targetTemp,
+            initialComprAircv: this.props.app.cvStageValue.CompAirInitialValue,
+            initialMainGascv: this.props.app.cvStageValue.MainGasInitialValue,
+            initialFinecv: this.props.app.cvStageValue.FineCVInitialValue,
           })
           .then((res) => {
             //read the response from plc for trget temp & rpm
@@ -583,6 +547,23 @@ class TestPageContainer extends Component {
     this.props.initiateTargetState();
   };
 
+  // onchange for discharge
+  onChangeDischarge = (event) => {
+    this.props.updateCoefficientofDischarge(event.target.value);
+  };
+  //onchange for CorrectionFactor
+  onChangeCorrectionFactor = (event) => {
+    this.props.updateCorrectionFactor(event.target.value);
+  };
+  //onchange for OrificeDiameter
+  onChangeOrificeDiameter = (event) => {
+    this.props.updateorificeDiameter(event.target.value);
+  };
+  // onchange for PipeDiameter
+  onChangePipeDiameter = (event) => {
+    this.props.updatePipeDiameter(event.target.value);
+  };
+
   render() {
     const shutdownInitiated = this.props.app.shutdownInitiated;
     const communicationFailed = this.props.app.communicationFailed;
@@ -593,10 +574,11 @@ class TestPageContainer extends Component {
     const targetRPM = this.props.app.targetRPM;
     const resetTemp = this.props.app.resetTemp;
     const resetRPM = this.props.app.resetRPM;
-    let turboStart = [];
-    if (this.props.app.turboStart) {
-      turboStart = this.props.app.turboStart;
-    }
+    // let turboStart = [];
+    let turboStart = this.props.app.turboStart;
+    // if (this.props.app.turboStart) {
+    //   turboStart = this.props.app.turboStart;
+    // }
     console.log(this.props.app);
 
     const InitializedataArray = turboStart.filter((it) =>
@@ -605,7 +587,7 @@ class TestPageContainer extends Component {
     const StartdataArray = turboStart.filter((it) =>
       Startdata.find((val) => val === it.name)
     );
-    console.log(StartdataArray);
+
     const nShutdowndataArray = turboStart.filter((it) =>
       nShutdowndata.find((val) => val === it.name)
     );
@@ -667,6 +649,98 @@ class TestPageContainer extends Component {
                   }}
                 >
                   <Row style={{ paddingLeft: "20px" }}>
+                    <Col span={6}>
+                      <Row>
+                        <Col span={8} style={{ marginTop: "20px" }}>
+                          <span> CE OF Discharge</span>
+                        </Col>
+                        <Col span={8}>
+                          {communication ? (
+                            <Input
+                              disabled
+                              name="CoEfficientofDischarge"
+                              style={{ width: "150px" }}
+                            />
+                          ) : (
+                            <Input
+                              style={{ width: "150px" }}
+                              name="CoEfficientofDischarge"
+                              value={this.props.app.Cdinfinite}
+                              onChange={this.onChangeDischarge}
+                            />
+                          )}
+                        </Col>
+                      </Row>
+                    </Col>
+
+                    <Col span={6}>
+                      <Row>
+                        <Col span={8} style={{ marginTop: "20px" }}>
+                          <span> CorrectionFactor</span>
+                        </Col>
+                        <Col span={8}>
+                          {communication ? (
+                            <Input
+                              disabled
+                              name="CorrectionFactor"
+                              style={{ width: "150px" }}
+                            />
+                          ) : (
+                            <Input
+                              style={{ width: "150px" }}
+                              name="CorrectionFactor"
+                              value={this.props.app.correctionFactor_b}
+                              onChange={this.onChangeCorrectionFactor}
+                            />
+                          )}
+                        </Col>
+                      </Row>
+                    </Col>
+
+                    <Col span={6}>
+                      <Row>
+                        <Col span={8} style={{ marginTop: "20px" }}>
+                          <span> OrificeDiameter</span>
+                        </Col>
+                        <Col span={8}>
+                          {communication ? (
+                            <Input
+                              disabled
+                              name="OrificeDiameter"
+                              style={{ width: "150px" }}
+                            />
+                          ) : (
+                            <Input
+                              style={{ width: "150px" }}
+                              name="OrificeDiameter"
+                              value={this.props.app.orificeDiameter_d}
+                              onChange={this.onChangeOrificeDiameter}
+                            />
+                          )}
+                        </Col>
+                      </Row>
+                    </Col>
+
+                    <Col span={6}>
+                      <Row>
+                        <Col span={8} style={{ marginTop: "20px" }}>
+                          <span> PipeDiameter</span>
+                        </Col>
+                        <Col span={8}>
+                          {communication ? (
+                            <Input disabled style={{ width: "150px" }} />
+                          ) : (
+                            <Input
+                              style={{ width: "150px" }}
+                              value={this.props.app.PipeDiameter_D}
+                              onChange={this.onChangePipeDiameter}
+                            />
+                          )}
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                  <Row style={{ paddingTop: "2%", paddingLeft: "20px" }}>
                     <Col xs={8}>
                       <form>
                         <Row>
@@ -707,7 +781,7 @@ class TestPageContainer extends Component {
                       </form>
                     </Col>
 
-                    <Col xs={8}>
+                    {/* <Col xs={8}>
                       <form>
                         <Row>
                           <Col xs={6} style={{ marginTop: "20px" }}>
@@ -745,10 +819,7 @@ class TestPageContainer extends Component {
                           )}
                         </Row>
                       </form>
-                    </Col>
-                  </Row>
-
-                  <Row style={{ paddingTop: "2%", paddingLeft: "20px" }}>
+                    </Col> */}
                     <Col span={8}>
                       <form>
                         <Row>
@@ -825,25 +896,26 @@ class TestPageContainer extends Component {
                         []
                       )}
                     </Col>
+
                     <Col span={8}>
                       <form onSubmit={(e) => this.addTesterItem(e, "tester")}>
                         <Row>
-                          <Col span={6} style={{ marginTop: "20px" }}>
+                          <Col span={4} style={{ marginTop: "20px" }}>
                             <label htmlFor="text" className="label">
-                              Tester
+                              Test Engg
                             </label>
                           </Col>
                           <Col span={15}>
                             {communication ? (
                               <Input
                                 disabled
-                                placeholder="Tester"
+                                placeholder="Test Engineer"
                                 name="Tester"
                                 style={{ width: "300px" }}
                               />
                             ) : (
                               <Input
-                                placeholder="Tester"
+                                placeholder="Test Engineer"
                                 name="Tester"
                                 style={{ width: "300px" }}
                                 value={this.state.currentTesterItem}
@@ -866,6 +938,7 @@ class TestPageContainer extends Component {
                       </Row>
                     </Col>
                   </Row>
+
                   <Row>
                     {this.state.errormsg ? (
                       <Alert
@@ -919,6 +992,7 @@ class TestPageContainer extends Component {
                       color: "#42dad6",
                       fontSize: "20px",
                       paddingLeft: "20px",
+                      fontWeight: "500",
                     }}
                   >
                     Initialize
@@ -1000,6 +1074,7 @@ class TestPageContainer extends Component {
                         color: "#42dad6",
                         fontSize: "20px",
                         paddingLeft: "35px",
+                        fontWeight: "500",
                       }}
                     >
                       {" "}
@@ -1011,6 +1086,7 @@ class TestPageContainer extends Component {
                         color: "gray",
                         fontSize: "20px",
                         paddingLeft: "35px",
+                        fontWeight: "500",
                       }}
                     >
                       {" "}
@@ -1133,6 +1209,7 @@ class TestPageContainer extends Component {
                         color: "#42dad6",
                         fontSize: "19px",
                         paddingLeft: "10px",
+                        fontWeight: "500",
                       }}
                     >
                       Reset Temp
@@ -1143,6 +1220,7 @@ class TestPageContainer extends Component {
                         color: "gray",
                         fontSize: "19px",
                         paddingLeft: "10px",
+                        fontWeight: "500",
                       }}
                     >
                       Reset Temp
@@ -1170,9 +1248,12 @@ class TestPageContainer extends Component {
                               name="ResetRPM"
                               style={{ width: "75px" }}
                             />
-                            <Button onClick={() => this.resetOnClick()}>
+                            <button
+                              className="add-btn"
+                              onClick={() => this.resetOnClick()}
+                            >
                               +
-                            </Button>
+                            </button>
                           </Row>
                         </p>
                       ) : (
@@ -1244,6 +1325,7 @@ class TestPageContainer extends Component {
                         color: "#42dad6",
                         fontSize: "20px",
                         paddingLeft: "15px",
+                        fontWeight: "500",
                       }}
                     >
                       Shutdown
@@ -1254,6 +1336,7 @@ class TestPageContainer extends Component {
                         color: "gray",
                         fontSize: "20px",
                         paddingLeft: "15px",
+                        fontWeight: "500",
                       }}
                     >
                       Shutdown
@@ -1335,14 +1418,27 @@ class TestPageContainer extends Component {
                 eShutdowndataArray.length >= 2 ||
                 (showTarget === false && communication === false) ||
                 communicationFailed === true ? (
-                  <p style={{ color: "#42dad6", fontSize: "20px" }}>Reset</p>
+                  <p
+                    style={{
+                      color: "#42dad6",
+                      fontSize: "20px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Reset
+                  </p>
                 ) : (
-                  <p style={{ color: "gray", fontSize: "20px" }}>Reset</p>
+                  <p
+                    style={{
+                      color: "gray",
+                      fontSize: "20px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Reset
+                  </p>
                 )}
               </Card>
-              <Row style={{ paddingTop: "40%" }}>
-                <CVStageComponent />
-              </Row>
             </Col>
 
             <Col span={2}>
@@ -1368,34 +1464,19 @@ class TestPageContainer extends Component {
                   content={
                     <div>
                       <p>
-                        {PilotFlameAir} {this.state.PilotFlameAir}{" "}
+                        {SV1_coolingAir} {this.state.SV1_coolingAir}
                       </p>
                       <p>
-                        {FuelInjectorAir} {this.state.FuelInjectorAir}
+                        {SV2_pilot_flameAir} {this.state.SV2_pilot_flameAir}
                       </p>
                       <p>
-                        {PilotFlameGas} {this.state.PilotFlameGas}
+                        {SV3_naturalGas} {this.state.SV3_naturalGas}
                       </p>
                       <p>
-                        {FCVAir} {this.state.FCVAir}
+                        {SV4_gas_pilotFlame} {this.state.SV4_gas_pilotFlame}
                       </p>
                       <p>
-                        {FCVKeroseneFuel} {this.state.FCVKeroseneFuel}
-                      </p>
-                      <p>
-                        {ByPassValueI} {this.state.ByPassValueI}
-                      </p>
-                      <p>
-                        {ByPassValueII} {this.state.ByPassValueII}
-                      </p>
-                      <p>
-                        {IgnitorSwitch} {this.state.IgnitorSwitch}
-                      </p>
-                      <p>
-                        {KerosenePump} {this.state.KerosenePump}
-                      </p>
-                      <p>
-                        {LubeOilPump} {this.state.LubeOilPump}
+                        {SV5_diliute} {this.state.SV5_diliute}
                       </p>
 
                       <p>
@@ -1423,9 +1504,25 @@ class TestPageContainer extends Component {
                     )}
                   </div>
                   {showTarget ? (
-                    <p style={{ color: "#42dad6", fontSize: "20px" }}>Help</p>
+                    <p
+                      style={{
+                        color: "#42dad6",
+                        fontSize: "20px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Help
+                    </p>
                   ) : (
-                    <p style={{ color: "gray", fontSize: "20px" }}>Help</p>
+                    <p
+                      style={{
+                        color: "gray",
+                        fontSize: "20px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Help
+                    </p>
                   )}
                 </Popover>
               </Card>
@@ -1463,6 +1560,10 @@ const mapDispatchToProps = {
   updateNotifyAction,
   startDisableEvent,
   gettingTestIdData,
+  updateCoefficientofDischarge,
+  updateCorrectionFactor,
+  updateorificeDiameter,
+  updatePipeDiameter,
 };
 
 const TestContainer = connect(

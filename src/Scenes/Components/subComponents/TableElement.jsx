@@ -112,6 +112,7 @@ class TableComponent extends Component {
 
   //Onclick for save data
   updateData = (value) => {
+    console.log(this.state.editRowIndex);
     const configDataValue = {
       page: this.props.childrenColumnName,
       editData: Object.assign({}, this.state.editData),
@@ -144,7 +145,7 @@ class TableComponent extends Component {
       //getting data from request page
       requestStatusData((data) => {
         this.props.updateTableStatusData(data);
-        if (typeof data !== "string" && data.length > installed_turbine) {
+        if (typeof data !== "string" && data.length > 1) {
           this.props.updateNotifyAction("true");
         } else if (
           typeof data !== "string" &&
@@ -163,6 +164,7 @@ class TableComponent extends Component {
   }
 
   render() {
+    console.log(this.state.data);
     const { data: tableData, editMode, editCancel, editSession } = this.state;
     const { editableColumn } = this.props;
     const editRowIndex = this.state.editRowIndex;

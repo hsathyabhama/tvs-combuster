@@ -516,21 +516,33 @@ div#allreport h1 {
 /* progress bar */
 
 .arrow-btn {
-  color: white;
+  color: rgb(72, 212, 72);
 }
 .arrow-btn:hover {
   color: #42dbdc;
   padding: 4%;
   border: 1px;
-  border-radius: 5px;
-  /* box-shadow: 0 0 10px #42dbdc, 0 0 10px #42dbdc, 0 0 0px #42dbdc; */
+  cursor: pointer;
 }
 .arrow-btn:active {
-  color: green;
+  color: lime;
 }
-
+.arrow-btn-disable {
+  color: #5f6363;
+}
 .ant-progress-text {
   color: white !important;
+}
+.progress_box {
+  border: 1px solid green;
+  border-radius: 7px;
+  background: #131633;
+  padding: 10px 30px 10px 15px;
+}
+.progress_title {
+  font-size: 13px;
+  color: white;
+  text-transform: uppercase;
 }
 /* ===================================
           radio + btn

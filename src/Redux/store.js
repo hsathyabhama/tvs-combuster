@@ -31,6 +31,7 @@ const InitialState = {
   statusData: '',
   reset: false,
   chartData: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  chartData2: [0, 0, 0, 0],
   shutdownInitiated: false, 
   communicationFailed: false,
   communication: false,
@@ -49,5 +50,10 @@ const InitialState = {
   //grapgView
   delayValue: 1000,
   cvStageValue:[],
+
+  Cdinfinite: 0,
+  correctionFactor_b : 0,
+  orificeDiameter_d  : 0,
+  PipeDiameter_D :0
 }
 export default InitialState
