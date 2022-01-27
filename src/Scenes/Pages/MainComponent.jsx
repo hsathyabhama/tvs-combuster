@@ -10,13 +10,10 @@ import LeftbarComponent from "../Components/LeftBar/LeftbarComponent";
 import TestPage from "./TestPage";
 import GraphView from "../Pages/DashboardPage/GraphView";
 import TableView from "./DashboardPage/TableView";
-import RunningReport from "./Reports/RunningReport";
 import TestConfig from "./ConfigurationPage/TestConfig";
 import ParamConfig from "./ConfigurationPage/ParamConfig";
 import ExportData from "./Reports/ExportData";
-import PerformanceReport from "./Reports/PerformanceReport";
-import EndurenceReport from "./Reports/EndurenceReport";
-import PerformanceAfterEndurence from "./Reports/PerformanceAfterEndurence";
+
 import axios from "axios";
 import {
   updateTurboConfig,
@@ -167,15 +164,7 @@ export class MainComponent extends Component {
             {mainPage === "testConfig" ? <TestConfig /> : []}
             {mainPage === "paramConfig" ? <ParamConfig /> : []}
             {mainPage === "testPage" ? <TestPage /> : []}
-            {mainPage === "runningReport" ? <RunningReport /> : []}
             {mainPage === "exportData" ? <ExportData /> : []}
-            {mainPage === "performanceReport" ? <PerformanceReport /> : []}
-            {mainPage === "endurenceReport" ? <EndurenceReport /> : []}
-            {mainPage === "performanceafterEndurence" ? (
-              <PerformanceAfterEndurence />
-            ) : (
-              []
-            )}
           </Content>
         </Layout>
         <Footer>

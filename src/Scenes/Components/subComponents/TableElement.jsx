@@ -164,7 +164,6 @@ class TableComponent extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     const { data: tableData, editMode, editCancel, editSession } = this.state;
     const { editableColumn } = this.props;
     const editRowIndex = this.state.editRowIndex;

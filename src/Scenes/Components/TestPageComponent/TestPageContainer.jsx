@@ -574,11 +574,8 @@ class TestPageContainer extends Component {
     const targetRPM = this.props.app.targetRPM;
     const resetTemp = this.props.app.resetTemp;
     const resetRPM = this.props.app.resetRPM;
-    // let turboStart = [];
     let turboStart = this.props.app.turboStart;
-    // if (this.props.app.turboStart) {
-    //   turboStart = this.props.app.turboStart;
-    // }
+
     console.log(this.props.app);
 
     const InitializedataArray = turboStart.filter((it) =>

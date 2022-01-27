@@ -129,12 +129,6 @@ class LeftbarComponent extends Component {
             >
               Export Data{" "}
             </Menu.Item>
-
-            {/* 
-            <Menu.Item key="runningReport" icon={<FiActivity style={{ color: "#42dbdc" }} />}> Running Report{" "}</Menu.Item>
-            <Menu.Item key="performanceReport" icon={<AiFillSignal style={{ color: '#42dbdc' }} />}>Performance Report</Menu.Item>
-            <Menu.Item key="endurenceReport" icon={<BiTrendingUp style={{ color: '#42dbdc' }} />}>Endurence Report</Menu.Item>
-            <Menu.Item key="performanceafterEndurence" icon={<CgPerformance style={{ color: '#42dbdc' }} />}>Performance After Endurence</Menu.Item> */}
           </SubMenu>
         </Menu>
       </Sider>
