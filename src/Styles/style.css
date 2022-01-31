@@ -519,13 +519,13 @@ div#allreport h1 {
   color: rgb(72, 212, 72);
 }
 .arrow-btn:hover {
-  color: #42dbdc;
+  color: #356e16;
   padding: 4%;
   border: 1px;
   cursor: pointer;
 }
 .arrow-btn:active {
-  color: lime;
+  color: red;
 }
 .arrow-btn-disable {
   color: #5f6363;
