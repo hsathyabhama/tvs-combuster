@@ -20,60 +20,60 @@ class CardComponent extends Component {
           T1T2: dummyData, //dummyData = 0 in constant page
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
           T3T4: dummyData,
           rpm1rpm2: dummyData,
-          P1P2: dummyData,
-          P3: dummyData,
           G1G2: dummyData,
-          VM1VM2: dummyData,
+          LubeOilPr: dummyData,
+          AirMassFlow: dummyData,
+          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
       ],
@@ -107,20 +107,20 @@ class CardComponent extends Component {
     let t1t2 = [];
     let t3t4 = [];
     let rpm1rpm2 = [];
-    let p1p2 = [];
-    let p3 = [];
     let g1g2 = [];
-    let vm1vm2 = [];
+    let lubeoilpr = [];
+    let airmassflow = [];
+    let airtofuelratio = [];
 
     let date_Time = [];
     for (let i = 0; i < 6; i++) {
       t1t2.push(chartdata[i].T1T2);
       t3t4.push(chartdata[i].T3T4);
       rpm1rpm2.push(chartdata[i].rpm1rpm2);
-      p1p2.push(chartdata[i].P1P2);
-      p3.push(chartdata[i].P3);
       g1g2.push(chartdata[i].G1G2);
-      vm1vm2.push(chartdata[i].VM1VM2);
+      lubeoilpr.push(chartdata[i].LubeOilPr);
+      airmassflow.push(chartdata[i].AirMassFlow);
+      airtofuelratio.push(chartdata[i].AirtoFuelRatio);
 
       date_Time.push(
         new Date(chartdata[i].date_Time).toLocaleTimeString([], {
@@ -140,10 +140,10 @@ class CardComponent extends Component {
     chartArray.push(t1t2);
     chartArray.push(t3t4);
     chartArray.push(rpm1rpm2);
-    chartArray.push(p1p2);
-    chartArray.push(p3);
     chartArray.push(g1g2);
-    chartArray.push(vm1vm2);
+    chartArray.push(lubeoilpr);
+    chartArray.push(airmassflow);
+    chartArray.push(airtofuelratio);
 
     let filteredData = chartArray.filter((_, index) =>
       dashboardDataNumArr.includes(index)

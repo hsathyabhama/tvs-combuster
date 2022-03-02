@@ -52,12 +52,12 @@ class StatusBlockRow2 extends Component {
     return (
       <div style={{ marginTop: "25px" }}>
         <Row>
-          {persons.map((It, y) => (
+          {/* {persons.map((It, y) => (
             <Col style={{ paddingRight: "10px", width: "230px" }}>
               <div className="statistic-block block">
-                <Row className="progress-details d-flex align-items-end justify-content-between">
-                  {/* up and down arrow column */}
-                  <Col>
+                <Row className="progress-details d-flex align-items-end justify-content-between"> */}
+          {/* up and down arrow column */}
+          {/* <Col>
                     {persons1[y] < It ? (
                       <img
                         src="./images/up-arrow-1.gif"
@@ -81,23 +81,23 @@ class StatusBlockRow2 extends Component {
                         }}
                       />
                     )}
-                  </Col>
+                  </Col> */}
 
-                  {/* value displaying column */}
-                  <Col
+          {/* value displaying column */}
+          {/* <Col
                     className="number dashtext-1"
                     style={{
                       paddingLeft: "10%",
                       fontSize: "17px",
                       color: "lime",
                     }}
-                  >
-                    {/* getting the color from the color array */}
-                    <span>{It}</span>
-                  </Col>
-                </Row>
+                  > */}
+          {/* getting the color from the color array */}
+          {/* <span>{It}</span> */}
+          {/* //</Col> */}
+        </Row>
 
-                <div className="progress progress-template">
+        {/* <div className="progress progress-template">
                   <div
                     role="progressbar"
                     style={{
@@ -108,21 +108,21 @@ class StatusBlockRow2 extends Component {
                     }}
                     className="progress-bar progress-bar-template dashbg-1"
                   ></div>
-                </div>
-                {/*  Title column */}
-                <div className="title">
+                </div> */}
+        {/*  Title column */}
+        {/* <div className="title">
                   <div style={{ fontSize: "8px" }}>
                     <strong>{sensorLabel_row2[y]}</strong>
                   </div>
-                </div>
-              </div>
+                </div> */}
+        {/* </div>
             </Col>
           ))}
+        </Row> */}
 
-          <Col>
-            <CVStageComponent />
-          </Col>
-        </Row>
+        <Col>
+          <CVStageComponent />
+        </Col>
       </div>
     );
   }

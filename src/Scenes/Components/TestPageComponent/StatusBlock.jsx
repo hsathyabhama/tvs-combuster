@@ -3,7 +3,7 @@ import { Col, Row, Progress } from "antd";
 import { connect } from "react-redux";
 import { dashboardSensor } from "../../../Services/constants";
 import { getTableView } from "../../../Services/requests";
-
+import { updateBargingBtnStatus } from "../../../Redux/action";
 const { sensorLabel, n_shutdown, e_shutdown, live, offline } = dashboardSensor;
 
 const styles = {
@@ -70,9 +70,6 @@ class StatusBlock extends Component {
 
     // let turboStart = [];
     let turboStart = this.props.app.turboStart;
-    // if (this.props.app.turboStart) {
-    //   turboStart = this.props.app.turboStart;
-    // }
 
     if (turboStart.length >= 0) {
       turboStart.map((they) => {
@@ -174,7 +171,7 @@ class StatusBlock extends Component {
                 <Row className="progress-details d-flex align-items-end justify-content-between">
                   {/* up and down arrow column */}
                   <Col>
-                    {persons1[y] < It ? (
+                    {persons1[y] <= It ? (
                       <img
                         src="./images/up-arrow-1.gif"
                         alt="Arrow"
@@ -229,24 +226,6 @@ class StatusBlock extends Component {
               </div>
             </Col>
           ))}
-
-          {/* <Col>
-            <div className="statistic-block block">
-              <Progress
-                strokeWidth={10}
-                strokeColor="#03fc28"
-                type="circle"
-                width={60}
-                style={{ marginLeft: "10px", marginRight: "10px" }}
-                percent={this.props.app.chartData[0].AirFCV}
-              />
-              <div className="title">
-                <div style={{ fontSize: "10px" }}>
-                  <strong> FCV Air</strong>
-                </div>
-              </div>
-            </div>
-          </Col> */}
         </Row>
       </div>
     );
@@ -255,6 +234,6 @@ class StatusBlock extends Component {
 const mapStateToProps = (state) => ({
   app: state.app,
 });
-const mapDispatchToProps = {};
+const mapDispatchToProps = { updateBargingBtnStatus };
 const statuspage = connect(mapStateToProps, mapDispatchToProps)(StatusBlock);
 export default statuspage;

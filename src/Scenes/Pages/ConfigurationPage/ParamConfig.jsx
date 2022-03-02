@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateParamConfig, updateTitleElements } from "../../../Redux/action";
+import { updateTitleElements } from "../../../Redux/action";
 import { Col, Row, Layout } from "antd";
 import TableElement from "../../Components/subComponents/TableElement";
 
@@ -44,7 +44,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  updateParamConfig,
   updateTitleElements,
 };
 

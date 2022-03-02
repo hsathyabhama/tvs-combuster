@@ -109,11 +109,6 @@ export const updateTurboMode = data => ({
   type: 'UPDATE_TURBO_MODE',
   payload: data
 })
-//plcControlType
-export const updatePlcControlType = data => ({
-  type: 'UPDATE_PLC_CONTROLTYPE',
-  payload: data
-})
 
 //testDropdown
 export const updateDropDown = data => ({
@@ -189,7 +184,7 @@ export const getResetRPM = data => ({
 export const stopDbInsert = bool => ({
   type: 'STOP_DB_INSERT',
   payload: bool
-})         
+})
 
 //startDisable
 export const startDisableEvent = data => ({
@@ -208,6 +203,11 @@ export const fetchingDelayValue = data => ({
   type: 'FETCHING_DELAY_VALUE',
   payload: data
 })
+//resetButtonClick
+export const updateResetButtonClick = data => ({
+  type: 'UPDATE_RESET_BUTTONCLICK',
+  payload: data
+})
 //cvStageValue
 export const fetchingCvstageValue = data => ({
   type: 'FETCHING_CVSTAGE_VALUE',
@@ -220,26 +220,20 @@ export const updateChartData2 = data => ({
   payload: data
 })
 
-// Cdinfinite
-export const updateCoefficientofDischarge = data => ({
-  type: 'UPDATE_CDINFINITE',
+// lubeOilValue
+export const updateLubeOilValue = data => ({
+  type: 'UPDATE_LUBEOILVALUE',
   payload: data
 })
 
-// correctionFactor_b
-export const updateCorrectionFactor = data => ({
-  type: 'UPDATE_CORRECTIONFACTOR',
+//bargingButtonActivity
+export const updateBargingBtnStatus = data => ({
+  type: 'UPDATE_BARGING_BUTTON',
   payload: data
 })
 
-// orificeDiameter_d
-export const updateorificeDiameter = data => ({
-  type: 'UPDATE_ORIFICEDIMETER',
-  payload: data
-})
-
-// PipeDiameter_D
-export const updatePipeDiameter = data => ({
-  type: 'UPDATE_PIPEDIAMETER',
-  payload: data
+//bargingEvent
+export const updateBargingEvent = bool => ({
+  type: 'UPDATE_BARGING_EVENT',
+  payload: bool
 })

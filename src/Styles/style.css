@@ -912,3 +912,32 @@ div#allreport h1 {
   background-color: #fff2f0;
   border: 1px solid #ffccc7;
 }
+/* ---bargging component--- */
+.barger_btn {
+  background-color: rgb(223, 62, 62);
+  color: black;
+  font-weight: bold !important;
+  border: 2px solid rgb(223, 62, 62);
+  border-radius: 0.35rem;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+}
+.barger_btn2 {
+  background-color: limegreen;
+  color: black;
+  font-weight: bold !important;
+  border: 2px solid limegreen;
+  border-radius: 0.35rem;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+}
+.barger_btn2:focus,
+.barger_btn2:hover {
+  color: black;
+  background-color: limegreen;
+  border-color: limegreen;
+  /* //box-shadow: 0px 0px 0px 3px limegreen; */
+  box-shadow: 0 0 10px limegreen, 0 0 10px limegreen, 0 0 0px limegreen;
+}

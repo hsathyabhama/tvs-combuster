@@ -45,6 +45,7 @@ class TableComponent extends Component {
       editRowIndex: null,
       editData: [],
       editCancel: false,
+      configID: 0,
       col: "",
       turbo_status: [
         { status: "installed" },
@@ -75,6 +76,12 @@ class TableComponent extends Component {
     const { editData: newEditData } = this.state;
     newEditData[colName] = event.target.value;
     this.setState({ editData: newEditData });
+
+    let val = this.state.editRowIndex;
+    let editedIndex = this.state.data[val];
+    if (this.state.editRowIndex >= 0) {
+      this.setState({ configID: editedIndex[Object.keys(editedIndex)[0]] });
+    }
   };
 
   //Onchange for table select input
@@ -112,12 +119,12 @@ class TableComponent extends Component {
 
   //Onclick for save data
   updateData = (value) => {
-    console.log(this.state.editRowIndex);
     const configDataValue = {
       page: this.props.childrenColumnName,
       editData: Object.assign({}, this.state.editData),
       editRowIndex: this.state.editRowIndex,
       turboIdVal: value.turboconfig_id,
+      configID: this.state.configID,
       paramIdVal: value.paramconfig_id,
       testIdVal: value.testparamconfig_id,
     };

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import StatusBlock from "../../Components/TestPageComponent/StatusBlock";
 import { Table, Row, Col } from "antd";
-import {
-  updateTitleElements,
-  updateTableViewData,
-} from "../../../Redux/action";
+import { updateTitleElements } from "../../../Redux/action";
 import { connect } from "react-redux";
 import { getTableView } from "../../../Services/requests";
 
@@ -92,6 +89,7 @@ class TableView extends Component {
     getTableView((data) => {
       const arrStr = this.props.app.targetKeys; //covertion string to number
       const dashboardDataNumArr = arrStr.map((i) => Number(i));
+
       this.setState({
         tabledata: data,
       });
@@ -104,7 +102,6 @@ class TableView extends Component {
       this.setState({
         filteredTableData: filteredTableData,
       });
-      //this.props.updateTableViewData(this.state.filteredTableData);
     });
   }
 
@@ -127,7 +124,6 @@ class TableView extends Component {
   });
 
   render() {
-    console.log(this.state.filteredTableData);
     return (
       <div>
         <StatusBlock />
@@ -167,7 +163,6 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   updateTitleElements,
-  updateTableViewData,
 };
 const Tabledata = connect(mapStateToProps, mapDispatchToProps)(TableView);
 export default Tabledata;

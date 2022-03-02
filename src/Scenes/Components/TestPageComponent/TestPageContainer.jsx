@@ -48,13 +48,12 @@ import {
   updateTestIdValue,
   updateTestIdCount,
   updateTurboMode,
-  updatePlcControlType,
   updateDropDown,
   startDisableEvent,
-  updateCoefficientofDischarge,
-  updateCorrectionFactor,
-  updateorificeDiameter,
-  updatePipeDiameter,
+  updateLubeOilValue,
+  updateChartData,
+  updateResetButtonClick,
+  updateBargingBtnStatus,
 } from "../../../Redux/action";
 import ListItems from "../subComponents/ListItems";
 import {
@@ -77,8 +76,9 @@ const {
   duplicate_msg,
   warning_Id,
   warning_burnermode,
-  warning_controlunit,
+  warning_lubeOil,
   warning_name,
+  warning_bargingActive,
   alert_targetval,
   Initializedata,
   Startdata,
@@ -201,11 +201,6 @@ class TestPageContainer extends Component {
     let data = e.target.value;
     this.props.updateTurboMode(data);
   };
-  //onchange for control type
-  onChangeControlType = (e) => {
-    let data = e.target.value;
-    this.props.updatePlcControlType(data);
-  };
 
   //select the TestId
   handleChangetestID = (value) => {
@@ -239,16 +234,18 @@ class TestPageContainer extends Component {
     shutdownClickEvent((data) => {
       //updating to the store called shutdownInitiated
       this.props.initiateShutdown(data);
+      this.props.updateBargingBtnStatus(false);
     });
   };
 
   //getting communication value in request page
   communicationstatus() {
+    this.props.updateResetButtonClick(0);
     axios
       .post("http://localhost:5000/initialize.php", {
         testId: this.props.app.testIdData,
         chargerType: this.props.app.turboChargerType,
-        controlType: this.props.app.plcControlType,
+        lubeOilValue: this.props.app.lubeOilValue,
       })
       .then((res) => {
         let CommunicationData = res.data;
@@ -268,6 +265,23 @@ class TestPageContainer extends Component {
   //initialize event onclick
   initializeClick = () => {
     this.props.updateDropDown(null);
+    if (this.props.app.bargingEvent === true) {
+      this.setState({
+        errormsg: warning_bargingActive,
+      });
+      return;
+    }
+    if (
+      this.props.app.lubeOilValue === 0 ||
+      this.props.app.lubeOilValue === undefined ||
+      this.props.app.lubeOilValue <= 2 ||
+      this.props.app.lubeOilValue >= 5
+    ) {
+      this.setState({
+        errormsg: warning_lubeOil,
+      });
+      return;
+    }
     if (
       this.props.app.turboChargerType === 0 ||
       this.props.app.turboChargerType === undefined
@@ -277,15 +291,6 @@ class TestPageContainer extends Component {
       });
       return;
     }
-    // if (
-    //   this.props.app.plcControlType === 0 ||
-    //   this.props.app.plcControlType === undefined
-    // ) {
-    //   this.setState({
-    //     errormsg: warning_controlunit,
-    //   });
-    //   return;
-    // }
     if (
       this.props.app.testIdValue === "" ||
       this.props.app.testIdValue === undefined ||
@@ -307,7 +312,6 @@ class TestPageContainer extends Component {
       this.props.app.testIdValue !== undefined &&
       this.props.app.testIdValue !== "" &&
       this.props.app.turboChargerType !== 0 &&
-      // this.props.app.plcControlType !== 0 &&
       this.state.testerItems.length !== 0 &&
       this.props.app.communication === false &&
       this.props.app.testIdValue.length !== 0
@@ -317,16 +321,11 @@ class TestPageContainer extends Component {
           turboIdVal: this.props.app.testIdValue,
           testerItems: this.state.testerItems,
           turboMode: this.props.app.turboChargerType,
-          controlUnit: this.props.app.plcControlType,
-          dischargeCoefficient: this.props.app.Cdinfinite,
-          corectionfactor: this.props.app.correctionFactor_b,
-          orificeDiameter: this.props.app.orificeDiameter_d,
-          pipeDiameter: this.props.app.PipeDiameter_D,
         })
         .then((res) => {
           let data = res.data;
-          console.log(res.data);
           this.props.gettingTestIdData(data);
+          this.props.updateBargingBtnStatus(true);
           this.communicationstatus();
         })
         .catch((err) => {
@@ -500,6 +499,15 @@ class TestPageContainer extends Component {
 
   //reSet action
   reloadAllEvents = () => {
+    axios
+      .post("http://localhost:5000/reset.php", {})
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+
+    let chartArray = [0, 0, 0, 0, 0, 0, 0, 0];
+    this.props.updateChartData(chartArray);
     this.props.gettingTestIdData(0);
     this.props.stopDbInsert();
     this.props.updateTestIdCount("");
@@ -509,7 +517,8 @@ class TestPageContainer extends Component {
     this.props.getResetTemp("");
     this.props.startDisableEvent(false);
     this.props.updateTurboMode(0);
-    this.props.updatePlcControlType(0);
+    this.props.updateResetButtonClick(1);
+    this.props.updateBargingBtnStatus(false);
 
     this.setState({
       turboIdDefaultValue: "Select Turbo ID",
@@ -548,20 +557,8 @@ class TestPageContainer extends Component {
   };
 
   // onchange for discharge
-  onChangeDischarge = (event) => {
-    this.props.updateCoefficientofDischarge(event.target.value);
-  };
-  //onchange for CorrectionFactor
-  onChangeCorrectionFactor = (event) => {
-    this.props.updateCorrectionFactor(event.target.value);
-  };
-  //onchange for OrificeDiameter
-  onChangeOrificeDiameter = (event) => {
-    this.props.updateorificeDiameter(event.target.value);
-  };
-  // onchange for PipeDiameter
-  onChangePipeDiameter = (event) => {
-    this.props.updatePipeDiameter(event.target.value);
+  onChangeLubeOilEvent = (event) => {
+    this.props.updateLubeOilValue(event.target.value);
   };
 
   render() {
@@ -575,8 +572,6 @@ class TestPageContainer extends Component {
     const resetTemp = this.props.app.resetTemp;
     const resetRPM = this.props.app.resetRPM;
     let turboStart = this.props.app.turboStart;
-
-    console.log(this.props.app);
 
     const InitializedataArray = turboStart.filter((it) =>
       Initializedata.find((val) => val === it.name)
@@ -649,94 +644,29 @@ class TestPageContainer extends Component {
                     <Col span={6}>
                       <Row>
                         <Col span={8} style={{ marginTop: "20px" }}>
-                          <span> CE OF Discharge</span>
+                          <span>Lube Oil Value</span>
                         </Col>
                         <Col span={8}>
                           {communication ? (
                             <Input
                               disabled
-                              name="CoEfficientofDischarge"
-                              style={{ width: "150px" }}
+                              name="LubeOilValue"
+                              value={this.props.app.lubeOilValue}
+                              style={{ width: "150px", color: "white" }}
                             />
                           ) : (
                             <Input
                               style={{ width: "150px" }}
-                              name="CoEfficientofDischarge"
-                              value={this.props.app.Cdinfinite}
-                              onChange={this.onChangeDischarge}
-                            />
-                          )}
-                        </Col>
-                      </Row>
-                    </Col>
-
-                    <Col span={6}>
-                      <Row>
-                        <Col span={8} style={{ marginTop: "20px" }}>
-                          <span> CorrectionFactor</span>
-                        </Col>
-                        <Col span={8}>
-                          {communication ? (
-                            <Input
-                              disabled
-                              name="CorrectionFactor"
-                              style={{ width: "150px" }}
-                            />
-                          ) : (
-                            <Input
-                              style={{ width: "150px" }}
-                              name="CorrectionFactor"
-                              value={this.props.app.correctionFactor_b}
-                              onChange={this.onChangeCorrectionFactor}
-                            />
-                          )}
-                        </Col>
-                      </Row>
-                    </Col>
-
-                    <Col span={6}>
-                      <Row>
-                        <Col span={8} style={{ marginTop: "20px" }}>
-                          <span> OrificeDiameter</span>
-                        </Col>
-                        <Col span={8}>
-                          {communication ? (
-                            <Input
-                              disabled
-                              name="OrificeDiameter"
-                              style={{ width: "150px" }}
-                            />
-                          ) : (
-                            <Input
-                              style={{ width: "150px" }}
-                              name="OrificeDiameter"
-                              value={this.props.app.orificeDiameter_d}
-                              onChange={this.onChangeOrificeDiameter}
-                            />
-                          )}
-                        </Col>
-                      </Row>
-                    </Col>
-
-                    <Col span={6}>
-                      <Row>
-                        <Col span={8} style={{ marginTop: "20px" }}>
-                          <span> PipeDiameter</span>
-                        </Col>
-                        <Col span={8}>
-                          {communication ? (
-                            <Input disabled style={{ width: "150px" }} />
-                          ) : (
-                            <Input
-                              style={{ width: "150px" }}
-                              value={this.props.app.PipeDiameter_D}
-                              onChange={this.onChangePipeDiameter}
+                              name="LubeOilValue"
+                              value={this.props.app.lubeOilValue}
+                              onChange={this.onChangeLubeOilEvent}
                             />
                           )}
                         </Col>
                       </Row>
                     </Col>
                   </Row>
+
                   <Row style={{ paddingTop: "2%", paddingLeft: "20px" }}>
                     <Col xs={8}>
                       <form>
@@ -778,45 +708,6 @@ class TestPageContainer extends Component {
                       </form>
                     </Col>
 
-                    {/* <Col xs={8}>
-                      <form>
-                        <Row>
-                          <Col xs={6} style={{ marginTop: "20px" }}>
-                            <label htmlFor="text" className="label">
-                              Controll Unit
-                            </label>
-                          </Col>
-                          {communication ? (
-                            <Radio.Group
-                              name="radiogroup"
-                              disabled
-                              className="test-radio"
-                            >
-                              <Radio value={1} className="radio-btn">
-                                <span className="disable-btn"> RPM</span>
-                              </Radio>
-                              <Radio value={2} className="radio-btn">
-                                <span className="disable-btn"> Mass Flow</span>
-                              </Radio>
-                            </Radio.Group>
-                          ) : (
-                            <Radio.Group
-                              name="radiogroup"
-                              defaultValue={this.props.app.plcControlType}
-                              onChange={this.onChangeControlType}
-                              className="test-radio"
-                            >
-                              <Radio value={1} className="radio-btn">
-                                RPM
-                              </Radio>
-                              <Radio value={2} className="radio-btn">
-                                Mass Flow
-                              </Radio>
-                            </Radio.Group>
-                          )}
-                        </Row>
-                      </form>
-                    </Col> */}
                     <Col span={8}>
                       <form>
                         <Row>
@@ -1296,14 +1187,14 @@ class TestPageContainer extends Component {
             <Col span={4}>
               <Card
                 style={
-                  showTarget || communication
+                  showTarget
                     ? { width: 185, borderColor: "red", cursor: "pointer" }
                     : { width: 185, borderColor: "gray" }
                 }
               >
                 <div style={{ width: "300px" }}>
                   <div>
-                    {showTarget || communication ? (
+                    {showTarget ? (
                       <PoweroffOutlined
                         className="icon-button3"
                         style={{ marginTop: "10px" }}
@@ -1316,7 +1207,7 @@ class TestPageContainer extends Component {
                       />
                     )}
                   </div>
-                  {showTarget || communication ? (
+                  {showTarget ? (
                     <p
                       style={{
                         color: "#42dad6",
@@ -1385,7 +1276,7 @@ class TestPageContainer extends Component {
                     eShutdowndataArray.length >= 1) ||
                   nShutdowndataArray.length >= 2 ||
                   eShutdowndataArray.length >= 2 ||
-                  (showTarget === false && communication === false)
+                  showTarget === false
                     ? { width: 100, cursor: "pointer", borderColor: "green" }
                     : { width: 100, borderColor: "gray" }
                 }
@@ -1395,7 +1286,7 @@ class TestPageContainer extends Component {
                     eShutdowndataArray.length >= 1) ||
                   nShutdowndataArray.length >= 2 ||
                   eShutdowndataArray.length >= 2 ||
-                  (showTarget === false && communication === false) ? (
+                  showTarget === false ? (
                     <RedoOutlined
                       className="icon-button2"
                       style={{ marginTop: "10px" }}
@@ -1413,7 +1304,7 @@ class TestPageContainer extends Component {
                   eShutdowndataArray.length >= 1) ||
                 nShutdowndataArray.length >= 2 ||
                 eShutdowndataArray.length >= 2 ||
-                (showTarget === false && communication === false) ||
+                showTarget === false ||
                 communicationFailed === true ? (
                   <p
                     style={{
@@ -1552,15 +1443,14 @@ const mapDispatchToProps = {
   updateTestIdValue,
   updateTestIdCount,
   updateTurboMode,
-  updatePlcControlType,
   updateDropDown,
   updateNotifyAction,
   startDisableEvent,
   gettingTestIdData,
-  updateCoefficientofDischarge,
-  updateCorrectionFactor,
-  updateorificeDiameter,
-  updatePipeDiameter,
+  updateLubeOilValue,
+  updateChartData,
+  updateResetButtonClick,
+  updateBargingBtnStatus,
 };
 
 const TestContainer = connect(

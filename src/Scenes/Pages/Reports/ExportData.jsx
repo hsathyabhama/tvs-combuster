@@ -32,14 +32,15 @@ class ExportData extends Component {
       emptyTestno: false,
       loading: false,
       title: [],
+
       formulaUnit: {
-        "Combustor Outlet Temperature": "Deg C",
-        "TurboCharger Outlet Temperature": "Deg C",
+        "Combustor Outlet Temperature": "Kg/m2",
+        "TurboCharger Inlet Temperature": "Degree C",
         "RPM Sensor": "rpm",
-        "Combuster Inlet Pressure": "Bar",
-        "Gas Inlet Pressure": "Bar",
         "Gas Flow": "kg/min",
-        "Ventury Meter": "mm",
+        "Lube Oil Pressure": "Bar",
+        "Air Mass Flow": "Bar",
+        "Air to Fuel Ratio": "mm",
       },
       timeUnit: {
         testdataTime: "Time",
@@ -60,7 +61,7 @@ class ExportData extends Component {
     //while adding the unit row in the table,exported excel sheet not in the correct order,
     //so here changed the order of the array index value
 
-    const index = [4, 0, 1, 2, 3, 5, 6];
+    const index = [0, 1, 2, 3, 4, 5, 6];
 
     const createdData = index.map((i) => paramValue[i]);
 
@@ -95,7 +96,6 @@ class ExportData extends Component {
           testno: this.state.testno1,
         })
         .then((res) => {
-          console.log(res.data);
           var data = res.data;
 
           if (data.length > 5 && typeof data !== "string") {
@@ -132,7 +132,6 @@ class ExportData extends Component {
           testno: this.state.testno1,
         })
         .then((res) => {
-          console.log(res.data);
           this.setState({
             tester: res.data[0].tester,
             witness: res.data[0].witness,
@@ -151,7 +150,7 @@ class ExportData extends Component {
       .post("http://localhost:5000/exportData.php", { turboIdVal: value })
       .then((res) => {
         let data = res.data;
-        console.log(data);
+
         if (typeof data === "string") {
           this.setState({
             testno: [],
@@ -212,7 +211,7 @@ class ExportData extends Component {
         dataIndex: this.state.title[0],
         key: this.state.title[0],
         fixed: "left",
-        width: 25,
+        width: 15,
       },
       {
         title: this.state.title[1],
@@ -220,7 +219,7 @@ class ExportData extends Component {
         key: this.state.title[1],
         fixed: this.state.title[1],
         fixed: "left",
-        width: 20,
+        width: 15,
       },
       {
         title: this.state.title[2],
@@ -252,7 +251,14 @@ class ExportData extends Component {
         key: this.state.title[6],
         width: 20,
       },
+      {
+        title: this.state.title[7],
+        dataIndex: this.state.title[7],
+        key: this.state.title[7],
+        width: 20,
+      },
     ];
+
     return (
       <div style={{ paddingTop: "1px" }}>
         <Layout className="layout-container">

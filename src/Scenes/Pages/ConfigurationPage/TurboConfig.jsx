@@ -86,7 +86,7 @@ class TurboConfig extends Component {
     const body = {
       turbo_id: this.state.turboID,
       date: this.state.dateVal,
-      nozzle_area: this.state.nozzleArea,
+      //nozzle_area: this.state.nozzleArea,
       descriptions: this.state.discriptionVal,
     };
 
@@ -192,13 +192,13 @@ class TurboConfig extends Component {
                   />
                 </Form.Item>
               </Col>
-              <Col sm={2}>
+              {/* <Col sm={2}>
                 <label className="label">
                   Nozzle Area
                   <i style={{ color: "red", fontSize: "15px" }}> *</i>
                 </label>
-              </Col>
-              <Col sm={6}>
+              </Col> */}
+              {/* <Col sm={6}>
                 <div>
                   <Tooltip
                     placement="bottom"
@@ -219,7 +219,7 @@ class TurboConfig extends Component {
                     </div>
                   </Tooltip>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
             <Row style={{ marginTop: "5px" }}>
               <Col sm={2}>

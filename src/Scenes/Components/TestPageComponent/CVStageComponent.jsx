@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Row, Layout, Progress, Col } from "antd";
+import { Row, Layout, Progress, Col, Button } from "antd";
 import { connect } from "react-redux";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { fcvTransferEvent } from "../../../Services/requests";
 import { testParamHash } from "../../../Services/constants";
+import { updateBargingEvent } from "../../../Redux/action";
+import axios from "axios";
+import { CaretUpOutlined } from "@ant-design/icons";
 
 const { Initializedata, Startdata, nShutdowndata, eShutdowndata } =
   testParamHash;
@@ -91,15 +94,35 @@ class CVStageComponent extends Component {
     fcvTransferEvent(body, (data) => {});
   };
 
+  bargingClick = () => {
+    if (this.props.app.bargingEvent == false) {
+      this.props.updateBargingEvent();
+      axios
+        .post("http://localhost:5000/barging.php", {
+          bargingValue: 1,
+        })
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      this.props.updateBargingEvent();
+      axios
+        .post("http://localhost:5000/barging.php", {
+          bargingValue: 2,
+        })
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   render() {
     let comprAir_FCV = this.props.app.chartData[0].AirFCV;
     let mainGas_FCV = this.props.app.chartData[0].MainGasFCV;
     let fine_FCV = this.props.app.chartData[0].FineFCV;
     let turboStart = this.props.app.turboStart;
-    // let turboStart = [];
-    // if (this.props.app.turboStart) {
-    //   turboStart = this.props.app.turboStart;
-    // }
 
     const InitializedataArray = turboStart.filter((it) =>
       Initializedata.find((val) => val === it.name)
@@ -124,7 +147,7 @@ class CVStageComponent extends Component {
           }}
         >
           <Row>
-            <Col span={8}>
+            <Col span={4}>
               <Row className="progress_box" style={{ marginRight: "10px" }}>
                 <div>
                   <Row gutter={8}>
@@ -195,7 +218,7 @@ class CVStageComponent extends Component {
                   <Row>
                     <div
                       className="progress_title"
-                      style={{ marginTop: "5px" }}
+                      style={{ marginTop: "5px", marginLeft: "30px" }}
                     >
                       <strong>Compressor Air FCV </strong>
                     </div>
@@ -204,7 +227,7 @@ class CVStageComponent extends Component {
               </Row>
             </Col>
 
-            <Col span={8}>
+            <Col span={4}>
               <Row className="progress_box" style={{ marginRight: "10px" }}>
                 <div>
                   <Row gutter={8}>
@@ -275,7 +298,7 @@ class CVStageComponent extends Component {
                   <Row>
                     <div
                       className="progress_title"
-                      style={{ marginTop: "5px" }}
+                      style={{ marginTop: "5px", marginLeft: "50px" }}
                     >
                       <strong>Main Gas FCV</strong>
                     </div>
@@ -284,7 +307,7 @@ class CVStageComponent extends Component {
               </Row>
             </Col>
 
-            <Col span={8}>
+            <Col span={4}>
               <Row className="progress_box" style={{ marginLeft: "px" }}>
                 <div>
                   <Row gutter={8}>
@@ -357,9 +380,42 @@ class CVStageComponent extends Component {
                   <Row>
                     <div
                       className="progress_title"
-                      style={{ marginTop: "5px" }}
+                      style={{ marginTop: "5px", marginLeft: "30px" }}
                     >
                       <strong>Fine Control Valve</strong>
+                    </div>
+                  </Row>
+                </div>
+              </Row>
+            </Col>
+
+            <Col span={4}>
+              <Row className="progress_box" style={{ marginLeft: "10px" }}>
+                <div style={{ marginTop: "20px" }}>
+                  <Row gutter={8}>
+                    <Button
+                      type="primary"
+                      shape="round"
+                      size={"large"}
+                      className={
+                        this.props.app.bargingEvent == false
+                          ? "barger_btn"
+                          : "barger_btn2"
+                      }
+                      icon={<CaretUpOutlined />}
+                      style={{ marginLeft: "20%", width: "8em" }}
+                      disabled={this.props.app.bargingButtonActivity}
+                      onClick={() => this.bargingClick()}
+                    >
+                      Barging
+                    </Button>
+                  </Row>
+                  <Row>
+                    <div
+                      className="progress_title"
+                      style={{ marginTop: "20px", marginLeft: "20%" }}
+                    >
+                      <strong>Bargging Air</strong>
                     </div>
                   </Row>
                 </div>
@@ -375,7 +431,7 @@ const mapStateToProps = (state) => ({
   app: state.app,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { updateBargingEvent };
 
 const CVStage = connect(mapStateToProps, mapDispatchToProps)(CVStageComponent);
 

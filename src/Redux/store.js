@@ -9,7 +9,6 @@ const InitialState = {
   collapsed: true,
   titleElements: titleElements,
   turboChargerType: 0,
-  plcControlType : 0,
   IsLogin: false,
   IsUserName: [],
 
@@ -30,15 +29,15 @@ const InitialState = {
   // -- test page -- //
   statusData: '',
   reset: false,
-  chartData: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  chartData: [0, 0, 0, 0, 0, 0, 0, 0],
   chartData2: [0, 0, 0, 0],
-  shutdownInitiated: false, 
+  shutdownInitiated: false,
   communicationFailed: false,
   communication: false,
   targetState: false,
   showReset: false,
   showTarget: false,
-  turboStart: [],  
+  turboStart: [],
   stageThree: false,
   targetRPM: '',
   targetTemp: '',
@@ -46,14 +45,11 @@ const InitialState = {
   resetRPM: '',
   startDisable: false,
   testIdData: 0,
-  
-  //grapgView
   delayValue: 1000,
-  cvStageValue:[],
-
-  Cdinfinite: 0,
-  correctionFactor_b : 0,
-  orificeDiameter_d  : 0,
-  PipeDiameter_D :0
+  cvStageValue: [],
+  resetButtonClick: 1,
+  lubeOilValue: 0,
+  bargingButtonActivity: false,
+  bargingEvent: false,
 }
 export default InitialState

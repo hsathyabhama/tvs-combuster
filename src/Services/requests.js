@@ -129,12 +129,11 @@ const requestStatusData = (callBack) => {
       console.log(err);
     })
 }
-const gettingChartData = (body,callBack) => {
-  axios.post(graphDataUrl, body)
+const gettingChartData = (callBack) => {
+  axios.get(graphDataUrl)
     .then(res => {
       let chartdata = res.data;
       callBack(chartdata)
-
     }).catch(err => {
       console.log(err);
     })

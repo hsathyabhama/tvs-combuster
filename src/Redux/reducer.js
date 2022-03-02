@@ -4,7 +4,7 @@ const appReducer = (state = InitialState, action) => {
   const newState = {}
   Object.assign(newState, state)
   switch (action.type) {
-  /* ---Main page --- */
+    /* ---Main page --- */
     //userParams
     case 'UPDATE_USER_PARAMETER':
       newState.userParams = action.payload
@@ -31,18 +31,18 @@ const appReducer = (state = InitialState, action) => {
       return newState
     //chartData
 
-  /* ---status block --- */
+    /* ---status block --- */
     case 'UPDATE_CHART_DATA':
       newState.chartData = action.payload ? action.payload : []
       return newState
 
-  /* ---config page --- */
+    /* ---config page --- */
     //testConfigPage
     case 'UPDATE_TEST_CONFIG_PAGE':
       newState.testConfigPage = action.payload ? action.payload : []
       return newState
     //turboConfig
-    case 'UPDATE_TURBO_CONFIG':    
+    case 'UPDATE_TURBO_CONFIG':
       newState.turboConfig = action.payload ? action.payload : []
       return newState
     //paramConfig
@@ -62,7 +62,7 @@ const appReducer = (state = InitialState, action) => {
       newState.notifyStatus = action.payload ? action.payload : []
       return newState
 
-  /* ---Table component --- */
+    /* ---Table component --- */
     //tableViewData
     case 'UPDATE_TABLEVIEW_DATA':
       newState.tableViewData = action.payload ? action.payload : []
@@ -72,7 +72,7 @@ const appReducer = (state = InitialState, action) => {
       newState.statusData = action.payload ? action.payload : []
       return newState
 
-  /* ---Form component --- */
+    /* ---Form component --- */
     //IsLogin
     case 'UPDATE_LOGIN_EVENT':
       newState.IsLogin = action.payload ? action.payload : []
@@ -83,8 +83,8 @@ const appReducer = (state = InitialState, action) => {
       return newState
 
 
-  /* ---Test page/test details --- */
-        //testidvalue
+    /* ---Test page/test details --- */
+    //testidvalue
     case 'UPDATE_TESTID_VALUE':
       newState.testIdValue = action.payload ? action.payload : []
       return newState
@@ -98,18 +98,14 @@ const appReducer = (state = InitialState, action) => {
     case 'UPDATE_TURBO_MODE':
       newState.turboChargerType = action.payload
       return newState
-     
-    //plcControlType
-    case 'UPDATE_PLC_CONTROLTYPE':
-      newState.plcControlType = action.payload
-      return newState
+
 
     //testDropdown
     case 'UPDATE_DROPDOWN':
       newState.testDropdown = action.payload
       return newState
 
-  /* ---Test page/test initialize --- */
+    /* ---Test page/test initialize --- */
     //shutdownInitiated
     case 'SHUTDOWN_INITIATED':
       newState.shutdownInitiated = true
@@ -120,7 +116,7 @@ const appReducer = (state = InitialState, action) => {
       return newState
     //communicationFailed
     case 'COMMUNICATION_FAILED_INITIATED':
-      newState.communicationFailed = action.payload 
+      newState.communicationFailed = action.payload
       return newState
     //communication
     case 'COMMUNICATION_INITIATED':
@@ -138,13 +134,13 @@ const appReducer = (state = InitialState, action) => {
     case 'TURBO_START_INITIATED':
       newState.turboStart = action.payload ? action.payload : []
       return newState
-   
+
     //stageThree
     case 'STAGE_THREE_INITIATED':
       newState.stageThree = true
       newState.showReset = true
       return newState
-   
+
     //targetRPM
     case 'TARGET_RPM':
       newState.targetRPM = action.payload
@@ -161,7 +157,7 @@ const appReducer = (state = InitialState, action) => {
     case 'RESET_RPM':
       newState.resetRPM = action.payload
       return newState
-  
+
     case 'STOP_DB_INSERT':
       newState.stageThree = false
       newState.communication = false
@@ -170,51 +166,53 @@ const appReducer = (state = InitialState, action) => {
       newState.targetRPM = ''
       newState.targetTemp = ''
       newState.shutdownInitiated = false
-      return newState  
+      return newState
 
     //startDisable
     case 'SHUTDOWN_ENABLE_EVENT':
-     newState.startDisable = action.payload
-    return newState
+      newState.startDisable = action.payload
+      return newState
 
     //testIdData
     case 'GETTING_TEST_ID_DATA':
       newState.testIdData = action.payload
-     return newState 
-                    
-     //delayValue
+      return newState
+
+    //delayValue
     case 'FETCHING_DELAY_VALUE':
       newState.delayValue = action.payload
       return newState
+
+    //resetButtonClick   
+    case 'UPDATE_RESET_BUTTONCLICK':
+      newState.resetButtonClick = action.payload
+      return newState
+
     //cvStageValue
     case 'FETCHING_CVSTAGE_VALUE':
       newState.cvStageValue = action.payload
       return newState
-      
+
     //chartData2
     case 'UPDATE_CHART_DATA2':
       newState.chartData2 = action.payload ? action.payload : []
       return newState
 
-    //Cdinfinite
-    case 'UPDATE_CDINFINITE':
-      newState.Cdinfinite = action.payload 
+    //lubeOilValue
+    case 'UPDATE_LUBEOILVALUE':
+      newState.lubeOilValue = action.payload
       return newState
 
-    //correctionFactor_b
-    case 'UPDATE_CORRECTIONFACTOR':
-      newState.correctionFactor_b = action.payload 
+    //bargingButtonActivity
+    case 'UPDATE_BARGING_BUTTON':
+      newState.bargingButtonActivity = action.payload
       return newState
 
-    //orificeDiameter_d
-    case 'UPDATE_ORIFICEDIMETER':
-      newState.orificeDiameter_d = action.payload 
+    //bargingEvent
+    case 'UPDATE_BARGING_EVENT':
+      newState.bargingEvent = !newState.bargingEvent
       return newState
 
-    //PipeDiameter_D
-    case 'UPDATE_PIPEDIAMETER':
-      newState.PipeDiameter_D = action.payload 
-      return newState
 
     default:
       return newState

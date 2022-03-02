@@ -26,6 +26,7 @@ import {
   updateChartData,
   initiateTurboStart,
   updateChartData2,
+  updateBargingBtnStatus,
 } from "../../Redux/action";
 import {
   getTurboConfigData,
@@ -93,10 +94,10 @@ export class MainComponent extends Component {
       this.props.updateTableViewData(filteredTableData);
     });
 
-    // fetch TestDatainsert on application load
+    //fetch TestDatainsert on application load
     if (this.state.testDataInsert === false) {
       axios
-        .post("http://localhost:7000/testdatainsert.php", {})
+        .post("http://localhost:7000/testdatainsert.php")
         .then(function (response) {
           this.setState({
             testDataInsert: true,
@@ -109,41 +110,27 @@ export class MainComponent extends Component {
 
     // fetch livedata from DB application load
     setInterval(() => {
-      const body = {
-        testId: this.props.app.testIdData,
-      };
-      gettingChartData(body, (data) => {
-        let ChartValue = data.slice(0, 7);
-        this.props.updateChartData(ChartValue);
+      if (this.props.app.resetButtonClick !== 1) {
+        gettingChartData((data) => {
+          let ChartValue = data.slice(0, 7);
+          this.props.updateChartData(ChartValue);
 
-        let CommandValue = data.slice(7);
-        this.props.initiateTurboStart(CommandValue[0]);
-      });
-    }, this.props.app.delayValue);
+          let CommandValue = data.slice(7);
+          this.props.initiateTurboStart(CommandValue[0]);
 
-    // setInterval(() => {
-    //   const nShutdowndataArray = this.props.app.turboStart.filter((it) =>
-    //     nShutdowndata.find((val) => val === it.name)
-    //   );
-
-    //   const eShutdowndataArray = this.props.app.turboStart.filter((it) =>
-    //     eShutdowndata.find((val) => val === it.name)
-    //   );
-
-    //   if (
-    //     this.props.app.testIdData !== 0 &&
-    //     nShutdowndataArray.length < 2 &&
-    //     eShutdowndataArray.length < 2
-    //   ) {
-    //     // getSensorData((data) => {
-    //     //   let val = data;
-    //     // });
-    //     if (this.props.app.communication === true) {
-    //       // this.props.initiateTurboStart(this.props.app.chartData[7]);
-    //     }
-    //   }
-    // });
-  }
+          const eShutdowndataArray = this.props.app.turboStart.filter((it) =>
+            eShutdowndata.find((val) => val === it.name)
+          );
+          if (eShutdowndataArray.length >= 2) {
+            this.props.updateBargingBtnStatus(false);
+          }
+        });
+      } else {
+        let chartArray = [0, 0, 0, 0, 0, 0, 0, 0];
+        this.props.updateChartData(chartArray);
+      }
+    }, 1000);
+  } //end of  componentDidMount()
 
   render() {
     const appData = this.props.app;
@@ -172,8 +159,9 @@ export class MainComponent extends Component {
         </Footer>
       </Layout>
     );
-  }
-}
+  } //endof render()
+} //end of class
+
 const mapStateToProps = (state) => ({
   app: state.app,
 });
@@ -189,6 +177,7 @@ const mapDispatchToProps = {
   updateChartData,
   initiateTurboStart,
   updateChartData2,
+  updateBargingBtnStatus,
 };
 
 const MainContainer = connect(

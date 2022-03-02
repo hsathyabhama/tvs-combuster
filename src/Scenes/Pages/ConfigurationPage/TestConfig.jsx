@@ -24,7 +24,6 @@ class TestConfig extends Component {
 
   render() {
     const testdata = this.props.app;
-    console.log(this.props.app);
     return (
       <div>
         <div>
