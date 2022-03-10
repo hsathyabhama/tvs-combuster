@@ -174,7 +174,7 @@ class TableComponent extends Component {
     const { data: tableData, editMode, editCancel, editSession } = this.state;
     const { editableColumn } = this.props;
     const editRowIndex = this.state.editRowIndex;
-
+    console.log(this.state.editRowIndex);
     if (editSession && tableData.length !== 0 && tableData !== "no_data") {
       tableData.forEach((it, index) => {
         console.log(editSession && index !== editRowIndex);

@@ -135,9 +135,10 @@ export class MainComponent extends Component {
   render() {
     const appData = this.props.app;
     const { mainPage } = appData;
+
     return (
       <Layout>
-        <Header style={{ paddingLeft: "10px", paddingRight: "0" }}>
+        <Header>
           <HeaderComponent />
         </Header>
         <Layout>

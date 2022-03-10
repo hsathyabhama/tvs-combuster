@@ -17,88 +17,76 @@ class CVStageComponent extends Component {
 
   //FCV value increasing and decreasing
   comprAirFcvIncreseClick = () => {
-    let comprAirIncreseVal =
-      parseFloat(this.props.app.chartData[0].AirFCV) +
-      parseFloat(this.props.app.cvStageValue.CompAirFCV);
-
     const body = {
       state: 1,
-      fcvValue: comprAirIncreseVal,
+      fcvValue: this.props.app.chartData[0].AirFCV,
+      decimalNum: this.props.app.cvStageValue.CompAirFCV,
+      operationType: 1,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
   comprAirFcvDecreseClick = () => {
-    let compeAirDecreseVal =
-      parseFloat(this.props.app.chartData[0].AirFCV) -
-      parseFloat(this.props.app.cvStageValue.CompAirFCV);
-
     const body = {
       state: 1,
-      fcvValue: compeAirDecreseVal,
+      fcvValue: this.props.app.chartData[0].AirFCV,
+      decimalNum: this.props.app.cvStageValue.CompAirFCV,
+      operationType: 2,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
   mainGasIncreseClick = () => {
-    let mainGasIncreseVal =
-      parseFloat(this.props.app.chartData[0].MainGasFCV) +
-      parseFloat(this.props.app.cvStageValue.MainGasFCV);
-
     const body = {
       state: 2,
-      fcvValue: mainGasIncreseVal,
+      fcvValue: this.props.app.chartData[0].MainGasFCV,
+      decimalNum: this.props.app.cvStageValue.MainGasFCV,
+      operationType: 1,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
   mainGasDecreseClick = () => {
-    let mainGasDecreseVal =
-      parseFloat(this.props.app.chartData[0].MainGasFCV) -
-      parseFloat(this.props.app.cvStageValue.MainGasFCV);
-
     const body = {
       state: 2,
-      fcvValue: mainGasDecreseVal,
+      fcvValue: this.props.app.chartData[0].MainGasFCV,
+      decimalNum: this.props.app.cvStageValue.MainGasFCV,
+      operationType: 2,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
   fineCVIncreseClick = () => {
-    let fineCVIncreseVal =
-      parseFloat(this.props.app.chartData[0].FineFCV) +
-      parseFloat(this.props.app.cvStageValue.FineControlValve);
-
     const body = {
       state: 3,
-      fcvValue: fineCVIncreseVal,
+      fcvValue: this.props.app.chartData[0].FineFCV,
+      decimalNum: this.props.app.cvStageValue.FineControlValve,
+      operationType: 1,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
   fineCVDecreseClick = () => {
-    let fineCVDecreseVal =
-      parseFloat(this.props.app.chartData[0].FineFCV) -
-      parseFloat(this.props.app.cvStageValue.FineControlValve);
-
     const body = {
       state: 3,
-      fcvValue: fineCVDecreseVal,
+      fcvValue: this.props.app.chartData[0].FineFCV,
+      decimalNum: this.props.app.cvStageValue.FineControlValve,
+      operationType: 2,
       testId: this.props.app.testIdData,
     };
     fcvTransferEvent(body, (data) => {});
   };
 
-  bargingClick = () => {
+  purgingClick = () => {
     if (this.props.app.bargingEvent == false) {
       this.props.updateBargingEvent();
       axios
-        .post("http://localhost:5000/barging.php", {
+        .post("http://localhost:5000/purging.php", {
           bargingValue: 1,
         })
         .then((res) => {})
@@ -108,7 +96,7 @@ class CVStageComponent extends Component {
     } else {
       this.props.updateBargingEvent();
       axios
-        .post("http://localhost:5000/barging.php", {
+        .post("http://localhost:5000/purging.php", {
           bargingValue: 2,
         })
         .then((res) => {})
@@ -147,24 +135,27 @@ class CVStageComponent extends Component {
           }}
         >
           <Row>
-            <Col span={4}>
+            <Col xs={2} sm={4}>
               <Row className="progress_box" style={{ marginRight: "10px" }}>
                 <div>
                   <Row gutter={8}>
-                    <Col span={12}>
-                      <div style={{ marginTop: "17%" }}>
-                        <Progress
-                          strokeWidth={10}
-                          strokeColor="#03fc28"
-                          type="circle"
-                          width={65}
-                          style={{ marginLeft: "2px" }}
-                          percent={comprAir_FCV}
-                        />
-                      </div>
-                    </Col>
+                    {/* <Col span={12}> */}
+                    <div style={{ marginTop: "17%" }}>
+                      <Progress
+                        strokeWidth={10}
+                        strokeColor="#03fc28"
+                        type="circle"
+                        width={65}
+                        style={{ marginLeft: "2px" }}
+                        percent={comprAir_FCV}
+                      />
+                    </div>
+                    {/* </Col> */}
 
-                    <Col span={6} style={{ marginTop: "17%" }}>
+                    <Col
+                      span={6}
+                      style={{ marginTop: "23%", marginLeft: "10%" }}
+                    >
                       {StartdataArray.find((it) => it.name === "Stage 3") &&
                       nShutdowndataArray.length === 0 &&
                       eShutdowndataArray.length === 0 ? (
@@ -189,7 +180,10 @@ class CVStageComponent extends Component {
                       )}
                     </Col>
 
-                    <Col span={6} style={{ marginTop: "18%" }}>
+                    <Col
+                      span={6}
+                      style={{ marginTop: "23%", marginLeft: "2%" }}
+                    >
                       {StartdataArray.find((it) => it.name === "Stage 3") &&
                       nShutdowndataArray.length === 0 &&
                       eShutdowndataArray.length === 0 ? (
@@ -227,24 +221,25 @@ class CVStageComponent extends Component {
               </Row>
             </Col>
 
-            <Col span={4}>
+            <Col xs={2} sm={4}>
               <Row className="progress_box" style={{ marginRight: "10px" }}>
                 <div>
                   <Row gutter={8}>
-                    <Col span={12}>
-                      <div style={{ marginTop: "17%" }}>
-                        <Progress
-                          strokeWidth={10}
-                          strokeColor="#03fc28"
-                          type="circle"
-                          width={65}
-                          style={{ marginLeft: "2px" }}
-                          percent={mainGas_FCV}
-                        />
-                      </div>
-                    </Col>
+                    <div style={{ marginTop: "17%" }}>
+                      <Progress
+                        strokeWidth={10}
+                        strokeColor="#03fc28"
+                        type="circle"
+                        width={65}
+                        style={{ marginLeft: "2px" }}
+                        percent={mainGas_FCV}
+                      />
+                    </div>
 
-                    <Col span={6} style={{ marginTop: "17%" }}>
+                    <Col
+                      span={6}
+                      style={{ marginTop: "23%", marginLeft: "5%" }}
+                    >
                       {StartdataArray.find((it) => it.name === "Stage 3") &&
                       nShutdowndataArray.length === 0 &&
                       eShutdowndataArray.length === 0 ? (
@@ -269,7 +264,10 @@ class CVStageComponent extends Component {
                       )}
                     </Col>
 
-                    <Col span={6} style={{ marginTop: "18%" }}>
+                    <Col
+                      span={6}
+                      style={{ marginTop: "23%", marginLeft: "0%" }}
+                    >
                       {StartdataArray.find((it) => it.name === "Stage 3") &&
                       nShutdowndataArray.length === 0 &&
                       eShutdowndataArray.length === 0 ? (
@@ -307,23 +305,25 @@ class CVStageComponent extends Component {
               </Row>
             </Col>
 
-            <Col span={4}>
-              <Row className="progress_box" style={{ marginLeft: "px" }}>
+            <Col xs={2} sm={4}>
+              <Row className="progress_box" style={{ marginLeft: "2px" }}>
                 <div>
                   <Row gutter={8}>
-                    <Col span={12}>
-                      <div style={{ marginTop: "17%" }}>
-                        <Progress
-                          strokeWidth={10}
-                          strokeColor="#03fc28"
-                          type="circle"
-                          width={65}
-                          style={{ marginLeft: "2px" }}
-                          percent={fine_FCV}
-                        />
-                      </div>
-                    </Col>
-                    <Col span={6} style={{ marginTop: "17%" }}>
+                    <div style={{ marginTop: "17%" }}>
+                      <Progress
+                        strokeWidth={10}
+                        strokeColor="#03fc28"
+                        type="circle"
+                        width={65}
+                        style={{ marginLeft: "2px" }}
+                        percent={fine_FCV}
+                      />
+                    </div>
+
+                    <Col
+                      span={6}
+                      style={{ marginTop: "23%", marginLeft: "10%" }}
+                    >
                       {InitializedataArray.find(
                         (it) => it.name === "Initialize Completed"
                       ) &&
@@ -350,7 +350,7 @@ class CVStageComponent extends Component {
                       )}
                     </Col>
 
-                    <Col span={6} style={{ marginTop: "18%" }}>
+                    <Col span={6} style={{ marginTop: "23%" }}>
                       {InitializedataArray.find(
                         (it) => it.name === "Initialize Completed"
                       ) &&
@@ -389,33 +389,36 @@ class CVStageComponent extends Component {
               </Row>
             </Col>
 
-            <Col span={4}>
-              <Row className="progress_box" style={{ marginLeft: "10px" }}>
-                <div style={{ marginTop: "20px" }}>
-                  <Row gutter={8}>
-                    <Button
-                      type="primary"
-                      shape="round"
-                      size={"large"}
-                      className={
-                        this.props.app.bargingEvent == false
-                          ? "barger_btn"
-                          : "barger_btn2"
-                      }
-                      icon={<CaretUpOutlined />}
-                      style={{ marginLeft: "20%", width: "8em" }}
-                      disabled={this.props.app.bargingButtonActivity}
-                      onClick={() => this.bargingClick()}
-                    >
-                      Barging
-                    </Button>
-                  </Row>
+            <Col xs={2} sm={4}>
+              <Row
+                gutter={8}
+                className="progress_box"
+                style={{ marginLeft: "10px" }}
+              >
+                <div style={{ marginTop: "25px" }}>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    size={"large"}
+                    className={
+                      this.props.app.bargingEvent == false
+                        ? "barger_btn"
+                        : "barger_btn2"
+                    }
+                    icon={<CaretUpOutlined />}
+                    style={{ marginLeft: "20%", width: "8em" }}
+                    disabled={this.props.app.bargingButtonActivity}
+                    onClick={() => this.purgingClick()}
+                  >
+                    Purging
+                  </Button>
+
                   <Row>
                     <div
                       className="progress_title"
-                      style={{ marginTop: "20px", marginLeft: "20%" }}
+                      style={{ marginTop: "30px", marginLeft: "30%" }}
                     >
-                      <strong>Bargging Air</strong>
+                      <strong>Purging Air</strong>
                     </div>
                   </Row>
                 </div>

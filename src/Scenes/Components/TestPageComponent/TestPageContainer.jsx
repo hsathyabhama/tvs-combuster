@@ -14,6 +14,7 @@ import {
   Space,
   message,
   Menu,
+  Form,
 } from "antd";
 import {
   DownloadOutlined,
@@ -516,7 +517,7 @@ class TestPageContainer extends Component {
     this.props.initiateCommunicationFailed(false);
     this.props.getResetTemp("");
     this.props.startDisableEvent(false);
-    this.props.updateTurboMode(0);
+    this.props.updateTurboMode(1);
     this.props.updateResetButtonClick(1);
     this.props.updateBargingBtnStatus(false);
 
@@ -640,132 +641,97 @@ class TestPageContainer extends Component {
                     paddingLeft: "20px",
                   }}
                 >
-                  <Row style={{ paddingLeft: "20px" }}>
-                    <Col span={6}>
-                      <Row>
-                        <Col span={8} style={{ marginTop: "20px" }}>
-                          <span>Lube Oil Value</span>
-                        </Col>
-                        <Col span={8}>
-                          {communication ? (
-                            <Input
-                              disabled
-                              name="LubeOilValue"
-                              value={this.props.app.lubeOilValue}
-                              style={{ width: "150px", color: "white" }}
-                            />
-                          ) : (
-                            <Input
-                              style={{ width: "150px" }}
-                              name="LubeOilValue"
-                              value={this.props.app.lubeOilValue}
-                              onChange={this.onChangeLubeOilEvent}
-                            />
-                          )}
-                        </Col>
-                      </Row>
-                    </Col>
+                  <Row gutter={[16, 8]} style={{ paddingLeft: "20px" }}>
+                    <Form.Item label="Lube Oil Value">
+                      {communication ? (
+                        <Input
+                          disabled
+                          name="LubeOilValue"
+                          value={this.props.app.lubeOilValue}
+                          style={{ width: "150px", color: "white" }}
+                        />
+                      ) : (
+                        <Input
+                          style={{ width: "150px" }}
+                          name="LubeOilValue"
+                          value={this.props.app.lubeOilValue}
+                          onChange={this.onChangeLubeOilEvent}
+                        />
+                      )}
+                    </Form.Item>
+
+                    <Form.Item label="Mode" style={{ paddingLeft: "17%" }}>
+                      {communication ? (
+                        <Radio.Group
+                          name="radiogroup"
+                          disabled
+                          className="test-radio"
+                        >
+                          <Radio value={1} className="radio-btn">
+                            <span className="disable-btn"> Burner 1</span>
+                          </Radio>
+                          <Radio value={2} className="radio-btn">
+                            <span className="disable-btn"> Burner 2</span>
+                          </Radio>
+                        </Radio.Group>
+                      ) : (
+                        <Radio.Group
+                          name="radiogroup"
+                          defaultValue={this.props.app.turboChargerType}
+                          onChange={this.onChangeTurboCharger}
+                          className="test-radio"
+                        >
+                          <Radio value={1} className="radio-btn">
+                            <span className="disable-btn">Burner 1</span>
+                          </Radio>
+                          <Radio value={2} className="radio-btn">
+                            <span className="disable-btn">Burner 2</span>
+                          </Radio>
+                        </Radio.Group>
+                      )}
+                    </Form.Item>
                   </Row>
-
-                  <Row style={{ paddingTop: "2%", paddingLeft: "20px" }}>
-                    <Col xs={8}>
-                      <form>
-                        <Row>
-                          <Col xs={5} style={{ marginTop: "20px" }}>
-                            <label htmlFor="text" className="label">
-                              Mode
-                            </label>
-                          </Col>
-                          {communication ? (
-                            <Radio.Group
-                              name="radiogroup"
-                              disabled
-                              className="test-radio"
+                  <Row gutter={[16, 8]} style={{ paddingLeft: "20px" }}>
+                    <Form.Item label="Turbo ID" style={{ paddingLeft: "2%" }}>
+                      {communication ? (
+                        <Input.Group compact>
+                          <Select
+                            disabled
+                            defaultValue={this.state.turboIdDefaultValue}
+                            style={{ width: "300px" }}
+                          ></Select>
+                        </Input.Group>
+                      ) : (
+                        <Input.Group compact>
+                          {testIdValue && testIdValue.length > 0 ? (
+                            <Select
+                              defaultValue={this.state.turboIdDefaultValue}
+                              style={{ width: "300px" }}
+                              onChange={this.handleChangetestID}
+                              value={this.state.turboIdValue}
                             >
-                              <Radio value={1} className="radio-btn">
-                                <span className="disable-btn"> Burner 1</span>
-                              </Radio>
-                              <Radio value={2} className="radio-btn">
-                                <span className="disable-btn"> Burner 2</span>
-                              </Radio>
-                            </Radio.Group>
+                              {this.props.app.statusData.map((it) => (
+                                <Option key={it.turboname} value={it.turboname}>
+                                  {it.turboname}
+                                </Option>
+                              ))}
+                            </Select>
                           ) : (
-                            <Radio.Group
-                              name="radiogroup"
-                              defaultValue={this.props.app.turboChargerType}
-                              onChange={this.onChangeTurboCharger}
-                              className="test-radio"
-                            >
-                              <Radio value={1} className="radio-btn">
-                                <span className="disable-btn">Burner 1</span>
-                              </Radio>
-                              <Radio value={2} className="radio-btn">
-                                <span className="disable-btn">Burner 2</span>
-                              </Radio>
-                            </Radio.Group>
+                            <Space type="warning" style={{ color: "red" }}>
+                              No active turbo
+                            </Space>
                           )}
-                        </Row>
-                      </form>
-                    </Col>
+                        </Input.Group>
+                      )}
 
-                    <Col span={8}>
-                      <form>
-                        <Row>
-                          <Col span={5} style={{ marginTop: "20px" }}>
-                            <label htmlFor="text" className="label">
-                              Turbo ID
-                            </label>
-                          </Col>
-                          <Col span={6}>
-                            {communication ? (
-                              <Input.Group compact>
-                                <Select
-                                  disabled
-                                  defaultValue={this.state.turboIdDefaultValue}
-                                  style={{ width: "300px" }}
-                                ></Select>
-                              </Input.Group>
-                            ) : (
-                              <Input.Group compact>
-                                {testIdValue && testIdValue.length > 0 ? (
-                                  <Select
-                                    defaultValue={
-                                      this.state.turboIdDefaultValue
-                                    }
-                                    style={{ width: "300px" }}
-                                    onChange={this.handleChangetestID}
-                                    value={this.state.turboIdValue}
-                                  >
-                                    {this.props.app.statusData.map((it) => (
-                                      <Option
-                                        key={it.turboname}
-                                        value={it.turboname}
-                                      >
-                                        {it.turboname}
-                                      </Option>
-                                    ))}
-                                  </Select>
-                                ) : (
-                                  <Space
-                                    type="warning"
-                                    style={{ color: "red" }}
-                                  >
-                                    No active turbo
-                                  </Space>
-                                )}
-                              </Input.Group>
-                            )}
-                          </Col>
-                        </Row>
-                      </form>
                       {this.props.app.statusData ? (
-                        <Row style={{ paddingLeft: "5rem" }}>
+                        <Row>
                           {this.state.truboIDnum ? (
                             <div
                               style={{
                                 color: "white",
                                 marginLeft: "15px",
-                                marginTop: "10px",
+                                marginTop: "5px",
                               }}
                             >
                               {this.props.app.testIdValue}
@@ -783,48 +749,44 @@ class TestPageContainer extends Component {
                       ) : (
                         []
                       )}
-                    </Col>
+                    </Form.Item>
 
-                    <Col span={8}>
-                      <form onSubmit={(e) => this.addTesterItem(e, "tester")}>
+                    <form
+                      onSubmit={(e) => this.addTesterItem(e, "tester")}
+                      style={{
+                        marginLeft:
+                          this.props.app.statusData.length == 0 ? "22%" : "5%",
+                      }}
+                    >
+                      <Form.Item label=" Test Engg">
+                        {communication ? (
+                          <Input
+                            disabled
+                            placeholder="Test Engineer"
+                            name="Tester"
+                            style={{ width: "300px" }}
+                          />
+                        ) : (
+                          <Input
+                            placeholder="Test Engineer"
+                            name="Tester"
+                            style={{ width: "300px" }}
+                            value={this.state.currentTesterItem}
+                            onChange={this.handleTesterInput}
+                          />
+                        )}
+                        <button className="add-btn" type="submit">
+                          +
+                        </button>
+
                         <Row>
-                          <Col span={4} style={{ marginTop: "20px" }}>
-                            <label htmlFor="text" className="label">
-                              Test Engg
-                            </label>
-                          </Col>
-                          <Col span={15}>
-                            {communication ? (
-                              <Input
-                                disabled
-                                placeholder="Test Engineer"
-                                name="Tester"
-                                style={{ width: "300px" }}
-                              />
-                            ) : (
-                              <Input
-                                placeholder="Test Engineer"
-                                name="Tester"
-                                style={{ width: "300px" }}
-                                value={this.state.currentTesterItem}
-                                onChange={this.handleTesterInput}
-                              />
-                            )}
-                          </Col>
-                          <Col>
-                            <button className="add-btn" type="submit">
-                              +
-                            </button>
-                          </Col>
+                          <ListItems
+                            items={this.state.testerItems}
+                            deleteItem={this.deleteTesterItem}
+                          />
                         </Row>
-                      </form>
-                      <Row style={{ paddingLeft: "7rem" }}>
-                        <ListItems
-                          items={this.state.testerItems}
-                          deleteItem={this.deleteTesterItem}
-                        />
-                      </Row>
-                    </Col>
+                      </Form.Item>
+                    </form>
                   </Row>
 
                   <Row>
@@ -853,12 +815,10 @@ class TestPageContainer extends Component {
             </Menu>
           </div>
 
-          <Row style={{ backgroundColor: "#131633", paddingRight: "20px" }}>
-            <Divider
-              style={{ borderColor: "#42dad6", backgroundColor: "#131633" }}
-            />
+          <Row style={{ paddingRight: "20px" }}>
+            <Divider style={{ borderColor: "#42dad6" }} />
 
-            <Col span={3}>
+            <Col xs={2} sm={3}>
               <Card
                 style={{ width: 185, cursor: "pointer", borderColor: "green" }}
               >
@@ -923,7 +883,7 @@ class TestPageContainer extends Component {
             </Col>
 
             <Col
-              span={2}
+              xs={2}
               style={{
                 marginTop: "30px",
                 paddingRight: "10px",
@@ -933,7 +893,7 @@ class TestPageContainer extends Component {
               <hr></hr>
             </Col>
 
-            <Col span={3}>
+            <Col xs={2} sm={3}>
               <Card
                 style={
                   InitializedCompletedStatus.length >= 1 && communication
@@ -971,7 +931,7 @@ class TestPageContainer extends Component {
                   ) : (
                     <p
                       style={{
-                        color: "gray",
+                        color: "white",
                         fontSize: "20px",
                         paddingLeft: "35px",
                         fontWeight: "500",
@@ -1055,9 +1015,9 @@ class TestPageContainer extends Component {
             </Col>
 
             <Col
-              span={2}
+              xs={2}
               style={{
-                marginTop: "40px",
+                marginTop: "30px",
                 paddingRight: "10px",
                 paddingLeft: "20px",
               }}
@@ -1066,7 +1026,7 @@ class TestPageContainer extends Component {
             </Col>
 
             {/* Reset Values part */}
-            <Col span={3}>
+            <Col xs={2} sm={3}>
               <Card
                 style={
                   StartdataArray.find((it) => it.name === "Stage 3") &&
@@ -1105,7 +1065,7 @@ class TestPageContainer extends Component {
                   ) : (
                     <p
                       style={{
-                        color: "gray",
+                        color: "white",
                         fontSize: "19px",
                         paddingLeft: "10px",
                         fontWeight: "500",
@@ -1174,9 +1134,9 @@ class TestPageContainer extends Component {
             </Col>
 
             <Col
-              span={2}
+              xs={2}
               style={{
-                marginTop: "40px",
+                marginTop: "30px",
                 paddingRight: "10px",
                 paddingLeft: "20px",
               }}
@@ -1184,7 +1144,7 @@ class TestPageContainer extends Component {
               <hr></hr>
             </Col>
 
-            <Col span={4}>
+            <Col xs={2} sm={4}>
               <Card
                 style={
                   showTarget
@@ -1221,7 +1181,7 @@ class TestPageContainer extends Component {
                   ) : (
                     <p
                       style={{
-                        color: "gray",
+                        color: "white",
                         fontSize: "20px",
                         paddingLeft: "15px",
                         fontWeight: "500",
@@ -1269,7 +1229,7 @@ class TestPageContainer extends Component {
               )}
             </Col>
 
-            <Col span={3}>
+            <Col xs={3}>
               <Card
                 style={
                   (nShutdowndataArray.length >= 1 &&
@@ -1278,7 +1238,7 @@ class TestPageContainer extends Component {
                   eShutdowndataArray.length >= 2 ||
                   showTarget === false
                     ? { width: 100, cursor: "pointer", borderColor: "green" }
-                    : { width: 100, borderColor: "gray" }
+                    : { width: 100, borderColor: "GRAY" }
                 }
               >
                 <div>
@@ -1318,7 +1278,7 @@ class TestPageContainer extends Component {
                 ) : (
                   <p
                     style={{
-                      color: "gray",
+                      color: "white",
                       fontSize: "20px",
                       fontWeight: "500",
                     }}
@@ -1329,7 +1289,7 @@ class TestPageContainer extends Component {
               </Card>
             </Col>
 
-            <Col span={2}>
+            <Col xs={2}>
               <Card
                 style={
                   showTarget

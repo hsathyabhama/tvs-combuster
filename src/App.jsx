@@ -29,6 +29,10 @@ class App extends Component {
     const appState = this.props.appState;
     return (
       <div className="site-layout-background">
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
         {appState === "main" ? <MainComponent /> : []}
         {appState === "login" ? <LoginPage /> : []}
         {appState === "signup" ? <RegisterPage /> : []}

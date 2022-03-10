@@ -45,10 +45,9 @@ class HeaderComponent extends Component {
           <div className="logout-content" onClick={this.backToLoginEvent}>
             <a className="logout-btn"> Logout</a>
           </div>
-
-          <div className="welcome-message">
-            <div>Welcome {appData.userName}</div>
-          </div>
+        </div>
+        <div className="welcome-message">
+          <div>Welcome {appData.userName}</div>
         </div>
       </div>
     );
@@ -57,8 +56,8 @@ class HeaderComponent extends Component {
 
 const LogoValue = () => (
   <div className="testlogo">
-    <Space style={{ color: "#42dad6", fontSize: "20px" }}>ENERTEK</Space>
-    <Space style={{ color: "#8a8d93", fontSize: "20px" }}>COMBUSTER</Space>
+    <Space style={{ color: "#42dad6", fontSize: "18px" }}>ENERTEK</Space>
+    <Space style={{ color: "#8a8d93", fontSize: "18px" }}>COMBUSTER</Space>
   </div>
 );
 

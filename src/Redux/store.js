@@ -8,7 +8,7 @@ const InitialState = {
   leftBarView: false,
   collapsed: true,
   titleElements: titleElements,
-  turboChargerType: 0,
+  turboChargerType: 1,
   IsLogin: false,
   IsUserName: [],
 

@@ -11,7 +11,7 @@ const styles = {
     color: "#03fc28",
     position: "absolute",
     right: 20,
-    top: 120,
+    top: 83,
     fontWeight: "bold",
     fontSize: 20,
   },
@@ -19,7 +19,7 @@ const styles = {
     color: "red",
     position: "absolute",
     right: 20,
-    top: 120,
+    top: 83,
     fontWeight: "bold",
     fontSize: 20,
   },
@@ -166,9 +166,9 @@ class StatusBlock extends Component {
         </div>
         <Row>
           {persons.map((It, y) => (
-            <Col style={{ paddingRight: "10px", width: "230px" }}>
+            <Col xs={2} sm={4} style={{ paddingRight: "10px", width: "230px" }}>
               <div className="statistic-block block">
-                <Row className="progress-details d-flex align-items-end justify-content-between">
+                <Row>
                   {/* up and down arrow column */}
                   <Col>
                     {persons1[y] <= It ? (

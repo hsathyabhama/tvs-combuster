@@ -198,7 +198,7 @@ class CardComponent extends Component {
     ) {
       return (
         <div className="site-card-wrapper">
-          <Row gutter={16}>
+          <Row gutter={[24, 24]}>
             {this.state.cardList
               ? this.state.cardList.map((it, y) => {
                   return (

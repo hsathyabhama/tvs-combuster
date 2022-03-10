@@ -155,43 +155,40 @@ class TurboConfig extends Component {
               }
             }}
           >
-            <Row style={{ paddingTop: "20px" }}>
-              <Col sm={2}>
-                <label className="label">
-                  Turbo ID<i style={{ color: "red", fontSize: "15px" }}> *</i>
-                </label>
-              </Col>
-              <Col sm={6}>
-                <Form.Item name="Turbo ID" rules={[{ required: true }]}>
-                  <div>
-                    <Input
-                      name="turbo_id"
-                      style={{ width: "320px" }}
-                      placeholder="Turbo ID"
-                      defaultValue={this.state.turboID}
-                      onChange={this.onchangeTurboID}
-                    />
-                  </div>
-                </Form.Item>
-              </Col>
-              <Col sm={3}>
-                <label htmlFor="name" className="label">
-                  Installed Date
-                  <i style={{ color: "red", fontSize: "15px" }}> *</i>
-                </label>
-              </Col>
-              <Col sm={5}>
-                <Form.Item name="Date " rules={[{ required: true }]}>
-                  <DatePicker
-                    name="date"
-                    disabledDate={(current) => {
-                      return current && current > moment(Date.now());
-                    }}
-                    style={{ backgroundColor: "#131633" }}
-                    onChange={this.updateDate}
-                  />
-                </Form.Item>
-              </Col>
+            <Row
+              gutter={[16, 8]}
+              style={{ paddingLeft: "20px", paddingTop: "20px" }}
+            >
+              <Form.Item
+                name="Turbo ID"
+                label="Turbo ID"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  name="turbo_id"
+                  style={{ width: "320px" }}
+                  placeholder="Turbo ID"
+                  defaultValue={this.state.turboID}
+                  onChange={this.onchangeTurboID}
+                />
+              </Form.Item>
+
+              <Form.Item
+                style={{ paddingLeft: "15%" }}
+                name="Date"
+                label=" Installed Date"
+                rules={[{ required: true }]}
+              >
+                <DatePicker
+                  name="date"
+                  disabledDate={(current) => {
+                    return current && current > moment(Date.now());
+                  }}
+                  style={{ backgroundColor: "#131633" }}
+                  onChange={this.updateDate}
+                />
+              </Form.Item>
+
               {/* <Col sm={2}>
                 <label className="label">
                   Nozzle Area
@@ -221,14 +218,11 @@ class TurboConfig extends Component {
                 </div>
               </Col> */}
             </Row>
-            <Row style={{ marginTop: "5px" }}>
-              <Col sm={2}>
-                <label className="label">
-                  Description{" "}
-                  <i style={{ color: "red", fontSize: "15px" }}> </i>
-                </label>
-              </Col>
-              <Col sm={14}>
+            <Row
+              gutter={[16, 8]}
+              style={{ paddingLeft: "20px", marginTop: "5px" }}
+            >
+              <Form.Item name="Description" label=" Description">
                 <Tooltip placement="bottomLeft" title="Allowed 200 words only">
                   <Input
                     name="description"
@@ -238,17 +232,13 @@ class TurboConfig extends Component {
                     onChange={this.updateDiscription}
                   />
                 </Tooltip>
-              </Col>
+              </Form.Item>
             </Row>
 
-            <Row sm={6} style={{ paddingTop: "25px", marginLeft: "93%" }}>
-              <Col xs={4}>
-                <Form.Item>
-                  <div>
-                    <Button htmlType="submit"> Save</Button>
-                  </div>
-                </Form.Item>
-              </Col>
+            <Row style={{ paddingTop: "25px", marginLeft: "90%" }}>
+              <Form.Item>
+                <Button htmlType="submit"> Save</Button>
+              </Form.Item>
             </Row>
           </Form>
         </Layout>

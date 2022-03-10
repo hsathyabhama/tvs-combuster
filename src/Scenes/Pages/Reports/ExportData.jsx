@@ -21,8 +21,14 @@ import html2canvas from "html2canvas";
 
 const { Option } = Select;
 let paramObj = {};
-
+const tailLayout = {
+  wrapperCol: {
+    offset: 10,
+    span: 22,
+  },
+};
 class ExportData extends Component {
+  formRef = React.createRef(); //this is used to reset datas
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +80,10 @@ class ExportData extends Component {
 
     createParam.forEach((key, i) => (paramObj[key] = createUnit[i]));
   }
-
+  //to reset the input box
+  onReset = () => {
+    this.formRef.current.resetFields();
+  };
   //to view the report
   getReport = () => {
     if (this.state.turboIdVal === "" || this.state.turboIdVal.length === 0) {
@@ -217,7 +226,6 @@ class ExportData extends Component {
         title: this.state.title[1],
         dataIndex: this.state.title[1],
         key: this.state.title[1],
-        fixed: this.state.title[1],
         fixed: "left",
         width: 15,
       },
@@ -263,16 +271,18 @@ class ExportData extends Component {
       <div style={{ paddingTop: "1px" }}>
         <Layout className="layout-container">
           <h2 className="h2"> Export Report</h2>
-          <Row style={{ paddingTop: "10px" }}>
-            <Col sm={2}>
-              <label className="label">
-                Turbo ID<i style={{ color: "red", fontSize: "15px" }}> *</i>
-              </label>
-              <span> &nbsp; &nbsp; &nbsp;</span>
-            </Col>
-            <Col sm={10}>
+          <Form ref={this.formRef} name="control-ref">
+            <Row style={{ paddingTop: "10px" }}>
               <Col sm={10}>
-                <Form.Item name="option">
+                <Form.Item
+                  name="option"
+                  label="Turbo ID"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
                   <Input.Group compact>
                     <Input.Group compact>
                       <Select
@@ -290,16 +300,16 @@ class ExportData extends Component {
                   </Input.Group>
                 </Form.Item>
               </Col>
-            </Col>
 
-            <Col sm={2}>
-              <label className="label">
-                Test No <i style={{ color: "red", fontSize: "15px" }}> *</i>
-              </label>
-              <span> &nbsp; &nbsp; &nbsp;</span>
-            </Col>
-            <Col sm={10}>
-              <Form.Item name="options">
+              <Form.Item
+                name="options"
+                label="Test No"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
                 <Input.Group compact>
                   <Select
                     defaultValue="Select Test No"
@@ -316,20 +326,21 @@ class ExportData extends Component {
                   </Select>
                 </Input.Group>
               </Form.Item>
-            </Col>
-          </Row>
-          <Row
-            style={{
-              paddingTop: "0px",
-              paddingLeft: "38%",
-              paddingBottom: "25px",
-            }}
-          >
-            <Col xs={4}>
-              <Button onClick={() => this.getReport()}> View</Button>
-              <span> &nbsp;</span>
-            </Col>
-          </Row>
+            </Row>
+            <Row style={{ marginLeft: "32%", paddingBottom: "2%" }}>
+              <Button htmlType="button" onClick={() => this.getReport()}>
+                View
+              </Button>
+
+              <Button
+                htmlType="button"
+                style={{ marginLeft: "4%" }}
+                onClick={this.onReset}
+              >
+                Reset
+              </Button>
+            </Row>
+          </Form>
         </Layout>
 
         <Button
