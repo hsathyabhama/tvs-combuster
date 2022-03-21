@@ -64,7 +64,11 @@ class ForgotPassword extends Component {
               {/* <!-- Logo & Information Panel--> */}
               <Col span={12}>
                 <div className="info" style={{ paddingTop: "10rem" }}>
-                  <h1 style={{ color: "white" }}>{company_name}</h1>
+                  <h1
+                    style={{ color: "white", fontSize: "calc(14px + 1.8vw)" }}
+                  >
+                    {company_name}
+                  </h1>
                   <p>{company_data}</p>
                 </div>
               </Col>
@@ -82,7 +86,7 @@ class ForgotPassword extends Component {
                       >
                         <Input
                           className="form-input"
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <UserOutlined className="site-form-item-icon" />
                           }
@@ -96,7 +100,7 @@ class ForgotPassword extends Component {
                         hasFeedback
                       >
                         <Input.Password
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
@@ -130,7 +134,7 @@ class ForgotPassword extends Component {
                         ]}
                       >
                         <Input.Password
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
@@ -173,7 +177,7 @@ class ForgotPassword extends Component {
                         <p
                           style={{
                             color: "rgb(151, 150, 151)",
-                            fontSize: "18px",
+                            fontSize: "calc(7px + 0.7vw)",
                           }}
                         >
                           Back to Login page?

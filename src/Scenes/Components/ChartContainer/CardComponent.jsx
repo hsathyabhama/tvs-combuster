@@ -9,6 +9,7 @@ import { getTableView } from "../../../Services/requests";
 const { sensorLabel, dummyData, chartMax } = dashboardSensor;
 
 class CardComponent extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -18,74 +19,52 @@ class CardComponent extends Component {
       dummygraphData: [
         {
           T1T2: dummyData, //dummyData = 0 in constant page
-          T3T4: dummyData,
-          rpm1rpm2: dummyData,
-          G1G2: dummyData,
+          rpm1rpm2: dummyData, //this must be 6,this is for chart line value
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
-          T3T4: dummyData,
           rpm1rpm2: dummyData,
-          G1G2: dummyData,
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
-          T3T4: dummyData,
           rpm1rpm2: dummyData,
-          G1G2: dummyData,
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
-          T3T4: dummyData,
           rpm1rpm2: dummyData,
-          G1G2: dummyData,
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
-          T3T4: dummyData,
           rpm1rpm2: dummyData,
-          G1G2: dummyData,
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
         {
           T1T2: dummyData,
-          T3T4: dummyData,
           rpm1rpm2: dummyData,
-          G1G2: dummyData,
           LubeOilPr: dummyData,
-          AirMassFlow: dummyData,
-          AirtoFuelRatio: dummyData,
           testdataTime: dummyData,
         },
       ],
     };
   }
 
-  //Rendering the 6 graph y axis limits while updatinh the table
+  //Rendering the graph y axis limits while updating the table
   componentDidMount() {
+    this._isMounted = true;
     getTableView((data) => {
       //getting this function(data) from request page
-      const arrStr = this.props.app.targetKeys; //covertion string to number
-      const dashboardDataNumArr = arrStr.map((i) => Number(i));
+      const arrStr = this.props.app.targetKeys;
+      const dashboardDataNumArr = arrStr.map((i) => Number(i)); //covertion string to number
+
       let filteredTableData = data.filter((_, index) =>
         dashboardDataNumArr.includes(index)
       );
@@ -94,10 +73,19 @@ class CardComponent extends Component {
     });
   }
 
+  //the component is unmountedand getting error in updating state,
+  //so we use this componentWllUnmound life cycle to stop memory leak
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   //Initially to render graph with 0 value
   interval = setInterval(() => {
     {
-      this.props.app.chartData.length !== 0
+      //the 3 mention how many graph now displaying,initially
+      //  this.props.app.chartdata length is 3 based on the graph count,
+      //  aftet live data the length will increase
+      this.props.app.chartData.length > 3
         ? this.prepareChartParams(this.props.app.chartData)
         : this.prepareChartParams(this.state.dummygraphData);
     }
@@ -105,22 +93,15 @@ class CardComponent extends Component {
 
   prepareChartParams = (chartdata) => {
     let t1t2 = [];
-    let t3t4 = [];
     let rpm1rpm2 = [];
-    let g1g2 = [];
     let lubeoilpr = [];
-    let airmassflow = [];
-    let airtofuelratio = [];
-
     let date_Time = [];
+
+    //this 6 mention the chart x-axis column count
     for (let i = 0; i < 6; i++) {
       t1t2.push(chartdata[i].T1T2);
-      t3t4.push(chartdata[i].T3T4);
       rpm1rpm2.push(chartdata[i].rpm1rpm2);
-      g1g2.push(chartdata[i].G1G2);
       lubeoilpr.push(chartdata[i].LubeOilPr);
-      airmassflow.push(chartdata[i].AirMassFlow);
-      airtofuelratio.push(chartdata[i].AirtoFuelRatio);
 
       date_Time.push(
         new Date(chartdata[i].date_Time).toLocaleTimeString([], {
@@ -138,12 +119,8 @@ class CardComponent extends Component {
 
     let chartArray = [];
     chartArray.push(t1t2);
-    chartArray.push(t3t4);
     chartArray.push(rpm1rpm2);
-    chartArray.push(g1g2);
     chartArray.push(lubeoilpr);
-    chartArray.push(airmassflow);
-    chartArray.push(airtofuelratio);
 
     let filteredData = chartArray.filter((_, index) =>
       dashboardDataNumArr.includes(index)
@@ -168,15 +145,8 @@ class CardComponent extends Component {
             title: filteredDataText,
             chartData: filteredData[i],
             filteredDataLabel: filteredDataLabel[i],
-            chartBackgroundColor: ["rgba(24,144,255,0.2)"],
-            chartBorderColor: [
-              "rgba(24, 144, 255, 0.5)",
-              "rgba(24, 144, 255, 0.5)",
-              "rgba(24, 144, 255, 0.5)",
-              "rgba(24, 144, 255, 0.5)",
-              "rgba(24, 144, 255, 0.5)",
-              "rgba(24, 144, 255, 0.5)",
-            ],
+            chartBackgroundColor: ["rgba(43,194,209,0.5)"],
+            chartBorderColor: ["red", "red", "red", "red", "red", "red"],
             chartTextColor: textColor,
 
             upperLimitVal: this.props.app.tableViewData[i].graph_upper,
@@ -184,9 +154,11 @@ class CardComponent extends Component {
           },
         };
         chartValue.push(chart);
-        this.setState({
-          cardList: chartValue,
-        });
+        if (this._isMounted) {
+          this.setState({
+            cardList: chartValue,
+          });
+        }
       }
     }
   };
@@ -203,16 +175,8 @@ class CardComponent extends Component {
               ? this.state.cardList.map((it, y) => {
                   return (
                     <Col span={8}>
-                      <Row style={{ paddingTop: "30px" }}>
-                        <Card
-                          style={{
-                            backgroundColor: "#131633",
-                            height: "250px",
-                            border: "none",
-                            borderRadius: "0px",
-                            width: "450px",
-                          }}
-                        >
+                      <Row style={{ paddingTop: "30px", marginLeft: "" }}>
+                        <Card className="graph-card">
                           {it.title}
                           <GraphComponent
                             data={

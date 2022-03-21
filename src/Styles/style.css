@@ -1,3 +1,7 @@
+:root {
+  --first-color: #131633;
+  --second-color: #ff7;
+}
 .site-layout-background {
   width: 100%;
   margin-left: 200;
@@ -11,13 +15,14 @@ table#example1 {
   margin-top: 20px;
   height: 250px;
   width: 100%;
+  background-color: red;
   font-size: 14px;
 }
 div#allreport {
   color: white;
 }
 div#allreport h1 {
-  font-size: 32px;
+  font-size: calc(10px + 1.3vw);
   color: white;
 }
 /*
@@ -28,7 +33,7 @@ div#allreport h1 {
 /* --toggle-- */
 .trigger {
   /* padding: 0 24px; */
-  font-size: 20px;
+  font-size: calc(10px + 0.9vw);
   line-height: 45px;
   cursor: pointer;
   transition: color 0.3s;
@@ -41,7 +46,7 @@ div#allreport h1 {
 /* ---header--- */
 .ant-layout-header {
   overflow: hidden;
-  background-color: #131633;
+  background-color: var(--first-color);
   padding: 14px 9px;
   line-height: 40px;
 }
@@ -64,7 +69,7 @@ div#allreport h1 {
   margin-top: -60px;
   float: right;
   margin-right: 5%;
-  font-size: 18px;
+  font-size: calc(7px + 0.9vw);
   line-height: 70px;
 }
 .logout-content {
@@ -72,7 +77,7 @@ div#allreport h1 {
   margin-top: -60px;
   float: right;
   margin-right: 40px;
-  font-size: 18px;
+  font-size: calc(7px + 0.9vw);
   line-height: 70px;
 }
 .logout-content :hover {
@@ -100,12 +105,12 @@ div#allreport h1 {
   color: rgb(151, 150, 151);
 }
 .layout-container {
-  background-color: #131633;
+  background-color: var(--first-color);
   padding-top: 20px;
   padding-left: 20px;
 }
 .bottom-container {
-  background-color: #131633;
+  background-color: var(--first-color);
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -132,7 +137,7 @@ div#allreport h1 {
   width: 80px !important;
 }
 .ant-layout-sider {
-  background: #131633;
+  background-color: var(--first-color);
 }
 .ant-layout-sider-children {
   height: 100%;
@@ -146,12 +151,12 @@ div#allreport h1 {
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
   color: rgba(255, 255, 255, 0.65);
-  background: #131633 !important;
+  background-color: var(--first-color) !important;
 }
 
 /* -- sidebar dropdown-- */
 .ant-menu-dark .ant-menu-inline.ant-menu-sub {
-  background: #131633;
+  background-color: var(--first-color);
 }
 .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #188fff67;
@@ -190,7 +195,7 @@ div#allreport h1 {
   border: 1px solid gray;
   border-radius: 10px;
   height: 90px;
-  background-color: #131633;
+  background-color: var(--first-color);
 }
 /* -----------dropdown----------- */
 .ant-menu-submenu-arrow {
@@ -204,7 +209,7 @@ div#allreport h1 {
 /* list */
 .list {
   color: #fff;
-  background-color: #131633;
+  background-color: var(--first-color);
 }
 .list p {
   position: relative;
@@ -215,7 +220,7 @@ div#allreport h1 {
   background-color: transparent;
   border: 0;
   color: #fff;
-  font-size: 18px;
+  font-size: calc(7px + 0.6vw);
 }
 .list p input:focus {
   outline: none;
@@ -226,7 +231,7 @@ div#allreport h1 {
 /* delete btn */
 .faicons {
   margin: 0 5px;
-  font-size: 15px;
+  font-size: calc(7px + 0.6vw);
   cursor: pointer;
   margin-top: 10px;
 }
@@ -246,11 +251,11 @@ div#allreport h1 {
 }
 .label {
   color: rgb(151, 150, 151);
-  font-size: 17px;
+  font-size: calc(7px + 0.6vw);
 }
 .input {
   width: 100px;
-  font-size: 1rem;
+  font-size: calc(7px + 0.6vw);
   border: 1px solid gray !important;
   color: #fff;
   background-color: transparent !important;
@@ -258,7 +263,7 @@ div#allreport h1 {
 .ant-input {
   width: 400px;
   height: 40px;
-  font-size: 15px;
+  font-size: calc(7px + 0.6vw);
   background-color: transparent !important;
   border: 1px solid gray;
   color: #fff;
@@ -285,7 +290,7 @@ div#allreport h1 {
 .ant-input-number {
   width: 450px;
   height: 40px;
-  font-size: 15px;
+  font-size: calc(7px + 0.6vw);
   background-color: transparent !important;
   border: 1px solid gray;
   color: #fff;
@@ -297,21 +302,21 @@ div#allreport h1 {
   color: black;
 }
 /* ---datepicker--- */
-.ant-picker {
+tr .ant-picker {
   width: 230px;
   color: #666873;
-  font-size: 20px;
+  font-size: calc(7px + 0.6vw);
   padding: 11px 11px 8px;
   border: 1px solid gray;
   border-radius: 2px;
 }
 .ant-picker-suffix {
   color: rgb(151, 150, 151);
-  font-size: 18px;
+  font-size: calc(7px + 0.6vw);
 }
 .ant-picker-input > input {
   color: rgb(151, 150, 151);
-  font-size: 18px;
+  font-size: calc(7px + 0.6vw);
 }
 /* ===================================
     Input dropown
@@ -323,7 +328,7 @@ div#allreport h1 {
   color: #fff;
   /* width:450px; */
   height: 40px;
-  font-size: 1rem;
+  font-size: calc(7px + 0.6vw);
   border-color: gray;
   padding-top: 4px;
 }
@@ -353,7 +358,7 @@ div#allreport h1 {
   width: 75px;
   height: 42px;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: calc(7px + 0.6vw);
   text-align: center;
   line-height: 1.5;
   padding: -0.55rem 0.75rem;
@@ -374,6 +379,11 @@ div#allreport h1 {
 /* ===================================
          testpage card + btn
 =================================== */
+.test-layout {
+  background-color: var(--first-color);
+  padding-left: 20px;
+  height: 768px;
+}
 .add-btn {
   width: 2em;
   height: 3em;
@@ -410,7 +420,7 @@ div#allreport h1 {
   margin-left: 40px;
   margin-top: 1px;
   color: green;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
   position: relative;
 }
 .icon-button1:hover {
@@ -429,14 +439,14 @@ div#allreport h1 {
   margin-left: 40px;
   margin-top: 1px;
   color: gray;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
   position: relative;
 }
 .icon-button2 {
   margin-left: 3px;
   margin-top: 1px;
   color: green;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .icon-button2:hover {
   color: #255784;
@@ -456,13 +466,13 @@ div#allreport h1 {
   margin-left: 3px;
   margin-top: 1px;
   color: gray;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .icon-button3 {
   margin-left: 40px;
   margin-top: 1px;
   color: red;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .icon-button3 :hover {
   color: #255784;
@@ -482,13 +492,13 @@ div#allreport h1 {
   margin-left: 40px;
   margin-top: 1px;
   color: gray;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .icon-button4 {
   margin-left: 3px;
   margin-top: 1px;
   color: red;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .icon-button4 :hover {
   color: #255784;
@@ -509,7 +519,7 @@ div#allreport h1 {
   margin-left: 3px;
   margin-top: 1px;
   color: gray;
-  font-size: 30px;
+  font-size: calc(12px + 0.9vw);
 }
 .logout-btn {
   text-transform: uppercase;
@@ -551,13 +561,17 @@ div#allreport h1 {
 .progress_box {
   border: 1px solid green;
   border-radius: 7px;
-  background: #131633;
-  padding: 10px 30px 10px 15px;
+  background-color: var(--first-color);
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 0px;
 }
 .progress_title {
-  font-size: 13px;
+  font-size: calc(5px + 0.6vw);
   color: white;
   text-transform: uppercase;
+  text-align: center;
 }
 /* ===================================
           radio + btn
@@ -572,7 +586,7 @@ div#allreport h1 {
 
 .radio-btn {
   color: rgb(216, 213, 216);
-  font-size: 18px;
+  font-size: calc(5px + 0.6vw);
 }
 .disable-btn {
   color: #fff2f0 !important;
@@ -582,13 +596,18 @@ div#allreport h1 {
 *      Table
 * =============================
 */
+.table-container {
+  background-color: var(--first-color);
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
 .ant-table-thead > tr > th {
   color: rgb(151, 150, 151);
   text-transform: capitalize;
   font-weight: 400;
   font-weight: bold !important;
   text-align: left;
-  background: #131633;
+  background-color: var(--first-color);
   border-bottom: 1px solid rgb(82, 79, 79);
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
@@ -600,7 +619,7 @@ div#allreport h1 {
 }
 .ant-table-tbody > tr > td {
   color: rgb(192, 196, 201);
-  background: #131633;
+  background: var(--first-color);
   border-bottom: none;
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
@@ -624,7 +643,7 @@ div#allreport h1 {
  ===================================*/
 .ant-pagination-item-active a {
   color: #fff;
-  background-color: #131633;
+  background-color: var(--first-color);
   /* border-color:rgb(146, 143, 143); */
 }
 .ant-pagination-item a {
@@ -632,12 +651,12 @@ div#allreport h1 {
 }
 .ant-pagination-item-active {
   font-weight: 500;
-  background: #131633;
+  background: var(--first-color);
   border-color: rgb(146, 143, 143);
 }
 .ant-pagination-item-link {
   color: #fff !important;
-  background-color: #131633 !important;
+  background-color: var(--first-color) !important;
   border-color: rgb(146, 143, 143);
 }
 /* ===================================
@@ -719,7 +738,7 @@ div#allreport h1 {
   width: 50px;
   height: 40px;
   padding: 0px 0;
-  font-size: 14px;
+  font-size: calc(7px + 0.9vw);
   border-radius: 5px;
 }
 .ant-transfer-operation .ant-btn:first-child {
@@ -736,6 +755,12 @@ div#allreport h1 {
 /* --dashboard anticon-- */
 .ant-transfer-operation .ant-btn .anticon {
   color: black;
+}
+.transfer-layout {
+  background-color: var(--first-color);
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /*
@@ -805,12 +830,12 @@ div#allreport h1 {
   flex-direction: column;
 }
 .form-holder .content {
-  background: #131633;
+  background: var(--first-color);
 }
 .form-holder .form a.forgot-pass,
 .form-holder .form a.signup,
 .form a.login {
-  font-size: 0.9rem;
+  font-size: calc(7px + 0.7vw);
   color: #42dbdc;
 }
 .forgot-pass {
@@ -854,42 +879,43 @@ div#allreport h1 {
  ===================================*/
 .ant-layout-footer {
   padding: 8px 50px;
-  font-size: 1vw;
-  background-color: #131633;
+  font-size: calc(7px + 0.7vw);
+  background-color: var(--first-color);
   height: "30px";
   width: "100%";
   font-family: "muli";
 }
-
-/* --Statistic Block-- */
-
+/* ===================================
+        --Statistic Block-- 
+===================================*/
 .statistic-block {
-  height: 125px;
-  padding-top: 3px;
-  padding-bottom: 0px;
+  height: 130px;
+  padding-top: 20px;
+  padding-bottom: 25px;
   padding-left: 10px;
   padding-right: 10px;
-  background: #131633;
-  color: #fff;
+  background: var(--first-color);
+  color: white;
 }
-.statistic-block .title {
-  text-align: center;
-  padding-top: 10px;
-}
+
 .number {
   margin-right: 15%;
 }
 
 .statistic-block strong {
+  text-align: center;
+  padding-top: 13px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 15px !important;
+  font-size: calc(5px + 0.5vw) !important;
   color: #fff;
   margin-bottom: -5px !important;
 }
 
 .statistic-block .number {
   color: inherit;
+  padding-left: 20%;
+  font-size: calc(7px + 0.9vw);
 }
 .statistic-block strong,
 .statistic-block span {
@@ -924,12 +950,21 @@ div#allreport h1 {
   color: #fff;
   padding: 6px;
 }
+.graph-card {
+  background-color: var(--first-color);
+  height: 350px;
+  border: none;
+  border-radius: 0px;
+  width: 460px;
+}
 
 /* ---alert error--- */
 .ant-alert-error {
   background-color: #fff2f0;
   border: 1px solid #ffccc7;
 }
+/* ---cv stage component--- */
+
 /* ---Purging component--- */
 .barger_btn {
   background-color: rgb(223, 62, 62);
@@ -938,7 +973,7 @@ div#allreport h1 {
   border: 2px solid rgb(223, 62, 62);
   border-radius: 0.35rem;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: calc(5px + 0.6vw);
   text-align: center;
 }
 .barger_btn2 {
@@ -948,7 +983,7 @@ div#allreport h1 {
   border: 2px solid limegreen;
   border-radius: 0.35rem;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: calc(5px + 0.6vw);
   text-align: center;
 }
 .barger_btn2:focus,
@@ -958,4 +993,60 @@ div#allreport h1 {
   border-color: limegreen;
   /* //box-shadow: 0px 0px 0px 3px limegreen; */
   box-shadow: 0 0 10px limegreen, 0 0 10px limegreen, 0 0 0px limegreen;
+}
+
+@media only screen and (min-width: 2000px) {
+  .progress.progress-template {
+    width: 100%;
+    height: 2px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: lime;
+    margin-top: 5px;
+  }
+  .statistic-block {
+    height: 170px;
+    padding-top: 25px;
+  }
+  .statistic-arrow {
+    width: 25px;
+    height: 35px;
+  }
+  .graph-card {
+    width: 600px;
+    height: 360px;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .progress.progress-template {
+    width: 100%;
+    height: 2px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: pink;
+    margin-top: 5px;
+  }
+  .statistic-block {
+    height: 140px;
+    padding-top: 25px;
+  }
+  .statistic-arrow {
+    width: 18px;
+    height: 25px;
+  }
+
+  .graph-card {
+    background-color: var(--first-color);
+    height: 360px;
+    border: none;
+    border-radius: 0px;
+    width: 350px;
+  }
+}
+.export-layout {
+  background-color: var(--first-color);
+  padding-left: 20px;
+  width: auto;
+  padding-top: 10px;
+  border: solid white;
 }

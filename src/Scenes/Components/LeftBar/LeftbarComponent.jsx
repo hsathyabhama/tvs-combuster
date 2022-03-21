@@ -58,7 +58,7 @@ class LeftbarComponent extends Component {
             key="sub1"
             icon={<DashboardOutlined />}
             title="Dashboard"
-            style={{ fontSize: "15px" }}
+            style={{ fontSize: "calc(7px + 0.6vw)" }}
           >
             <Menu.Item
               key="graphView"
@@ -76,13 +76,18 @@ class LeftbarComponent extends Component {
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="testPage" icon={<DashboardOutlined />}>
-            <Space style={{ marginBottom: "10px" }}> Test </Space>
+            <Space
+              style={{ marginBottom: "10px", fontSize: "calc(7px + 0.6vw)" }}
+            >
+              {" "}
+              Test{" "}
+            </Space>
           </Menu.Item>
           <SubMenu
             key="sub2"
             icon={<ToolOutlined />}
             title="Configuration"
-            style={{ fontSize: "15px" }}
+            style={{ fontSize: "calc(7px + 0.6vw)" }}
           >
             {communication ? (
               <Menu.Item
@@ -121,7 +126,7 @@ class LeftbarComponent extends Component {
             key="sub3"
             icon={<FolderOutlined />}
             title="Report"
-            style={{ fontSize: "15px" }}
+            style={{ fontSize: "calc(7px + 0.6vw)" }}
           >
             <Menu.Item
               key="exportData"

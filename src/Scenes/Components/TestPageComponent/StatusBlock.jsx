@@ -13,7 +13,7 @@ const styles = {
     right: 20,
     top: 83,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: "calc(7px + 0.8vw)",
   },
   offline: {
     color: "red",
@@ -21,7 +21,7 @@ const styles = {
     right: 20,
     top: 83,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: "calc(7px + 0.8vw)",
   },
 };
 
@@ -105,12 +105,12 @@ class StatusBlock extends Component {
     {
       this.props.app.chartData[0]
         ? (persons = filteredData)
-        : (persons = [0, 0, 0, 0, 0, 0]);
+        : (persons = [0, 0, 0]);
     }
     {
       this.props.app.chartData[1]
         ? (persons1 = filteredData1)
-        : (persons1 = [0, 0, 0, 0, 0, 0]);
+        : (persons1 = [0, 0, 0]);
     }
 
     {
@@ -166,7 +166,7 @@ class StatusBlock extends Component {
         </div>
         <Row>
           {persons.map((It, y) => (
-            <Col xs={2} sm={4} style={{ paddingRight: "10px", width: "230px" }}>
+            <Col xs={4} sm={6} style={{ paddingRight: "10px", width: "230px" }}>
               <div className="statistic-block block">
                 <Row>
                   {/* up and down arrow column */}
@@ -196,10 +196,7 @@ class StatusBlock extends Component {
                     )}
                   </Col>
                   {/* value displaying column */}
-                  <Col
-                    className="number dashtext-1"
-                    style={{ paddingLeft: "20%", fontSize: "21px" }}
-                  >
+                  <Col className="number">
                     {/* getting the color from the color array */}
                     <span style={{ color: colors[y] }}>{It}</span>
                   </Col>
@@ -218,10 +215,8 @@ class StatusBlock extends Component {
                   ></div>
                 </div>
                 {/*  Title column */}
-                <div className="title">
-                  <div style={{ fontSize: "10px" }}>
-                    <strong>{filteredDataLabel[y]}</strong>
-                  </div>
+                <div>
+                  <strong>{filteredDataLabel[y]}</strong>
                 </div>
               </div>
             </Col>

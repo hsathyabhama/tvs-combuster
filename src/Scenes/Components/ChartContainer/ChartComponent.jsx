@@ -45,7 +45,7 @@ class ChartComponent extends Component {
     return (
       <div>
         <Line
-          height={240}
+          height={350}
           data={{
             labels: ["", "", "", "", "", ""],
             datasets: [
@@ -86,14 +86,14 @@ class ChartComponent extends Component {
               xAxes: [
                 {
                   gridLines: {
-                    color: "rgba(255, 255, 255, 0.1)",
+                    color: "rgba(255, 255, 255, 0.3)",
                   },
                 },
               ],
               yAxes: [
                 {
                   gridLines: {
-                    color: "rgba(255, 255, 255, 0.1)",
+                    color: "rgba(255, 255, 255, 0.3)",
                   },
                   ticks: {
                     max: max,

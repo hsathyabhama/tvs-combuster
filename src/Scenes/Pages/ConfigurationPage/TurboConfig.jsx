@@ -168,7 +168,7 @@ class TurboConfig extends Component {
                   name="turbo_id"
                   style={{ width: "320px" }}
                   placeholder="Turbo ID"
-                  defaultValue={this.state.turboID}
+                  initialvalues={this.state.turboID}
                   onChange={this.onchangeTurboID}
                 />
               </Form.Item>
@@ -184,7 +184,7 @@ class TurboConfig extends Component {
                   disabledDate={(current) => {
                     return current && current > moment(Date.now());
                   }}
-                  style={{ backgroundColor: "#131633" }}
+                  style={{ backgroundColor: "transparent" }}
                   onChange={this.updateDate}
                 />
               </Form.Item>

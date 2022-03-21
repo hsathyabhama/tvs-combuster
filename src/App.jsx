@@ -8,7 +8,12 @@ import "antd/dist/antd.css";
 import "../src/Styles/style.css";
 import Cookies from "universal-cookie";
 import { gettingDelayValue } from "./Services/requests";
-import { fetchingDelayValue, fetchingCvstageValue } from "./Redux/action";
+import {
+  fetchingDelayValue,
+  fetchingCvstageValue,
+  updatingAirFCVInput,
+  updatingGasFCVInput,
+} from "./Redux/action";
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +25,8 @@ class App extends Component {
     gettingDelayValue((data) => {
       this.props.fetchingDelayValue(data[0].Delay * 1000);
       this.props.fetchingCvstageValue(data[0]);
+      this.props.updatingAirFCVInput(data[0].CompAirFCV);
+      this.props.updatingGasFCVInput(data[0].MainGasFCV);
     });
   }
   render() {
@@ -47,7 +54,12 @@ const mapStateToProps = (state) => ({
   appState: state.app.appState,
 });
 
-const mapDispatchToProps = { fetchingDelayValue, fetchingCvstageValue };
+const mapDispatchToProps = {
+  fetchingDelayValue,
+  fetchingCvstageValue,
+  updatingAirFCVInput,
+  updatingGasFCVInput,
+};
 
 const appPage = connect(mapStateToProps, mapDispatchToProps)(App);
 export default appPage;

@@ -4,7 +4,9 @@ import { Table, Row, Col } from "antd";
 import { updateTitleElements } from "../../../Redux/action";
 import { connect } from "react-redux";
 import { getTableView } from "../../../Services/requests";
+import { testParamHash } from "../../../Services/constants";
 
+const { Startdata } = testParamHash;
 const columns = [
   {
     title: "Param",
@@ -124,6 +126,12 @@ class TableView extends Component {
   });
 
   render() {
+    let turboStart = this.props.app.turboStart;
+
+    const StartdataArray = turboStart.filter((it) =>
+      Startdata.find((val) => val === it.name)
+    );
+
     return (
       <div>
         <StatusBlock />
@@ -149,7 +157,7 @@ class TableView extends Component {
                 }}
                 pagination={false}
                 columns={columns1}
-                dataSource={this.props.app.turboStart.reverse()}
+                dataSource={StartdataArray.reverse()}
               />
             </Col>
           </Row>

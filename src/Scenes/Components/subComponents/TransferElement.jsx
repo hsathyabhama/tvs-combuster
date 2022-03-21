@@ -59,16 +59,16 @@ class TransferElement extends React.Component {
 
   //transfering data onclick
   handleChange = (targetKeys, direction, moveKeys) => {
-    if (targetKeys.length < 6) {
+    if (targetKeys.length < 3) {
       this.openNotification("bottomRight");
     }
-    if (targetKeys.length > 6) {
+    if (targetKeys.length > 3) {
       message.warning(msg_warning);
     } else {
       this.setState({
         targetKeys,
       });
-      if (targetKeys.length < 6) {
+      if (targetKeys.length < 3) {
         this.openNotification("bottomRight");
       } else {
         this.props.updateTargetKeys(targetKeys);
@@ -109,12 +109,22 @@ class TransferElement extends React.Component {
       <div>
         <Row>
           <Col span={12}>
-            <h2 style={{ color: "rgb(151, 150, 151)", fontSize: "25px" }}>
+            <h2
+              style={{
+                color: "rgb(151, 150, 151)",
+                fontSize: "calc(7px + 0.8vw)",
+              }}
+            >
               Dashboard Configuration
             </h2>
           </Col>
           <Col span={12}>
-            <h2 style={{ color: "rgb(151, 150, 151)", fontSize: "25px" }}>
+            <h2
+              style={{
+                color: "rgb(151, 150, 151)",
+                fontSize: "calc(7px + 0.8vw)",
+              }}
+            >
               Selected Param
             </h2>
           </Col>

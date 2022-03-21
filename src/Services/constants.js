@@ -41,33 +41,21 @@ const CompanyDetails = {
 
 const dashboardDataVal = [
   { "key": "0", "Name": "Combustor Outlet Temperature", "chosen": true },
-  { "key": "1", "Name": "TurboCharger Inlet Temperature", "chosen": true },
-  { "key": "2", "Name": "RPM sensor", "chosen": true },
-  { "key": "3", "Name": "Gas Flow", "chosen": true },
-  { "key": "4", "Name": "Lube Oil Pressure", "chosen": true },
-  { "key": "5", "Name": "Air Mass Flow", "chosen": true },
-  { "key": "6", "Name": "Air to Fuel Ratio", "chosen": false },
+  { "key": "1", "Name": "RPM sensor", "chosen": true },
+  { "key": "2", "Name": "Lube Oil Pressure", "chosen": true },
 ]
-const targetKeysVal = ["0","1", "2", "3", "4", "5"]
+const targetKeysVal = ["0", "1", "2" ]
 const dashboardSensor = {
   sensorLabel: [
-    "Combustor Outlet Temperature", "TurboCharger Inlet Temperature", "Rpm sensor",
-     "Gas Flow","Lube Oil Pressure","Air Mass Flow","Air to Fuel Ratio"
+    "Combustor Outlet Temperature","Rpm sensor", "Lube Oil Pressure",
    ],
   dummyData: 0,
-  chartMax: 5,
+  chartMax: 3,
   n_shutdown: 'N-Shutdown',
   e_shutdown: 'E-Shutdown',
   live: 'LIVE',
   offline: 'OFFLINE',
 
-  sensorLabel_row2 : [
-    "Beta", "AirtoFuelRatio", "AirMassFlow",
-  ],
-
-  //filter for statusblockRow2 
-  //number should be 2 less than the actual index like c13 = 11  
-    targetKeysVal_row2 :  [10, 11, 12],
 }
 
 
@@ -80,19 +68,21 @@ const titleElements = [
 
 const testParamHash = { 
   Initializedata: ['Communication', 'Initialize Started', 'Initialize Completed'],
-  Startdata: ['Start Completed', 'Ignite', 'Pilot Gas Opened', 'Stage 1', 'Main Gas Opened','Stage 2', 'Pilot Gas Closed','Stage 3'],
+  Startdata: ['Start Initiated','Start Completed', 'Ignite', 'Pilot Gas Opened', 'Stage 1', 'Main Gas Opened','Stage 2', 'Pilot Gas Closed','Stage 3'],
   nShutdowndata: ['N.Shutdown Initiated', 'N.Shutdown Completed'],
   eShutdowndata: ['E.Shutdown Initiated', 'E.Shutdown Completed'],
   Resetdata: ['Reset Values'],
   Tester_warning: 'Already exists',
   Witness_warning: 'Already exists',
   duplicate_msg: 'Duplicate value', 
-  warning_lubeOil: "Please enter Lubeoil value between 2 to 5",
+  warning_lubeOil: "Please enter Lubeoil value between 1 to 5",
   warning_burnermode: "Please select turbo mode",
   warning_Id: "Please select the turbo ID",
   warning_name: "Please enter test engineer name",
   warning_bargingActive : "Barging is going on",
   alert_targetval: "Please enter target values",
+  airFCVValue_warning: "Please enter  between 0.1 to 0.5",
+  
 }
 
 const helpPopup = {

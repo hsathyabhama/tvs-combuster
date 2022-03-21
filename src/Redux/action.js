@@ -213,7 +213,16 @@ export const fetchingCvstageValue = data => ({
   type: 'FETCHING_CVSTAGE_VALUE',
   payload: data
 })
-
+//airFCVInput
+export const updatingAirFCVInput = data => ({
+  type: 'UPDATING_AIRFCV_INPUTVALUE',
+  payload: data
+})
+//gasFCVInput
+export const updatingGasFCVInput = data => ({
+  type: 'UPDATING_GASFCV_INPUTVALUE',
+  payload: data
+})
 // chartData2
 export const updateChartData2 = data => ({
   type: 'UPDATE_CHART_DATA2',

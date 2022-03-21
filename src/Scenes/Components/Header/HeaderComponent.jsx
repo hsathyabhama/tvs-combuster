@@ -56,8 +56,12 @@ class HeaderComponent extends Component {
 
 const LogoValue = () => (
   <div className="testlogo">
-    <Space style={{ color: "#42dad6", fontSize: "18px" }}>ENERTEK</Space>
-    <Space style={{ color: "#8a8d93", fontSize: "18px" }}>COMBUSTER</Space>
+    <Space style={{ color: "#42dad6", fontSize: "calc(9px + 0.8vw)" }}>
+      ENERTEK
+    </Space>
+    <Space style={{ color: "#8a8d93", fontSize: "calc(9px + 0.8vw)" }}>
+      COMBUSTER
+    </Space>
   </div>
 );
 

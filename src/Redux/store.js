@@ -29,7 +29,7 @@ const InitialState = {
   // -- test page -- //
   statusData: '',
   reset: false,
-  chartData: [0, 0, 0, 0, 0, 0, 0, 0],
+  chartData: [0,0,0,0,0,0,0],
   chartData2: [0, 0, 0, 0],
   shutdownInitiated: false,
   communicationFailed: false,
@@ -47,6 +47,8 @@ const InitialState = {
   testIdData: 0,
   delayValue: 1000,
   cvStageValue: [],
+  airFCVInput: 0,
+  gasFCVInput:0,
   resetButtonClick: 1,
   lubeOilValue: 0,
   bargingButtonActivity: false,

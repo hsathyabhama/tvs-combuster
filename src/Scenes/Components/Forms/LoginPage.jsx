@@ -70,7 +70,11 @@ class LoginPage extends Component {
                 {/* <!-- Logo & Information Panel--> */}
                 <Col span={12}>
                   <div className="info" style={{ paddingTop: "10rem" }}>
-                    <h1 style={{ color: "white" }}>{company_name}</h1>
+                    <h1
+                      style={{ color: "white", fontSize: "calc(14px + 1.8vw)" }}
+                    >
+                      {company_name}
+                    </h1>
                     <p>{company_data}</p>
                   </div>
                 </Col>
@@ -88,7 +92,7 @@ class LoginPage extends Component {
                         rules={[{ required: true, message: enter_email }]}
                       >
                         <Input
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <UserOutlined className="site-form-item-icon" />
                           }
@@ -100,7 +104,7 @@ class LoginPage extends Component {
                         rules={[{ required: true, message: enter_password }]}
                       >
                         <Input.Password
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
@@ -142,13 +146,21 @@ class LoginPage extends Component {
                         <a
                           onClick={this.forgotPasswordEvent}
                           className="forgot-pass"
+                          style={{
+                            fontSize: "calc(6px + 0.7vw)",
+                          }}
                         >
                           Forgot Password?
                         </a>
                         <br></br>
                       </div>
-                      <div className="signup">
-                        <p style={{ color: "rgb(151, 150, 151)" }}>
+                      <div>
+                        <p
+                          style={{
+                            color: "rgb(151, 150, 151)",
+                            fontSize: "calc(6px + 0.7vw)",
+                          }}
+                        >
                           Do not have an account?
                           <a onClick={this.signupEvent} className="forgot-pass">
                             Signup

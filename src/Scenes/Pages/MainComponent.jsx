@@ -126,7 +126,7 @@ export class MainComponent extends Component {
           }
         });
       } else {
-        let chartArray = [0, 0, 0, 0, 0, 0, 0, 0];
+        let chartArray = [0, 0, 0, 0, 0, 0, 0];
         this.props.updateChartData(chartArray);
       }
     }, 1000);

@@ -192,7 +192,15 @@ const appReducer = (state = InitialState, action) => {
     case 'FETCHING_CVSTAGE_VALUE':
       newState.cvStageValue = action.payload
       return newState
-
+      
+    //airFCVInput
+    case 'UPDATING_AIRFCV_INPUTVALUE':
+      newState.airFCVInput = action.payload
+      return newState
+    //gasFCVInput
+    case 'UPDATING_GASFCV_INPUTVALUE':
+      newState.gasFCVInput = action.payload
+      return newState
     //chartData2
     case 'UPDATE_CHART_DATA2':
       newState.chartData2 = action.payload ? action.payload : []

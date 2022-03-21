@@ -174,7 +174,7 @@ class TableComponent extends Component {
     const { data: tableData, editMode, editCancel, editSession } = this.state;
     const { editableColumn } = this.props;
     const editRowIndex = this.state.editRowIndex;
-    console.log(this.state.editRowIndex);
+
     if (editSession && tableData.length !== 0 && tableData !== "no_data") {
       tableData.forEach((it, index) => {
         console.log(editSession && index !== editRowIndex);
@@ -319,15 +319,7 @@ class TableComponent extends Component {
           </Row>
         </div>
 
-        <Table
-          dataSource={tableData}
-          size="middle"
-          style={{
-            backgroundColor: "#131633",
-            paddingBottom: "10px",
-            marginTop: "10px",
-          }}
-        >
+        <Table dataSource={tableData} size="middle" className="table-container">
           {columns && columns.length > 0
             ? columns.map((col) => {
                 if (col !== this.props.configIdKeyValue) {

@@ -41,12 +41,8 @@ class ExportData extends Component {
 
       formulaUnit: {
         "Combustor Outlet Temperature": "Kg/m2",
-        "TurboCharger Inlet Temperature": "Degree C",
         "RPM Sensor": "rpm",
-        "Gas Flow": "kg/min",
         "Lube Oil Pressure": "Bar",
-        "Air Mass Flow": "Bar",
-        "Air to Fuel Ratio": "mm",
       },
       timeUnit: {
         testdataTime: "Time",
@@ -67,7 +63,7 @@ class ExportData extends Component {
     //while adding the unit row in the table,exported excel sheet not in the correct order,
     //so here changed the order of the array index value
 
-    const index = [0, 1, 2, 3, 4, 5, 6];
+    const index = [0, 1, 2];
 
     const createdData = index.map((i) => paramValue[i]);
 
@@ -220,50 +216,21 @@ class ExportData extends Component {
         dataIndex: this.state.title[0],
         key: this.state.title[0],
         fixed: "left",
-        width: 15,
       },
       {
         title: this.state.title[1],
         dataIndex: this.state.title[1],
         key: this.state.title[1],
-        fixed: "left",
-        width: 15,
       },
       {
         title: this.state.title[2],
         dataIndex: this.state.title[2],
         key: this.state.title[2],
-        width: 20,
       },
       {
         title: this.state.title[3],
         dataIndex: this.state.title[3],
         key: this.state.title[3],
-        width: 20,
-      },
-      {
-        title: this.state.title[4],
-        dataIndex: this.state.title[4],
-        key: this.state.title[4],
-        width: 20,
-      },
-      {
-        title: this.state.title[5],
-        dataIndex: this.state.title[5],
-        key: this.state.title[5],
-        width: 20,
-      },
-      {
-        title: this.state.title[6],
-        dataIndex: this.state.title[6],
-        key: this.state.title[6],
-        width: 20,
-      },
-      {
-        title: this.state.title[7],
-        dataIndex: this.state.title[7],
-        key: this.state.title[7],
-        width: 20,
       },
     ];
 
@@ -272,7 +239,7 @@ class ExportData extends Component {
         <Layout className="layout-container">
           <h2 className="h2"> Export Report</h2>
           <Form ref={this.formRef} name="control-ref">
-            <Row style={{ paddingTop: "10px" }}>
+            <Row style={{ paddingTop: "10px", marginLeft: "15px" }}>
               <Col sm={10}>
                 <Form.Item
                   name="option"
@@ -359,15 +326,7 @@ class ExportData extends Component {
         </Button>
 
         <Spin tip="Loading..." size="large" spinning={this.state.loading}>
-          <Layout
-            style={{
-              backgroundColor: "#131633",
-              paddingLeft: "20px",
-              width: "auto",
-              paddingTop: "10px",
-              border: "solid white",
-            }}
-          >
+          <Layout className="export-layout">
             <div id="allreport">
               <div className="mx-auto" style={{ marginTop: "2%" }}>
                 <div
@@ -386,7 +345,7 @@ class ExportData extends Component {
                 columns={columns}
                 pagination={false}
                 dataSource={this.state.reportDetails}
-                scroll={{ x: 2000, y: 500 }}
+                scroll={{ x: 500, y: 500 }}
               />
             ) : (
               <Table id="someRandomID" size="middle" scroll={{ x: 2000 }} />

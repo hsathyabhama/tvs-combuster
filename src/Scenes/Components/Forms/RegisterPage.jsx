@@ -76,7 +76,11 @@ class RegisterPage extends Component {
               {/* <!-- Logo & Information Panel--> */}
               <Col span={12}>
                 <div className="info" style={{ paddingTop: "10rem" }}>
-                  <h1 style={{ color: "white" }}>{company_name}</h1>
+                  <h1
+                    style={{ color: "white", fontSize: "calc(14px + 1.8vw)" }}
+                  >
+                    {company_name}
+                  </h1>
                   <p>{company_data}</p>
                 </div>
               </Col>
@@ -94,7 +98,7 @@ class RegisterPage extends Component {
                         rules={[{ required: true, message: enter_username }]}
                       >
                         <Input
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <UserOutlined className="site-form-item-icon" />
                           }
@@ -116,7 +120,7 @@ class RegisterPage extends Component {
                         ]}
                       >
                         <Input
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <MailOutlined className="site-form-item-icon" />
                           }
@@ -130,7 +134,7 @@ class RegisterPage extends Component {
                         hasFeedback
                       >
                         <Input.Password
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
@@ -164,7 +168,7 @@ class RegisterPage extends Component {
                         ]}
                       >
                         <Input.Password
-                          style={{ backgroundColor: "#131633" }}
+                          style={{ backgroundColor: "transparent" }}
                           prefix={
                             <LockOutlined className="site-form-item-icon" />
                           }
@@ -206,7 +210,7 @@ class RegisterPage extends Component {
                         <p
                           style={{
                             color: "rgb(151, 150, 151)",
-                            fontSize: "18px",
+                            fontSize: "calc(7px + 0.7vw)",
                           }}
                         >
                           Already have an account?
