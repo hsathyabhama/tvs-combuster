@@ -30,7 +30,7 @@ class TestConfig extends Component {
           <Layout className="bottom-container">
             <Row>
               <Col span={8}>
-                <h2 className="h2">Test Configuration</h2>
+                <h2 className="component-heading">Test Configuration</h2>
               </Col>
             </Row>
             {testdata.testConfigPage && testdata.testConfigPage.length > 0 ? (

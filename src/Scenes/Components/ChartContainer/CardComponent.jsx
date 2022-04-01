@@ -18,38 +18,38 @@ class CardComponent extends Component {
       cardList: [],
       dummygraphData: [
         {
-          T1T2: dummyData, //dummyData = 0 in constant page
-          rpm1rpm2: dummyData, //this must be 6,this is for chart line value
+          rpm1rpm2: dummyData, //dummyData = 0 in constant page
+          T1T2: dummyData, //this must be 6,this is for chart line value
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
         {
-          T1T2: dummyData,
           rpm1rpm2: dummyData,
+          T1T2: dummyData,
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
         {
-          T1T2: dummyData,
           rpm1rpm2: dummyData,
+          T1T2: dummyData,
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
         {
-          T1T2: dummyData,
           rpm1rpm2: dummyData,
+          T1T2: dummyData,
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
         {
-          T1T2: dummyData,
           rpm1rpm2: dummyData,
+          T1T2: dummyData,
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
         {
-          T1T2: dummyData,
           rpm1rpm2: dummyData,
+          T1T2: dummyData,
           LubeOilPr: dummyData,
           testdataTime: dummyData,
         },
@@ -92,15 +92,15 @@ class CardComponent extends Component {
   }, 1000);
 
   prepareChartParams = (chartdata) => {
-    let t1t2 = [];
     let rpm1rpm2 = [];
+    let t1t2 = [];
     let lubeoilpr = [];
     let date_Time = [];
 
     //this 6 mention the chart x-axis column count
     for (let i = 0; i < 6; i++) {
-      t1t2.push(chartdata[i].T1T2);
       rpm1rpm2.push(chartdata[i].rpm1rpm2);
+      t1t2.push(chartdata[i].T1T2);
       lubeoilpr.push(chartdata[i].LubeOilPr);
 
       date_Time.push(
@@ -118,8 +118,8 @@ class CardComponent extends Component {
     ); //chartlabel
 
     let chartArray = [];
-    chartArray.push(t1t2);
     chartArray.push(rpm1rpm2);
+    chartArray.push(t1t2);
     chartArray.push(lubeoilpr);
 
     let filteredData = chartArray.filter((_, index) =>

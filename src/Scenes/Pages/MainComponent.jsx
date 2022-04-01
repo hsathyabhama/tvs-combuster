@@ -10,6 +10,7 @@ import LeftbarComponent from "../Components/LeftBar/LeftbarComponent";
 import TestPage from "./TestPage";
 import GraphView from "../Pages/DashboardPage/GraphView";
 import TableView from "./DashboardPage/TableView";
+import PreTesting from "./DashboardPage/PreTesting";
 import TestConfig from "./ConfigurationPage/TestConfig";
 import ParamConfig from "./ConfigurationPage/ParamConfig";
 import ExportData from "./Reports/ExportData";
@@ -27,6 +28,7 @@ import {
   initiateTurboStart,
   updateChartData2,
   updateBargingBtnStatus,
+  gettingPreTestingSensor,
 } from "../../Redux/action";
 import {
   getTurboConfigData,
@@ -37,12 +39,12 @@ import {
   getHandleChangetestID,
   getTableView,
   gettingChartData,
-  getSensorData,
+  getPreTestingDetails,
 } from "../../Services/requests";
 import { testParamHash } from "../../Services/constants";
 
 const { Content, Header, Footer } = Layout;
-const { nShutdowndata, eShutdowndata } = testParamHash;
+const { eShutdowndata } = testParamHash;
 
 export class MainComponent extends Component {
   constructor(props) {
@@ -81,6 +83,10 @@ export class MainComponent extends Component {
     // fetch turbine ID Name  on application load
     getHandleChangetestID((data) => {
       this.props.updateTestIdCount(data);
+    });
+
+    getPreTestingDetails((data) => {
+      this.props.gettingPreTestingSensor(data);
     });
 
     // fetch graphvalue on application load
@@ -135,7 +141,6 @@ export class MainComponent extends Component {
   render() {
     const appData = this.props.app;
     const { mainPage } = appData;
-
     return (
       <Layout>
         <Header>
@@ -147,11 +152,12 @@ export class MainComponent extends Component {
             <TitleElement />
             {mainPage === "graphView" ? <GraphView /> : []}
             {mainPage === "tableView" ? <TableView /> : []}
+            {mainPage === "preTest" ? <PreTesting /> : []}
+            {mainPage === "testPage" ? <TestPage /> : []}
             {mainPage === "turboConfig" ? <TurboConfig /> : []}
             {mainPage === "dashboardConfig" ? <DashboardConfig /> : []}
             {mainPage === "testConfig" ? <TestConfig /> : []}
             {mainPage === "paramConfig" ? <ParamConfig /> : []}
-            {mainPage === "testPage" ? <TestPage /> : []}
             {mainPage === "exportData" ? <ExportData /> : []}
           </Content>
         </Layout>
@@ -179,6 +185,7 @@ const mapDispatchToProps = {
   initiateTurboStart,
   updateChartData2,
   updateBargingBtnStatus,
+  gettingPreTestingSensor,
 };
 
 const MainContainer = connect(

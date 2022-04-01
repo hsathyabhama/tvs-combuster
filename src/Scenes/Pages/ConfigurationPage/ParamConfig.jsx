@@ -20,7 +20,9 @@ class ParamConfig extends Component {
           <Layout className="bottom-container">
             <Row>
               <Col span={8}>
-                <h2 className="h2">Color Range Configuration Table</h2>
+                <h2 className="component-heading">
+                  Color Range Configuration Table
+                </h2>
               </Col>
             </Row>
             {appData.paramConfig && appData.paramConfig.length > 1 ? (

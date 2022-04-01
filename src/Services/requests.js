@@ -17,6 +17,8 @@ const turboIdValueUrl = `${BASE_URL}${URL.TURBOID_VALUE}`
 const tableStatusDataUrl = `${BASE_URL}${URL.TABLE_STATUSDATA}` 
 const delayDataUrl = `${BASE_URL}${URL.DELAY_DATA}`
 const logoutEventUrl = `${BASE_URL}${URL.LOGOUT_EVENT}`
+const preTestingDataUrl = `${BASE_URL}${URL.PRETEST_DATA}`
+const preTestingUrl = `${BASE_URL}${URL.PRETEST_CHECK}`
 const graphDataUrl = `http://localhost:8001/graph.php`  
 const sensorDataUrl = `http://localhost:8002/getdata.php`
 const fcvStageUrl = `http://localhost:8003/fcvStage.php`
@@ -189,6 +191,21 @@ const fcvTransferEvent = (body,callBack) => {
       console.log(err.res)
     })
 };
+const getPreTestingDetails = (callBack) => {
+  axios.get(preTestingDataUrl).then(res => {  
+    callBack(res.data)
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+
+const checkPreTesting = (body,callBack) => {
+  axios.post(preTestingUrl ,body).then(res => {  
+    callBack(res.data)
+  }).catch((err) => {
+    console.log(err);
+  })
+}
 
 export {
   getTurboConfigData, turbineConfigSubmit,
@@ -198,6 +215,7 @@ export {
   registerPageValidation, getTableView,
   getSensorData, getHandleChangetestID,
   requestStatusData, gettingChartData, 
-  gettingDelayValue, logoutEvent,fcvTransferEvent
+  gettingDelayValue, logoutEvent,fcvTransferEvent,
+  getPreTestingDetails,checkPreTesting
   
 }

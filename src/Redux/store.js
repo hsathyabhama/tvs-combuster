@@ -53,5 +53,9 @@ const InitialState = {
   lubeOilValue: 0,
   bargingButtonActivity: false,
   bargingEvent: false,
+  preTestingSensor: [],
+  preTestKey:"Select Sensor",
+  preTestValue:0,
+  preTestStatus:false,
 }
 export default InitialState

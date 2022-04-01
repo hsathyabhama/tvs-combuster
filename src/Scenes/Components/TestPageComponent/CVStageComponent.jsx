@@ -18,6 +18,7 @@ const {
   nShutdowndata,
   eShutdowndata,
   airFCVValue_warning,
+  gasFCVValue_warning,
 } = testParamHash;
 
 class CVStageComponent extends Component {
@@ -33,7 +34,7 @@ class CVStageComponent extends Component {
     if (
       this.props.app.airFCVInput === 0 ||
       this.props.app.airFCVInput === undefined ||
-      this.props.app.airFCVInput < 0.1 ||
+      this.props.app.airFCVInput < 0.01 ||
       this.props.app.airFCVInput > 2
     ) {
       this.setState({
@@ -55,7 +56,7 @@ class CVStageComponent extends Component {
     if (
       this.props.app.airFCVInput === 0 ||
       this.props.app.airFCVInput === undefined ||
-      this.props.app.airFCVInput < 0.1 ||
+      this.props.app.airFCVInput < 0.01 ||
       this.props.app.airFCVInput > 2
     ) {
       this.setState({
@@ -77,11 +78,11 @@ class CVStageComponent extends Component {
     if (
       this.props.app.gasFCVInput === 0 ||
       this.props.app.gasFCVInput === undefined ||
-      this.props.app.gasFCVInput < 0.1 ||
+      this.props.app.gasFCVInput < 0.01 ||
       this.props.app.gasFCVInput > 0.55
     ) {
       this.setState({
-        errormsg: airFCVValue_warning,
+        errormsg: gasFCVValue_warning,
       });
       return;
     }
@@ -99,11 +100,11 @@ class CVStageComponent extends Component {
     if (
       this.props.app.gasFCVInput === 0 ||
       this.props.app.gasFCVInput === undefined ||
-      this.props.app.gasFCVInput < 0.1 ||
+      this.props.app.gasFCVInput < 0.01 ||
       this.props.app.gasFCVInput > 0.55
     ) {
       this.setState({
-        errormsg: airFCVValue_warning,
+        errormsg: gasFCVValue_warning,
       });
       return;
     }
@@ -450,17 +451,13 @@ class CVStageComponent extends Component {
                       : "barger_btn2"
                   }
                   icon={<CaretUpOutlined />}
-                  style={{ marginLeft: "20%", width: "8em" }}
                   disabled={this.props.app.bargingButtonActivity}
                   onClick={() => this.purgingClick()}
                 >
-                  Purging
+                  <span>Purging</span>
                 </Button>
 
-                <Row
-                  className="progress_title"
-                  style={{ marginTop: "30px", marginLeft: "30%" }}
-                >
+                <Row className="card-title">
                   <strong>Purging Air</strong>
                 </Row>
               </Row>

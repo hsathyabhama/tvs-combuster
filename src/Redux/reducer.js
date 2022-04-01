@@ -221,7 +221,25 @@ const appReducer = (state = InitialState, action) => {
       newState.bargingEvent = !newState.bargingEvent
       return newState
 
+    //preTestingSensor
+    case 'GETTING_PRETESTING':
+      newState.preTestingSensor = action.payload
+      return newState
 
+    //preTestKey
+    case 'UPDATE_PRETEST_KEY':
+      newState.preTestKey = action.payload
+      return newState
+
+    //preTestValue
+    case 'UPDATE_PRETEST_VALUE':
+      newState.preTestValue = action.payload
+      return newState
+
+     //preTestStatus
+     case 'UPDATE_PRETEST_STATUS':
+      newState.preTestStatus = action.payload
+      return newState     
     default:
       return newState
   }

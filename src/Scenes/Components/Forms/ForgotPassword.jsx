@@ -65,7 +65,7 @@ class ForgotPassword extends Component {
               <Col span={12}>
                 <div className="info" style={{ paddingTop: "10rem" }}>
                   <h1
-                    style={{ color: "white", fontSize: "calc(14px + 1.8vw)" }}
+                  // style={{ color: "white", fontSize: "calc(14px + 1.8vw)" }}
                   >
                     {company_name}
                   </h1>

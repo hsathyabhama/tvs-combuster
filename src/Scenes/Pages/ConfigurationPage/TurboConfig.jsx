@@ -30,10 +30,6 @@ import "moment/locale/zh-cn";
 
 const {
   installed_turbine,
-  nozzleArea_min,
-  nozzleArea_max,
-  nozzleArea_step,
-  nozzleArea_defalutValue,
   error_turbo_msg,
   added_turbo_msg,
   message_title,
@@ -47,7 +43,6 @@ class TurboConfig extends Component {
     this.state = {
       turboID: "",
       dateVal: "",
-      nozzleArea: nozzleArea_defalutValue,
       discriptionVal: null,
     };
     this.updateDate = this.updateDate.bind(this);
@@ -86,7 +81,6 @@ class TurboConfig extends Component {
     const body = {
       turbo_id: this.state.turboID,
       date: this.state.dateVal,
-      //nozzle_area: this.state.nozzleArea,
       descriptions: this.state.discriptionVal,
     };
 
@@ -120,12 +114,6 @@ class TurboConfig extends Component {
     });
   };
 
-  handleNumber = (value) => {
-    this.setState({
-      nozzleArea: value,
-    });
-  };
-
   updateDiscription = (e) => {
     this.setState({
       discriptionVal: e.target.value,
@@ -142,7 +130,7 @@ class TurboConfig extends Component {
     return (
       <div>
         <Layout className="layout-container">
-          <h2 className="h2">Turbo Configuration</h2>
+          <h2 className="component-heading">Turbo Configuration</h2>
           <Form
             onFinish={() => {
               const isDuplicateId = turboConfig
@@ -188,35 +176,6 @@ class TurboConfig extends Component {
                   onChange={this.updateDate}
                 />
               </Form.Item>
-
-              {/* <Col sm={2}>
-                <label className="label">
-                  Nozzle Area
-                  <i style={{ color: "red", fontSize: "15px" }}> *</i>
-                </label>
-              </Col> */}
-              {/* <Col sm={6}>
-                <div>
-                  <Tooltip
-                    placement="bottom"
-                    title="Range 0.0002 to 0.0005 m2"
-                    style={{ backgroundColor: "pink" }}
-                  >
-                    <div>
-                      <InputNumber
-                        style={{ width: "320px" }}
-                        min={nozzleArea_min}
-                        max={nozzleArea_max}
-                        step={nozzleArea_step}
-                        defaultValue={nozzleArea_defalutValue}
-                        value={this.state.nozzleArea || nozzleArea_defalutValue}
-                        onChange={this.handleNumber}
-                        stringMode
-                      />
-                    </div>
-                  </Tooltip>
-                </div>
-              </Col> */}
             </Row>
             <Row
               gutter={[16, 8]}
@@ -247,7 +206,7 @@ class TurboConfig extends Component {
           <Layout className="bottom-container">
             <Row>
               <Col span={8}>
-                <h2 className="h2">Turbo Configuration</h2>
+                <h2 className="component-heading">Turbo Configuration</h2>
               </Col>
             </Row>
             {turboConfig ? (

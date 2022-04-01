@@ -40,7 +40,7 @@ class ExportData extends Component {
       title: [],
 
       formulaUnit: {
-        "Combustor Outlet Temperature": "Kg/m2",
+        "Combustor Outlet Temperature": "°C",
         "RPM Sensor": "rpm",
         "Lube Oil Pressure": "Bar",
       },
@@ -155,7 +155,6 @@ class ExportData extends Component {
       .post("http://localhost:5000/exportData.php", { turboIdVal: value })
       .then((res) => {
         let data = res.data;
-
         if (typeof data === "string") {
           this.setState({
             testno: [],
@@ -237,7 +236,7 @@ class ExportData extends Component {
     return (
       <div style={{ paddingTop: "1px" }}>
         <Layout className="layout-container">
-          <h2 className="h2"> Export Report</h2>
+          <h2 className="component-heading"> Export Report</h2>
           <Form ref={this.formRef} name="control-ref">
             <Row style={{ paddingTop: "10px", marginLeft: "15px" }}>
               <Col sm={10}>
@@ -309,21 +308,19 @@ class ExportData extends Component {
             </Row>
           </Form>
         </Layout>
-
-        <Button
-          style={{
-            marginLeft: "1270px",
-            marginBottom: "10px",
-            marginTop: "10px",
-            width: "140px",
-          }}
-          variant="warning"
-          onClick={(e) =>
-            this.exportToCSV(this.state.reportDetails, "Export Report")
-          }
-        >
-          Export in Excel
-        </Button>
+        <Row justify="end" className="report-btn-block">
+          <Button
+            style={{
+              width: "140px",
+            }}
+            variant="warning"
+            onClick={(e) =>
+              this.exportToCSV(this.state.reportDetails, "Export Report")
+            }
+          >
+            Export in Excel
+          </Button>
+        </Row>
 
         <Spin tip="Loading..." size="large" spinning={this.state.loading}>
           <Layout className="export-layout">

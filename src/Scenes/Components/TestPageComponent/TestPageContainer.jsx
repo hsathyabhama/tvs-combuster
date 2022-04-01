@@ -454,33 +454,31 @@ class TestPageContainer extends Component {
   //start event onClick
   startClick = () => {
     if (this.props.app.communication === true) {
-      //  if (this.props.app.targetRPM !== "" && this.props.app.targetTemp !== "") {
+      if (this.props.app.targetRPM !== "" && this.props.app.targetTemp !== "") {
+        this.props.initiateShowTarget();
+        this.props.startDisableEvent(true);
 
-      this.props.initiateShowTarget();
-      this.props.startDisableEvent(true);
-
-      //delay for receiving sensor data from plc
-      axios
-        .post("http://localhost:5000/start.php", {
-          //set target rpm & temp value to sent plc
-          testId: this.props.app.testIdData,
-          // targetRPM: this.props.app.targetRPM,
-          // targetTemp: this.props.app.targetTemp,
-          initialComprAircv: this.props.app.cvStageValue.CompAirInitialValue,
-          initialMainGascv: this.props.app.cvStageValue.MainGasInitialValue,
-          initialFinecv: this.props.app.cvStageValue.FineCVInitialValue,
-        })
-        .then((res) => {
-          //read the response from plc for trget temp & rpm
-          let startData = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      // } else {
-      //   this.props.initiateTargetState();
-      // }
+        //delay for receiving sensor data from plc
+        axios
+          .post("http://localhost:5000/start.php", {
+            //set target rpm & temp value to sent plc
+            testId: this.props.app.testIdData,
+            targetRPM: this.props.app.targetRPM,
+            targetTemp: this.props.app.targetTemp,
+            initialComprAircv: this.props.app.cvStageValue.CompAirInitialValue,
+            initialMainGascv: this.props.app.cvStageValue.MainGasInitialValue,
+            initialFinecv: this.props.app.cvStageValue.FineCVInitialValue,
+          })
+          .then((res) => {
+            //read the response from plc for trget temp & rpm
+            let startData = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        this.props.initiateTargetState();
+      }
     }
   };
 
@@ -810,7 +808,7 @@ class TestPageContainer extends Component {
           <Row gutter={[8, 4]} style={{ paddingRight: "20px" }}>
             <Divider style={{ borderColor: "#42dad6" }} />
 
-            <Col span={6}>
+            <Col span={5}>
               <Card
                 style={{ width: 185, cursor: "pointer", borderColor: "green" }}
               >
@@ -845,11 +843,7 @@ class TestPageContainer extends Component {
                             style={{ color: "red", marginTop: "1%" }}
                           />
 
-                          <p
-                            style={{
-                              fontSize: "calc(6px + 0.5vw)",
-                            }}
-                          >
+                          <p className="commands">
                             {this.state.currentDateTime}- Communication failed
                           </p>
                         </Row>
@@ -864,13 +858,10 @@ class TestPageContainer extends Component {
                     <p>
                       {InitializedataArray.map((item) => {
                         return (
-                          <div
-                            style={{
-                              fontSize: "calc(6px + 0.5vw)",
-                            }}
-                          >
+                          <div className="commands">
                             <CheckOutlined style={{ color: "green" }} />
                             {item.testcommandsTime} - {item.name}
+                            <br></br>
                           </div>
                         );
                       })}
@@ -881,17 +872,6 @@ class TestPageContainer extends Component {
                 </div>
               </Card>
             </Col>
-
-            {/* <Col
-              span={2}
-              style={{
-                marginTop: "30px",
-                paddingRight: "0px",
-                paddingLeft: "0px",
-              }}
-            >
-              <hr></hr>
-            </Col> */}
 
             <Col span={6}>
               <Card
@@ -942,7 +922,7 @@ class TestPageContainer extends Component {
                     </p>
                   )}
 
-                  {/* {InitializedCompletedStatus.length >= 1 && communication ? (
+                  {InitializedCompletedStatus.length >= 1 && communication ? (
                     <p>
                       <Row>
                         <Col>
@@ -972,9 +952,9 @@ class TestPageContainer extends Component {
                     </p>
                   ) : (
                     []
-                  )} */}
+                  )}
 
-                  {/* {targetState ? (
+                  {targetState ? (
                     <Alert
                       className="alert_error"
                       message={alert_targetval}
@@ -985,27 +965,24 @@ class TestPageContainer extends Component {
                     />
                   ) : (
                     ""
-                  )} */}
-                  {/* {showTarget ? (
+                  )}
+                  {showTarget ? (
                     <div>
                       Target Temp : {targetTemp}, &nbsp; RPM : {targetRPM}
                     </div>
                   ) : (
                     []
-                  )} */}
+                  )}
 
                   {showTarget ? (
                     <p>
                       <Row>
                         {StartdataArray.map((item) => {
                           return (
-                            <div
-                              style={{
-                                fontSize: "calc(6px + 0.5vw)",
-                              }}
-                            >
+                            <div className="commands">
                               <CheckOutlined style={{ color: "green" }} />
                               {item.testcommandsTime} - {item.name}
+                              <br></br>
                             </div>
                           );
                         })}
@@ -1018,25 +995,14 @@ class TestPageContainer extends Component {
               </Card>
             </Col>
 
-            {/* <Col
-              span={2}
-              style={{
-                marginTop: "30px",
-                paddingRight: "0px",
-                paddingLeft: "0px",
-              }}
-            >
-              <hr></hr>
-            </Col> */}
-
             {/* Reset Values part */}
-            {/* <Col xs={2} sm={3}>
+            <Col span={5}>
               <Card
                 style={
                   StartdataArray.find((it) => it.name === "Stage 3") &&
                   communication
-                    ? { width: 185, cursor: "pointer", borderColor: "green" }
-                    : { width: 185, borderColor: "gray" }
+                    ? { width: 180, cursor: "pointer", borderColor: "green" }
+                    : { width: 180, borderColor: "gray" }
                 }
               >
                 <div style={{ width: "300px" }}>
@@ -1115,7 +1081,7 @@ class TestPageContainer extends Component {
                       <div>
                         {ResetdataArray.map((item) => {
                           return (
-                            <div>
+                            <div className="commands">
                               <CheckOutlined style={{ color: "green" }} />
                               {item.testcommandsTime} - {item.name} -{" "}
                               {item.value}
@@ -1136,17 +1102,6 @@ class TestPageContainer extends Component {
                 </div>
               </Card>
             </Col>
-
-            <Col
-              xs={2}
-              style={{
-                marginTop: "30px",
-                paddingRight: "10px",
-                paddingLeft: "20px",
-              }}
-            >
-              <hr></hr>
-            </Col> */}
 
             <Col span={6}>
               <Card
@@ -1202,11 +1157,7 @@ class TestPageContainer extends Component {
                   <Row>
                     {nShutdowndataArray.map((item) => {
                       return (
-                        <div
-                          style={{
-                            fontSize: "calc(6px + 0.5vw)",
-                          }}
-                        >
+                        <div className="commands">
                           <CheckOutlined style={{ color: "green" }} />
                           {item.testcommandsTime} - {item.name}
                         </div>
@@ -1237,7 +1188,7 @@ class TestPageContainer extends Component {
               )}
             </Col>
 
-            <Col span={3}>
+            <Col span={2}>
               <Card
                 style={
                   (nShutdowndataArray.length >= 1 &&
@@ -1297,7 +1248,7 @@ class TestPageContainer extends Component {
               </Card>
             </Col>
 
-            <Col span={3}>
+            {/* <Col span={3}>
               <Card
                 style={
                   showTarget
@@ -1383,6 +1334,7 @@ class TestPageContainer extends Component {
                 </Popover>
               </Card>
             </Col>
+           */}
           </Row>
         </Layout>
       </div>

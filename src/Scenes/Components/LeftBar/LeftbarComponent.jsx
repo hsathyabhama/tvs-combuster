@@ -9,12 +9,10 @@ import {
   LineChartOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import { GiPaperWindmill } from "react-icons/gi";
+import { GiPaperWindmill, GiCheckboxTree } from "react-icons/gi";
 import { DiYii } from "react-icons/di";
-import { FiSettings, FiActivity } from "react-icons/fi";
-import { AiOutlineTable, AiFillDatabase, AiFillSignal } from "react-icons/ai";
-import { BiTrendingUp } from "react-icons/bi";
-import { CgPerformance } from "react-icons/cg";
+import { FiSettings } from "react-icons/fi";
+import { AiOutlineTable, AiFillDatabase } from "react-icons/ai";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -74,14 +72,15 @@ class LeftbarComponent extends Component {
               {" "}
               Table View{" "}
             </Menu.Item>
+            <Menu.Item
+              key="preTest"
+              icon={<GiCheckboxTree style={{ color: "#42dbdc" }} />}
+            >
+              PreTesting
+            </Menu.Item>
           </SubMenu>
           <Menu.Item key="testPage" icon={<DashboardOutlined />}>
-            <Space
-              style={{ marginBottom: "10px", fontSize: "calc(7px + 0.6vw)" }}
-            >
-              {" "}
-              Test{" "}
-            </Space>
+            <Space style={{ fontSize: "calc(7px + 0.6vw)" }}> Test </Space>
           </Menu.Item>
           <SubMenu
             key="sub2"

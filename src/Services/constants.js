@@ -14,6 +14,8 @@ const url = {
   TABLE_STATUSDATA: 'statusValue.php',  
   DELAY_DATA: 'configuration.php',     
   LOGOUT_EVENT: 'logout.php',  
+  PRETEST_DATA: 'preTestingSensor.php', 
+  PRETEST_CHECK: 'preTesting.php', 
 }
 
 const FormDetails = {
@@ -38,16 +40,18 @@ const CompanyDetails = {
   company_link: 'http://www.v-enertek.com/',
   drdo_logo: 'https://www.drdo.gov.in/sites/default/files/drdo_logo_0.png',
 }
-
+//if we want to change the order in status block,we need to change the order in DB,
+//CardComponent all fields,dashboardDataVal,targetKeysVal,sensorLabel
 const dashboardDataVal = [
-  { "key": "0", "Name": "Combustor Outlet Temperature", "chosen": true },
-  { "key": "1", "Name": "RPM sensor", "chosen": true },
+  { "key": "0", "Name": "RPM sensor", "chosen": true },
+  { "key": "1", "Name": "Combustor Outlet Temperature", "chosen": true },  
   { "key": "2", "Name": "Lube Oil Pressure", "chosen": true },
 ]
+
 const targetKeysVal = ["0", "1", "2" ]
 const dashboardSensor = {
   sensorLabel: [
-    "Combustor Outlet Temperature","Rpm sensor", "Lube Oil Pressure",
+    "Rpm sensor","Combustor Outlet Temperature", "Lube Oil Pressure",
    ],
   dummyData: 0,
   chartMax: 3,
@@ -81,8 +85,8 @@ const testParamHash = {
   warning_name: "Please enter test engineer name",
   warning_bargingActive : "Barging is going on",
   alert_targetval: "Please enter target values",
-  airFCVValue_warning: "Please enter  between 0.1 to 0.5",
-  
+  airFCVValue_warning: "Please enter between 0.1 to 2",
+  gasFCVValue_warning: "Please enter between 0.1 to 0.5",
 }
 
 const helpPopup = {
@@ -97,10 +101,6 @@ const helpPopup = {
 
 const turboConfigValue = {
   installed_turbine: 1,
-  nozzleArea_min: 0.0002,
-  nozzleArea_max: 0.0005,
-  nozzleArea_step: 0.0001,
-  nozzleArea_defalutValue: 0.00023,  
   error_turbo_msg: 'Turbo ID alreadt exists',
   error_blade_msg: 'Please enter number of blades',
   added_turbo_msg: 'TurboID added successfully',

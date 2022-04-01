@@ -246,3 +246,23 @@ export const updateBargingEvent = bool => ({
   type: 'UPDATE_BARGING_EVENT',
   payload: bool
 })
+//preTestingSensor
+export const gettingPreTestingSensor = data => ({
+  type: 'GETTING_PRETESTING',
+  payload: data
+})
+//preTestKey
+export const updatePreTestKey = data => ({
+  type: 'UPDATE_PRETEST_KEY',
+  payload: data
+})
+//preTestValue
+export const updatePreTestValue = data => ({
+  type: 'UPDATE_PRETEST_VALUE',
+  payload: data
+})
+//preTestStatus
+export const updatePreTestStatus = data => ({
+  type: 'UPDATE_PRETEST_STATUS',
+  payload: data
+})
